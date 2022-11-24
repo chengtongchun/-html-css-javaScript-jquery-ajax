@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html{
+            background-image: url(./作业/img/不知火舞.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+           /* biya */
+           #biya{
+            margin:140px auto;
+            width:500px;
+            height:500px;
+            /* background-color: aquamarine; */
+            transform-style:preserve-3d;
+             /* transform:rotateX(-45deg) rotateZ(45deg);   */
+             animation:biya 20s linear infinite ;
+
+        }
+        #biya>div{
+            width:500px;
+            height:500px;
+            background-repeat:no-repeat;
+            background-size:cover;
+            background-position: center center;
+            border-radius:50%;
+            position:absolute;
+            opacity: 0.7;
+        }
+        /* 大圈 */
+        #biya1{
+            background-image: url(./作业/img/夏洛特.jpg);
+            transform:rotateY(90deg) translateZ(250px);/*右*/
+        }
+        #biya2{
+          background-image: url(./作业/img/西施.jpg);
+            transform:rotateY(-90deg) translateZ(250px);/*左*/
+        }
+        #biya3{
+          background-image: url(./作业/img/西施.jpg);
+            transform:rotateX(90deg) translateZ(250px); /*上 */
+        }
+        #biya4{
+          background-image: url(./作业/img/夏洛特.jpg);
+            transform:rotateX(-90deg) translateZ(250px) ; /*下*/
+            /* transform:rotateX(90deg) translateZ(-100px); */
+        }
+        #biya5{
+          background-image: url(./作业/img/不知火舞.jpg);
+            transform:rotateY(180deg) translateZ(250px);/*后*/
+        }
+        #biya6{
+            background-image: url(./作业/img/上官婉儿.jpg);
+            transform:rotateY(0deg) translateZ(250px);
+        }
+      
+        @keyframes biya{
+            from{
+                transform:rotateX(0) rotateZ(0);
+            }
+            to{
+                transform:rotateX(1turn) rotateZ(1turn);
+            }
+        }
+          /* 大圈 */
+          /* 小圈 */
+          #biya>div:nth-child(7),#biya>div:nth-child(8),#biya>div:nth-child(9),#biya>div:nth-child(10),#biya>div:nth-child(11),#biya>div:nth-child(12){
+            width:300px;
+            height:300px;
+            position:absolute;
+            top:0;right:0;bottom:0;left:0;margin:auto;
+            opacity: 1;
+            border-radius: 0;
+            /* animation:small 6s  linear infinite; */
+          }
+          #biya7{
+            background-image:url(./作业/img/不知火舞.jpg);
+            transform:rotateY(90deg) translateZ(150px); /*右*/
+          }
+          #biya8{
+            background-image:url(./作业/img/上官婉儿.jpg);
+            transform:rotateY(-90deg) translateZ(150px);/*左*/
+          }
+          #biya9{
+            background-image:url(./作业/img/夏洛特.jpg);
+            transform:rotateX(90deg) translateZ(150px); /*上 */
+          }
+          #biya10{
+            background-image:url(./作业/img/夏洛特.jpg);
+            transform:rotateX(-90deg) translateZ(150px) ; /*下*/
+          }
+          #biya11{
+            background-image:url(./作业/img/西施.jpg);
+            transform:rotateY(180deg) translateZ(150px);/*后*/
+          }
+          #biya12{
+            background-image:url(./作业/img/上官婉儿.jpg);
+            transform:rotateY(0deg) translateZ(150px);/*前*/
+          }
+          @keyframes small{
+            form{
+                transform: rotateY(0) rotateZ(0);
+            }   
+            to{
+                transform:rotateY(1turn) rotateZ(1turn);
+            }
+          }
+          /* 小圈 */
+        /* biya */
+    </style>
+</head>
+<body>
+    <!-- biya -->
+    <div id="biya">
+        <div id="biya1"></div>
+        <div id="biya2"></div>
+        <div id="biya3"></div>
+        <div id="biya4"></div>
+        <div id="biya5"></div>
+        <div id="biya6"></div>
+        <div id="biya7">1</div>
+        <div id="biya8">2</div>
+        <div id="biya9">3</div>
+        <div id="biya10">4</div>
+        <div id="biya11">5</div>
+        <div id="biya12">6</div>
+    </div>
+    <!-- biya -->
+</body>
+</html>

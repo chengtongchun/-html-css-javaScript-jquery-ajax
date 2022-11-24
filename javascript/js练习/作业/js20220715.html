@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: burlywood;
+        }
+        p{
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <p>作业</p>
+    <p>1. function Person(name){
+             this.name=name;
+    }
+    Person.prototype.say=function(){console.log("say...");
+    var p=new Person(); 
+    p的__proto__指向谁 
+    Person.prototype指向谁 
+    Person.prototype.constructor指向谁
+    Object.prototype指向谁</p>
+    <p> 答案：p的__proto__指向Person，Person.prototype指向Object，Person.prototype.constructor指向Person，Object.prototype指向null</Object></p>
+    <p>2. call apply的区别</p>
+    <p>call和apply 会调用函数，并且改变函数内部this指向，一次性改变
+        call和apply 传递的参数不一样，call传递参数(this,参数1,参数2,..)形式，apply传递参数(this,数组)形式;
+    </p>
+    <p>3. 需求
+        动物类Animal有name,weight体重属性,方法是eat和death死亡
+        <span></span>
+        飞行类Fly 有count里程属性 方法是fly
+        Dog继承Animal类 它有sex性别 方法有run，覆盖父类的eat方法
+        Bird类继承Animal和Fly类 它有color颜色属性
+    </p>
+    <p></p>
+    <script>
+        //动物类Animal有name,weight体重属性,方法是eat和death死亡
+        function Animal(name,weight){
+            this.name=name;
+            this.weight=weight;
+        }
+        Animal.prototype.eat=function(xxx){
+            console.log(this.name+"吃了"+xxx);
+            return this.name+"吃了"+xxx;
+        }
+        Animal.prototype.death=function(){
+            console.log(this.name+"死了");
+            return this.name+"死了";
+        }
+        // 飞行类Fly 有count里程属性 方法是fly
+        function Fly(count){
+            this.count=count;
+        }
+        Fly.prototype.fly=function(){//fly自己的fly方法
+            return "飞了"+this.count;
+        }
+        
+        //Dog继承Animal类 它有sex性别 方法有run，覆盖父类的eat方法
+        function Dog(name,weight,sex){
+            Animal.apply(this,[name,weight]);
+            this.sex=sex;//雄雌
+        }
+        Dog.prototype=new Animal();//继承Animal的方法
+        Dog.prototype.constructor=Dog;//构造函数改为自己
+        Dog.prototype.run=function(){//Dog自己的方法
+            console.log("跑了");
+            return "跑了";
+        }
+        Dog.prototype.eat=function(xx){//重写animal的eat方法
+            console.log("除了吃骨头，还吃"+xx);
+            return "除了吃骨头，还吃"+xx;
+        }
+        let dog=new Dog("wang","100斤","雌");
+        console.log(dog.__proto__);//
+        console.log("GIGIUGIU"+dog.__proto__.__proto__);//
+        console.log(dog.prototype);//undefined
+        //Bird类继承Animal和Fly类 它有color颜色属性
+        function Bird(name,weight,count,color)
+        {
+            Animal.apply(this,[name,weight]);
+            Fly.call(this,count);//现在最新不允许继承多个
+            this.color=color;
+        }
+        // Bird.prototype=new Fly();//现在最新不允许继承多个
+        Bird.prototype=new Animal();
+        // Bird.prototype=new Fly(),new Animal();
+        Bird.prototype.constructor=Bird;
+         let y=new Bird("燕子","10斤",100,"黑色");
+        console.log(y);
+        console.log(y.eat("虫"));
+        // console.log(y.fly());
+        console.log(y.death());
+    </script>   
+</body>
+</html>

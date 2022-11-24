@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    p{white-space: pre-wrap;}
+  </style>
+</head>
+<body>
+  <p> 练习：</p>
+  <p>1.画图分析内存    重点new一个对象到底干了什么
+    function Person(name){this.name=name;this.age=age;this.say(){}} 
+    var p1=new Person("cjy",33); p.say();var p2=new Person("cjy1",43);p2.say();
+  </p>
+  <p><img src="./images/js20220714_one.jpg"></p>
+  <p>2.prototype干什么用的</p>
+  <p> prototype原型属性是个指针，指向该类的所有实例共享的属性和方法</p>
+  <p>3.写MyArray类 
+    构造函数function MyArray(...ele)
+       {  this.datas=[...ele];this.size=this.datas.length;}
+    MyArray.prototype.at(index)=size>0?datas[index]:-1;
+    MyArray.prototype.every(callback);
+    MyArray.prototype.map(callback);
+    MyArray.prototype.filter(callback);</p>
+  
+  <script>
+    // 第三题答案
+      function MyArray(...ele){
+        this.datas=[...ele];
+        this.size=this.datas.length;
+      }
+      MyArray.prototype={
+        constructor:MyArray,
+        at:function (index){//等级下标返回值
+         return this.size>0?this.datas[index] : -1
+        },
+        every:function(callback){//every() 方法用于检测数组所有元素是否都符合指定条件（通过函数提供）。
+          let array=this.datas;
+          for(let i=0;i<array.length;i++){
+              if(callback(array[i])!=true){
+                return false;
+              }
+          }
+          return true;
+        },
+        map:function(callback){//map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值
+          //map方法是返回元素值 全部 +或-或*或%之后的新数组
+          let array=this.datas;
+          let newArray=[];
+          for(let i=0;i<array.length;i++){
+            newArray.push(callback(array[i]));
+          }
+          return newArray;
+        },
+        filter:function(callback){//filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
+          //filter方法是全部元素值 比较之后符合条件的值组成的新数组
+          let array=this.datas;
+          let newArray=[];
+          for(let i=0;i<array.length;i++){
+            if(callback(array[i]) == true){
+              newArray.push(array[i]);
+            }
+          }
+          return newArray;
+        }
+      } 
+      myArray.prototype.push=function(ele){//最后一位添加新值
+        this.datas[size+1]=ele;
+      }
+      MyArray.prototype.pop=function(){//删除最后一位
+        return this.datas[sizz--];
+      }
+      var m=new MyArray(1,2,3,4,5,6,933);
+      let newAr=m.every(e=>{return e>0});
+      console.log(newAr);//true
+      let newArray=m.map(e=>{return e*5});
+      console.log(newArray);//[5, 10, 15, 20, 25, 30, 4665]
+      let newArray2=m.filter(e=>{return e>5});
+      console.log(newArray2);//[6,933]
+  </script>        
+</body>
+</html>

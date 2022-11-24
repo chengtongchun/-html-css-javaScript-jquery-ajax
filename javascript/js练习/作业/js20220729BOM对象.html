@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .title{
+            white-space: pre-wrap;
+        }
+        button{
+            width: 200px;height:50px;
+            border-radius: 10px;
+        }
+        /* 跳转页面a */
+        #pl{
+            display:flex;border: 1px solid black;
+            width:200px;height:45px;border-radius: 20px;
+            position: fixed;top:20px;right:10px;justify-content: center;align-items: center;background-color: yellowgreen;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var a=document.getElementById("pl");//跑路
+            a.onclick=function(){
+                location.href="js20220729下笔记.html";
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="./res/css/font-awesome.min.css">
+</head>
+<body>
+    <a id="pl">点击有惊喜</a>
+    <p class="title">练习</p>
+    <p class="title">1.DOMContentLoaded和onload的区别
+        (1)DOMContentLoaded搭配addEventListener实施；onload是window对象点
+        (2)onload是当页面加载后触发 ，DOMContentLoaded是DOM加载完毕，还没加载图片，js，css,加载速度比load早一些
+    </p>
+    <p class="title">2.弹出确认删除窗口</p>
+    <button id="two"> 删除窗口，快给我出来 </button>
+    <p class="title">3.重新定向到另一个网页的三种方式
+        (1)location.href="去吧，皮卡丘.html";
+        (2)location.assign("我不要去呀.html");
+        (3)location.replace("不会生成历史记录.html");
+    </p>
+    <p class="title">4.document的referrer是干嘛用的
+        记录谁载入的当前文档
+    </p>
+    <p class="title">5.sessionStorage和 localStorage的区别
+        生命周期不同，sessionStorage随着浏览器的关闭而消失，localStorage浏览器关了还存在
+    </p>
+    <p class="title">6.点按钮打开一个窗口(长300宽300），3秒后关闭该窗口</p>
+        <button id="six">打开一个窗口</button>
+    <p class="title">7.保存window对象到本地</p>
+        <button id="seven1">保存</button>
+        <button id="seven2">删除</button>
+    <script>
+        const $=(ele)=>document.getElementById(ele);
+        const log=(...ele)=>console.log(...ele);
+        //第二题
+        {
+            let two=$("two");
+            two.onclick=function(){
+                var con=confirm("是你在召唤我吗？");
+                if(con){
+                    alert("抽你欧气");
+                }else{
+                    alert("给你非气")
+                }
+            }
+        }
+        //第三题
+        {
+            let six=$("six");
+            six.onclick=function(){
+                var newWin=open("https://www.bilibili.com/video/BV1YW411T7GX?p=138&spm_id_from=pageDriver&vd_source=0400d62817f8f1c8dd88613216eee36b","js二级联动","width=300px,height=300px")
+                if(newWin){
+                    if(newWin.close)
+                        setTimeout(function(){newWin.close();},3000);//3秒后关闭 
+                }
+            }
+        }
+        //第七题
+        {
+            var add=$("seven1");
+            var del=$("seven2");
+            add.onclick=function(){
+                localStorage.setItem("win",window);
+                log(window,localStorage.getItem("win"));
+            }
+            del.onclick=function(){
+                localStorage.removeItem("win");
+                log(window,localStorage.getItem("win"));
+
+            }
+        }
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/js20220727.css">
+    <style>
+        body{
+            background-image: url(./img/蓝色.jpg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .title{
+            white-space: pre-wrap;
+            color:white;
+            font-size:20px;
+            text-shadow: 0px 0px 10px red;
+        }
+        /* 第五题 */
+        #five{
+            width:150px;
+            height:150px;
+            list-style: none;
+            padding:0px;margin:0px;
+            margin: 0 auto;
+            background-color: yellowgreen;
+        }
+        #five>li{
+            width:100%;height:28px;border:1px solid purple;
+            display: flex;justify-content: center;align-items: center;
+        }
+       /* 第六题 */
+       .val{
+            border:1px solid rgb(0, 255, 251);
+        }
+    </style>
+</head>
+<body>
+    <p class="title">练习</p>
+    <p class="title">1.DOM的3个阶段 有3个div{父亲儿子孙子} 捕获顺序是   冒泡顺序是
+        3个阶段：捕获阶段 目标阶段 冒泡阶段
+        捕获顺序：父亲=>儿子=>孙子
+        冒泡顺序：孙子=>儿子=>父亲
+    </p>
+    <p class="title">2.DOM 0 级和2级 它们的优点和缺点
+        （1）0级：触发对象.onclick=function(){}，通过触发对象.onclick=null删除事件;
+            优点：简单，跨浏览器；
+            缺点：永远是冒泡
+        （2）2级：触发对象.addEventListener('触发事件',函数,true/false),通过removeEventListener删除
+            优点：可以多个，不覆盖，可冒泡，可捕获（第三个参数true是捕获，false是冒泡）
+            缺点：书写麻烦，要考虑兼容性问题，
+    </p>
+    <p class="title">3.如何让禁止文档的右键菜单和复制文字
+        contextmenu右键菜单 selectstart文字选中 
+        用e.preventDefault()/e.preventDefault、return false 禁止默认行为 ;
+    
+    </p>
+    <p class="title">4.键盘3事件是？ 如何检测ctrl、alt等键有没有按下
+        3事件：keydown按下（识别功能键，不区分大小写）；keypress按下（不识别功能键，区分大小写）；keyup松开（不区分大小写）
+        用keydown来检测
+    </p>
+    <p class="title">5.完成拖动排序
+        draggable="true"允许拖动 ondragstart开始拖动 ondragend=结束拖动 ondragover拖到上面 ondrop放下
+    </p>
+    <ul id="five">
+        <li draggable="true">1</li>
+        <li draggable="true">2</li>
+        <li draggable="true">3</li>
+        <li draggable="true">4</li>
+        <li draggable="true">5</li>
+    </ul>
+    <p class="title">6.完成input案例
+        vscode安装easyless扩展，它能够自动将less文件转为css文件
+     less是简化css编写的 让你快速按层次编写css样式</p>
+     <div id="six">
+        <div id="top">
+            <h2>Verify Your Account</h2>
+            <p>We emailed you the six digit code to cool_guy@email.com<br>
+                Enter the code below to confirm your email address.</p>
+        </div>
+        <div id="content">
+            <input type="number" name="" id="" class="num" placeholder="0" min="0" max="9" required>
+            <input type="number" name="" id="" class="num" placeholder="0" min="0" max="9" required>
+            <input type="number" name="" id="" class="num" placeholder="0" min="0" max="9" required>
+            <input type="number" name="" id="" class="num" placeholder="0" min="0" max="9" required>
+            <input type="number" name="" id="" class="num" placeholder="0" min="0" max="9" required>
+            <input type="number" name="" id="" class="num" placeholder="0" min="0" max="9" required>
+        </div>
+        <div id="buttom">
+            This is design only. We didn't actually send you an email as we don't have your email, right?
+        </div>
+     </div>
+    <script>
+        //第五题
+        {
+            let five=document.getElementById("five");
+            let lis=five.getElementsByTagName("li");
+            // console.log(lis);
+            for(var i=0;i<lis.length;i++){
+                var sel=null;
+                lis[i].ondragstart=function(event){//开始
+                    sel=event.target;//选中要移动的对象
+                    // alert("啊啊")
+                }
+                lis[i].ondragover=function(event){//拖到上面
+                    event.preventDefault();//取消默认行为
+                    if((sel.parentNode===event.target.parentNode)&&(sel.tagName =="LI")&&(event.target.tagName =="LI"))
+                    //比较选中移动对象的父元素和拖到在上面元素的父元素是否一致
+                    {
+                        tuo(sel,event.target);
+                    }else{
+                        alert("sddsdsd")
+                    }
+                }
+                lis[i].ondrop=function(event){//放下
+                    console.log(event.target+"还好");
+                    // five.appendChild(event.target)
+                }
+                lis[i].ondragend=function(){//结束
+                    sel=null;
+                }
+            }
+            function tuo(e1,e2){
+                var val1,val2;
+                for(var i=0;i<lis.length;i++){
+                    if(lis[i] == e1){
+                        val1=i;
+                    }
+                    if(lis[i]== e2){
+                        val2=i;
+                    }
+                }
+                if(val1 == val2){
+                    console.log("啥都不说了，不动")
+                }else if(val1<val2){
+                    //要移动的在被移动的前面
+                    five.insertBefore(lis[val2],lis[val1])
+                }else if(val1>val2){
+                    //要移动的在被移动的后面
+                    five.insertBefore(lis[val1],lis[val2])
+
+                }
+            }
+        }
+        //第六题
+        {
+            let nums=document.getElementsByClassName("num");
+            nums[0].focus();//光标
+            nums=Array.from(nums);
+            nums.forEach(function(num,index){
+                num.onkeydown=function(event){
+                    if(event.key>=0&&event.key<=9){
+                        setTimeout(()=>{
+                            if(index+1<nums.length){
+                                nums[index+1].focus();
+                            }
+                            // nums[index].classList.add("val");
+                            nums[index].style.border="1px solid rgb(0, 255, 251)";
+                        },10)
+                        console.log(index);
+                    }
+                    if(event.key=="Backspace"){
+                        setTimeout(() =>{
+                            if(index>0)
+                            nums[index - 1].focus();
+                            else
+                            nums[index].focus();
+                            nums[index].value="";
+                            nums[index].style.border="1px solid gainsboro";
+                        }, 10);
+                    }
+                } 
+                //光标失去后，再次点击，光标会出现在最后一个值有值的input
+                num.onclick=function(){
+                    if(nums[nums.length-1].value.length>0){
+                        nums[nums.length-1].focus();
+                    }else{
+                        var numIndex=0;
+                        for(var i=0;i<nums.length-1;i++){
+                            if(nums[i].value.length>0){
+                                numIndex=i;
+                            }
+                        }
+                        if(nums[0].value.length>0){
+                            nums[numIndex+1].focus();
+                        }else{
+                            nums[numIndex].focus();
+                        }
+                    }
+                }
+            });      
+        }
+    </script>
+</body>
+</html>

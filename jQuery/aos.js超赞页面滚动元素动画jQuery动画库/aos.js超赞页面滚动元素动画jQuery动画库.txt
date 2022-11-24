@@ -1,0 +1,13 @@
+aos.js超赞页面滚动元素动画jQuery动画库
+<link rel="stylesheet" href="aos.css" />
+<script src="aos.js"></script>
+使用<div   aos="动作">
+   <script>
+        AOS.init();
+     </script>
+       语法:动作-方向   up/down/left/right
+       动作有fade渐变、flip翻转、slide滑动、 zoom-in、zoom-out
+      属性有aos-offset    aos-duration持续时间   aos-easing效果   aos-delay延迟   
+
+AdminLTE是什么？  一款建立在bootstrap和jquery之上的开源的模板主题工具。
+特点：响应的、可重复使用的组件并内置了多个模板页面；自适应多种屏幕分辨率，兼容PC和移动端

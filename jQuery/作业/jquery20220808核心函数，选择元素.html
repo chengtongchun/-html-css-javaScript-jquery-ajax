@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <script src="./js/jquery-1.10.1.js"></script>
+   <style>
+        body{
+            background-color:grey;
+            background-image: url(./img/程少商\(赵思露\).jpg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            display:flex;
+            flex-direction: column;
+            color:white;
+        }
+        .one{
+            display: block;width:20%;
+            border:1px solid black;
+            padding:30px;background-color: burlywood;
+        }
+        .title{
+            white-space:pre-wrap;
+        }
+        button{
+            width:300px;border-radius: 5px;
+            margin: 10px;
+        }
+   </style>
+</head>
+
+<body>
+    <ul class="one">
+        <li>1</li>
+        <li>2</li>
+        <li id="id1">3</li>
+        <li>4</li>
+        <li class="cls1">5</li>
+        <li>6</li>
+          <ol>
+            <li>ol1</li>
+            <li>ol2</li>
+            <li class="cls2">ol3</li>
+          </ol>
+        <li>7</li>
+        <li class="cls1">8</li>
+        <li>9</li>
+        <li>10</li>
+      </ul>
+    <p class="title">1.核心函数$的作用
+        $(log(123)); 
+        $('.one');  
+        $('&lt;li&gt;创建一个li&lt;/li&gt;');
+    </p>
+    <p class="title">2.</p>
+    <button id="btn01">选中所有ol元素并设置背景为yellowgreen</button>
+    <button id="btn02">选中id1元素并隐藏</button>
+    <button id="btn03">选中类为cls1的元素并设置背景为lightblue</button>
+    <button id="btn04">选中所有元素并设置字体为14px</button>
+    <button id="btn05">选中li为cls2的元素并设置颜色为red</button>
+
+<script>
+  $(function(){
+    //<button id="btn01">选中所有ol元素并设置背景为#fefefe</button>
+    $("#btn01").click(function(){
+        $("ol").css("background","yellowgreen");
+    })
+    //     <button id="btn02">选中id1元素并隐藏</button>
+    $("#btn02").click(function(){
+        // hide();//隐藏
+        $("#id1").hide();
+    })
+    //    <button id="btn03">选中类为cls1的元素并设置背景为lightblue</button>
+    $('#btn03').click(function(){
+      $('.cls1').css('background',"lightblue") ;
+    })
+    //<button id="btn04">选中所有元素并设置字体为14px</button>
+    $("#btn04").click(function(){
+        $("*").css("font-size","14px");
+    })
+    // <button id="btn05">选中li为cls2的元素并设置颜色为red</button>
+    $("#btn05").click(function(){
+        $("li.cls2").css("background","red")
+    })
+    // 核心函数$的作用    
+    const {log}=console;
+    $(log(123));
+    log($(".one"));
+    log($('<li>创建一个li</li>'));
+
+  })
+</script>
+</body>
+
+</html>

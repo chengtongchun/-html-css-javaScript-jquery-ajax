@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <style>
+          body{
+               background-color: burlywood;
+               /* background-image: url(./img/西施.jpg); */
+               background-repeat: no-repeat;background-size: cover;background-attachment: fixed;
+               color:white;
+               text-shadow: 0px 0px 20px red;
+          }
+          p{
+               white-space: pre-wrap;
+          }
+          button{
+               width:150px;
+               height:45px;
+               border-radius: 5px;
+          }
+          /* 第七题 */
+          #seven{
+               float:left;
+          }
+          #sevenSpan{float:left;
+               width:500px;height:250px;font-size: 4em;
+               /* width:100px;height:35px;text-align: center; */
+               display:flex;
+               justify-content: space-evenly;align-items: center;
+               font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+               /* background-image: url(./img/不知火舞.jpg); */
+               /* background-repeat: no-repeat;background-size: cover; */
+               background-color: thistle;
+               border:1px solid black;
+               margin:4px 10px 0px 10px;border-radius: 5px;
+               /* font-size: 1.4em; */
+          }
+     </style>
+</head>
+<body>
+     <p>作业:</p>
+     <p>1.取整函数有哪些，区别是
+          取整函数有：floor向下取整 ceil向上取整  round四舍五入  trunc去掉小数位
+     </p>
+     <p>2.产生10个1-100间的随机数并放入数组，用数组的sort排序</p>
+     <p id="two"></p>
+     <p>3.var str = "431103200506018771" 取出出生年月和性别</p>
+     <p id="there"></p>
+     <p>4.如何判断url是否是https开头 .cn结尾</p>
+     <button id="four_button">检测url</button><span id="four_span"></span>
+     <p id="four"></p>
+     <p>5.substr和substring  splice和slice 的区别
+          substr和substring的区别：第二位参数不同，substr第二位是截取数量，substring第二位是截取结束位置（不包括本身）
+          splice和slice的区别：splice会改变原数组，slice返回一个新数组
+     </p>
+     <p>6.生成一个8位随机密码</p>
+     <button id="six">随机生成一个随机密码</button><span id="sixSpan"></span>
+     <p>7.生成一个随机验证码，要求每个字的颜色不同</p>
+     <button id="seven">随机生成一个随机验证码</button><span id="sevenSpan"></span>
+     <script>
+          //第二题
+          {
+               var arr=[];
+               for(var i=0;i<10;i++){
+                    arr[i]=Math.trunc((Math.random()*100+1));
+               }//[72, 62, 92, 68, 25, 49, 9, 23, 32, 78]
+               //console.log(arr);
+               arr.sort((a,b)=>{
+                    return a-b;
+               })
+               //console.log(arr);//[9, 23, 25, 32, 49, 62, 68, 72, 78, 92]
+               let two=document.getElementById("two");
+               two.innerHTML="var arr=[]; <br>\
+               for(var i=0;i<10;i++){ <br>\
+                    arr[i]=Math.trunc((Math.random()*100+1)); <br>\
+               }//[72, 62, 92, 68, 25, 49, 9, 23, 32, 78] <br>\
+               console.log(arr); <br>\
+               arr.sort((a,b)=>{ <br>\
+                    return a-b; <br>\
+               }) <br>\
+               console.log(arr);//[9, 23, 25, 32, 49, 62, 68, 72, 78, 92]";
+          }
+          // 第三题
+          {
+               var str="431103200506018771"
+               var birthday=str.substr(6,8);//生日
+               // console.log(birthday);//20050601
+               var sex=str.substr(16,1);//7
+               if(sex %2 !=0){
+                    sex="男";
+               }else{
+                    sex="女";
+               }
+               // console.log(sex);//男
+               let there=document.getElementById("there");
+               there.innerHTML='   生日：'+birthday+"\t性别："+sex;
+          }
+          //第四题
+          let four_button=document.getElementById("four_button");
+          four_button.onclick=function(){
+               let four_span=document.getElementById("four_span");
+               let four=document.getElementById("four");
+               var url=prompt("输入url地址：");
+               if(url!=null){
+                    if(url.startsWith("https")){//判断开头
+                         if(url.endsWith(".cn")){//判断结尾
+                              alert(url+"是https开头 .cn结尾");
+                              four_span.innerHTML=url+"是https开头 .cn结尾";
+                         }else{
+                              alert(url+"不是.cn结尾");
+                              four_span.innerHTML=url+"不是.cn结尾";
+                         }
+                    }else{
+                         alert(url+"不是https开头");
+                         four_span.innerHTML=url+"不是https开头";
+                    }
+               }else{
+                    alert("没写东西");
+               }
+               four.innerHTML='var url=prompt("输入url地址："); <br>\
+               if(url.startsWith("https")){//判断开头 <br>\
+                    if(url.endsWith(".cn")){//判断结尾 <br>\
+                         alert(url+"是https开头 .cn结尾"); <br>\
+                    }else{ <br>\
+                         alert(url+"不是.cn结尾"); <br>\
+                    } <br>\
+               }else{ <br>\
+                    alert(url+"不是https开头"); <br>\
+               }';
+          }
+          //第六题//生成8位随机密码
+          let six=document.getElementById("six");
+          six.onclick=function(){
+               let span=document.getElementById("sixSpan");
+               let password=Math.random().toString(36).slice(2).substr(0,8);
+               span.innerText="\t"+password;
+               span.style.marginLeft="10px";span.style.borderRadius="5px"
+               span.style.backgroundColor="#"+(Math.random().toString(16).slice(2).substr(0,6));
+          }
+          //第七题 //生成4位验证码
+          let seven=document.getElementById("seven");
+          yzm();
+          seven.onclick=yzm;
+          function yzm(){
+               let span=document.getElementById("sevenSpan");
+               span.innerText="";
+               let pwd=Math.random().toString(36).slice(2).substr(0,4);
+               let ar=pwd.split("");
+               for(var i=0;i<ar.length;i++){
+                    let span1=document.createElement("span");
+                    span1.style.color="#"+(Math.random().toString(16).slice(2).substr(0,6));
+                    span1.innerText=ar[i];
+                    span.appendChild(span1);
+               }
+          }
+          // 点击body换背景颜色
+          document.body.onclick=function(){
+               const sc=()=>Math.random().toString(16).slice(2).substring(0,6);
+               document.body.style.backgroundColor="#"+sc();
+          }
+     </script>
+</body>
+</html>

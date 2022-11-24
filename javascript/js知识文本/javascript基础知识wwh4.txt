@@ -1,0 +1,90 @@
+﻿第二章 面向对象
+  三个特征：封装 继承 多态
+2.1 自定义对象
+ 创建对象的三种方法
+  1.var person = new Object( ); person.name="cjy"; person.say()=function(){}
+  2.用字面量var Person={name:"cjy",say:function(){}} 
+  3.用构造函数function Person(name){this.name=name;this.age=age;this.say(){}} 
+     var p=new Person("cjy",33); p.say();
+内存分析
+new在执行时会做四件事情：
+     在内存中创建一个新的空对象。
+     让 this 指向这个新的对象。
+     执行构造函数里面的代码，给这个新对象添加属性和方法。
+     返回这个新对象（所以构造函数里面不需要 return ）
+     每次new都占一块空间，很浪费内存，方法能不能共享呢 用原型 prototype 
+    console.dir(p1)  console.dir(Person)
+对象的访问   
+   对象就是键值对 对象['属性名'] 对象.属性名 
+           if(对象['name']) 
+           for(in或of)遍历对象
+   属性访问:对象.属性名   对象['属性名']     delete 对象.属性名
+
+构造函数和原型对象
+    function Person(name,age){this.name=name;this.age=age;}
+    Person.prototype.say=function(){console.log("say...");}
+    var p=new Person("cjy",33,'shenzhen'); p.say();
+   属性constructor和prototype
+    Person.prototype = {constructor:Person,
+            eat: function () {console.log(this.name + "吃东西"); }}
+     Person.prototype.name="旺旺";
+     Person.prototype.run=()=>console.log("run...");
+     prototype原型属性是个指针，指向该类的所有实例共享的属性和方法
+    var p=new Person();原型链:p对象、p对象原型、原型的原型（Object）、Object的原型null没父亲
+练习：1.画图分析内存    重点new一个对象到底干了什么
+         function Person(name){this.name=name;this.age=age;this.say(){}} 
+         var p1=new Person("cjy",33); p.say();var p2=new Person("cjy1",43);p2.say();
+         2.prototype干什么用的
+         3.写MyArray类 
+     /*        构造函数function MyArray(...ele)
+                {  this.datas=[...ele];this.size=this.datas.length;}
+             MyArray.prototype.at(index)=size>0?datas[index]:-1;
+             MyArray.prototype.every(callback);
+             MyArray.prototype.map(callback);
+             MyArray.prototype.filter(callback);*/
+      function MyArray(...ele){
+        this.datas=[...ele];
+        this.size=this.datas.length;
+      }
+      MyArray.prototype={
+        constructor:MyArray,
+        at:function (index){//等级下标返回值
+         return this.size>0?this.datas[index] : -1
+        },
+        every:function(callback){//every() 方法用于检测数组所有元素是否都符合指定条件（通过函数提供）。
+          let array=this.datas;
+          for(let i=0;i<array.length;i++){
+              if(callback(array[i])!=true){
+                return false;
+              }
+          }
+          return true;
+        },
+        map:function(callback){//map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值
+          //map方法是返回元素值 全部 +或-或*或%之后的新数组
+          let array=this.datas;
+          let newArray=[];
+          for(let i=0;i<array.length;i++){
+            newArray.push(callback(array[i]));
+          }
+          return newArray;
+        },
+        filter:function(callback){//filter() 方法创建一个新的数组，新数组中的元素是通过检查指定数组中符合条件的所有元素。
+          //filter方法是全部元素值 比较之后符合条件的值组成的新数组
+          let array=this.datas;
+          let newArray=[];
+          for(let i=0;i<array.length;i++){
+            if(callback(array[i]) == true){
+              newArray.push(array[i]);
+            }
+          }
+          return newArray;
+        }
+      } 
+      myArray.prototype.push=function(ele){//最后一位添加新值
+        this.datas[size+1]=ele;
+      }
+      MyArray.prototype.pop=function(){//删除最后一位
+        return this.datas[sizz--];
+      }
+             

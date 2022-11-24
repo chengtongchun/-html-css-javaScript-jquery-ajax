@@ -1,0 +1,87 @@
+﻿es6集合类型
+    Set不重复
+      构造方法Set：const set1 = new Set([1, 2, 3, 4, 5]);
+      属性.size
+      方法
+        .add(value) 如set1.add(5).add('some text');
+        .delete(value)删除has(value)包含有 clear()清空
+       迭代方法.forEach
+    WeakSet弱引用Set 只能包含对象引用不能有其他值，对象没有引用时启动GC回收垃圾
+    Map键值对  WeakMap
+     
+
+1.2.9自定义函数
+    声明 function 函数名(参数1,参数2[=默认值],参数3){//形参默认值为 undefined
+           [return返回值]  //没有 return 返回的是undefined
+        }
+     调用  函数名( 实参)//多个参数中间用逗号分隔 
+     形参的个数可以和实参个数不匹配，但是结果不可预计，尽量要匹配
+     arguments参数的数组for(in)
+     函数的参数和返回值:可以是js的任意类型
+
+特殊的函
+     构造函数var add = new Function("a,b","return a+b;");console.log(fn1);
+     匿名函数var add=function(a,b){} add(1,2); 
+     自动执行函数(function(a,b) {console.log(a+b);})(3,4)  !(function(a,b) {console.log(a+b);})(3,4)
+  箭头函数
+         var add=(a,b)=>{return a+b;}  
+         var fn=a=>console.log(a);没有参数()可以省略 只有1句{}可以省略
+         var fn=(a,b)=>{let c=a+b;return {a,b,z}};返回多个值
+         var fn=()=>{({a,b});}返回对象
+         var fn=()=>{let x=10;return ()=>x=x+10;};返回函数
+    函数作为参数和返回值
+        function f(callback) {const a=10;if(callback instanceof Function) callback(a);}
+        function f(){let a=10;return (x,y)=>{return a+x+y;}}
+        const f=()=>123;可以返回后面这些值'';true;['',''];{name:123};({name:123})
+
+作业:1.set最大的特点是什么  map的特点呢
+        2.输入4个学生姓名,判断有没有张三，有就删除没有就加
+        3.weakset干嘛用的
+       4.function add(a,b){ console.log(a+b);}  let z=add(1); console.log(z)问输出什么
+       5.写insertSort函数
+         function insertSort(ar){
+          if(null!==ar && ar instanceof Array){//保证ar不为空且为array的实例
+              for(let i=0; i<ar.length; i++){
+                 for(let j=0; j<i; j++)
+                    if(ar[j]>ar[i])
+                      [ar[j],ar[i]]=[ar[i],ar[j]];//交换ar[j]和ar[i]
+              }
+          }   
+       }
+      6.写add()可以加任意个数如add(1,2) add(1,2,3,4,5,6)arguments
+      7.用Function构造一个函数arrMax求数组最大值      用Math.max(...ar)方法
+/	(1)
+         let arrMax=new Function('return function arrMax(ar=[]){return Math.max(...ar);}');
+         let am=arrMax()(ar);
+        (2)
+        let arrMax=new Function('ar=[]','return Math.max(...ar)');
+        let am=arrMax(ar);
+        console.log(am);
+
+      8.下面的函数怎么调用，怎么把返回值取出来
+         (1) var fn=(a,b)=>{let c=a+b;return [a,b,c];} 
+          取：  let [a,b,c]=fn(9,19);
+           	console.log(a+","+b+","+c);//9,19,28
+
+      (2) var fn=()=>{let x=2;return ()=>x=x+10;} 
+          取： 	let fn2=fn()();
+            	console.log(fn2);//12
+
+      (3) const fn=()=>[1,2,3]; 
+          取：  let [a,b,c]=fn();
+            	console.log(a+","+b+","+c);//1,2,3
+
+      (4) const fn=()=>({a:1,b:2,c:3});
+          取：  let {a,b,c}=fn();
+           	console.log(a+","+b+","+c);
+      9.写myMap返回新数组，myFind查找第一个符合条件的元素
+       const ar=[12,23,4,56,77];
+      function myMap(ar=[],callback){
+           let newar=[];//返回新数组
+          ar.forEach((e)=>{//每个元素都执行callback
+              newar.push(callback(e)) ;
+          });
+          return newar;
+      }
+     var ar1= myMap(ar,(e)=>{return e+10});//所有元素都+10
+  

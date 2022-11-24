@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url(./img/绿发.jpg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-attachment: fixed;
+            font-size: 20px;
+            text-shadow: 0px 0px 5px greenyellow;
+        }
+        .title{
+            white-space: pre-wrap;
+        }
+        /* 第三题 */
+        #thereDiv{
+            width:200px;height:200px;
+        }
+        .there{
+            width:200px;height:200px;
+            border-radius: 50%;
+            /* position:relative; */
+            position: absolute;
+            /* display: block; */
+        }
+        .there2{
+            width:200px;height:200px;
+            border-radius: 50%;
+            /* position:relative; */
+            position: absolute;
+            /* display: block; */
+        }
+    /*第四题  */
+    #four{
+        width:500px;height:100%;
+    }
+    #four>img{
+        width:500px;
+    }
+    button{
+        width: 130px;height:40px;
+    }
+    </style>
+</head>
+<body>
+    <p class="title">练习</p>
+    <p class="title">1.如何禁止浏览器弹出右键菜单和复制文本
+        contextmenu右键菜单 selectstart文字选中 
+        用e.preventDefault()/e.preventDefault、return false 禁止默认行为 ;
+    </p>
+    <p class="title">2. mouseleave  mouseout的区别 
+        :两个都是鼠标离开，mouseleave（只有在鼠标指针离开被选元素时，才会触发）是不冒泡的，mouseout（不论鼠标指针离开被选元素还是任何子元素，都会触发）有冒泡
+    mouseenter和mouseover的区别
+        :都是鼠标移入
+            mouseover：鼠标经过自身盒子会触发，经过子盒子还会触发（因为存在冒泡）
+            mouseenter：只会经过自身盒子触发（不会冒泡）跟mouseenter对应的
+    clientX  pageX  screenX  的区别
+            :都是坐标
+            screenX:鼠标位置相对于用户屏幕水平偏移量，而screenY也就是垂直方向的，此时的参照点也就是原点是屏幕的左上角。
+            clientX:跟screenX相比就是将参照点改成了浏览器内容区域的左上角，该参照点会随之滚动条的移动而移动。
+            pageX：参照点也是浏览器内容区域的左上角，但它不会随着滚动条而变动。所以pageX》=clientX；
+    </p>
+    <p class="title">3.完成鼠标拖影</p>
+    <div id="thereDiv">
+        <img src="img/河岸.jpg" class="there"  alt="啊哦哦，图片没了" title="古风女子">
+        <img src="img/河岸.jpg" class="there"  alt="啊哦哦，图片没了" title="古风女子">
+    <img src="img/河岸.jpg" class="there"  alt="啊哦哦，图片没了" title="古风女子">
+    <img src="img/河岸.jpg" class="there"  alt="啊哦哦，图片没了" title="古风女子">
+    <img src="img/河岸.jpg" class="there"  alt="啊哦哦，图片没了" title="古风女子">
+
+    </div>
+    <p class="title">4.用三种方式懒加载6张图片</p>
+    <button id="four_one">第一种</button><button id="four_two">第二种</button><button id="four_there">第三种</button>
+    <div id="four">
+        <img data-lazy="img/上官婉儿.jpg" alt="图片未加载" src="./images/未加载.jpg">
+        <img data-lazy="img/不知火舞.jpg" alt="图片未加载" src="./images/未加载.jpg">
+        <img data-lazy="img/夏洛特.jpg" alt="图片未加载" src="./images/未加载.jpg">
+        <img data-lazy="img/嫦娥.jpg" alt="图片未加载" src="./images/未加载.jpg">
+        <img data-lazy="img/西域.jpg" alt="图片未加载" src="./images/未加载.jpg">
+        <img data-lazy="img/河岸.jpg" alt="图片未加载" src="./images/未加载.jpg">
+    </div>
+    <script>
+    const $=(ele)=>document.getElementById(ele);
+    const log=(...msg)=>console.log(...msg);
+    //第三题
+    {
+        let imgs=document.querySelectorAll("#thereDiv>img");
+        let thereDiv=document.getElementById("thereDiv");
+        thereDiv.onmousedown=function(ev){
+            ev=ev||window.ev;
+            if(ev.target.className=='there'){
+                window.onmousemove=function(ev){
+                    var left=ev.clientX,top=ev.clientY;
+                    console.log(left+"?"+top);
+                    var i=imgs.length-1;
+                    var timer=setInterval(function(){
+                        if(i<0){
+                            clearInterval(timer);
+                            return;
+                        }
+                        imgs[i].style.left=left+"px";
+                        imgs[i].style.top=top+"px";
+                        i--;
+                    },60);
+                }
+                window.onclick=function(){
+                    window.onmouseup=null;
+                    window.onmousemove=null;
+                }
+            }
+        }
+    //    let there=document.querySelector(".there");
+    //    there.onmousedown=function(event){
+    //         event=event||window.event;
+    //         let ol=event.clientX-there.offsetLeft;
+    //         let ot=event.clientY-there.offsetTop;
+    //         document.onmousemove=function(event){
+    //             let left=event.clientX-ol,top=event.clientY-ot;
+    //             // var i=0;
+    //             // var time=setInterval(function(){
+    //             //     if(i>=4){
+    //             //         clearInterval(time);
+    //             //         return;
+    //             //     }
+    //                 there.style.left=left+"px";
+    //                 there.style.top=top+"px";
+    //             // },60)
+    //         }
+    //         document.onmouseup=function(){
+    //             document.onmouseup=null;
+    //             document.onmousemove=null;
+    //         }
+    //    }
+    }
+    // 第四题
+    let four_one=document.getElementById("four_one");
+    let four_two=document.getElementById("four_two");
+    let four_there=document.getElementById("four_there");
+    const imgs=document.querySelectorAll("#four>img");
+    console.log(imgs);
+    four_one.onclick=function(){
+        window.onscroll=function(ev){//效果第二
+          const target=ev.target||ev.srcElement;
+          let h=document.documentElement.clientHeight;//可见区域
+          let stop= document.documentElement.scrollTop; //滚动条顶端
+          imgs.forEach((img,index)=>{
+            if(img.offsetTop<h+stop)
+                img.src=img.dataset.lazy;
+         })
+        }
+    }
+    four_two.onclick=function(){
+        window.onscroll=function(ev){//效果最差
+            const target=ev.target||ev.srcElement;
+            let h=window.innerHeight;
+            imgs.forEach((img,index)=>{
+                console.log("h"+h);
+                console.log(img.getBoundingClientRect());
+                if(img.getBoundingClientRect().top<h){
+                    img.src=img.dataset.lazy;
+                }
+            })
+        }
+    }
+    four_there.onclick=function(){
+        callback=(entries)=>{//效果最好
+            entries.forEach(entry=>{
+                if(entry.isIntersecting){//如果交叉
+                    let img=entry.target;//触发事件对象
+                    img.src=img.dataset.lazy;//加载图片
+                    obs.unobserve(img);//不观察了
+                }
+            })
+        }//用IntersectionObserver允许你追踪目标元素与其祖先元素或视窗的交叉状态
+        const obs=new IntersectionObserver(callback);//新建交叉观察
+        imgs.forEach(img=>{
+            obs.observe(img);//观察每一张图片有没有跟窗口交叉
+        })
+    }
+    </script>
+</body>
+</html>

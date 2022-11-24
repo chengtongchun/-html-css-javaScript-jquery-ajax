@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      /* background-image:url(img/pink1.jpg) ; */
+      background-repeat: no-repeat;
+      background-position:center center;
+      background-size: cover;
+      background-attachment: fixed;
+      /* padding:0 10px; */
+      font-size: 1.1em;
+    }
+    p{
+      white-space: pre-wrap;
+    }
+    button{
+      width:120px;
+      height:40px;
+    }
+    span{
+      font-size: 1.5em;
+      margin-left:10px;
+      color:red;
+    }
+    /* 第五题 */
+    #five{
+      width:120px;height:40px;
+    }
+    #fiveUl{
+      width:400px;height:100%;
+      background-color: tan;
+      opacity: .6;
+      display: flex; padding: 0;align-items: flex-start;justify-content: flex-start;flex-direction: column;
+      list-style-type: none;
+      margin: 0;padding: 0;
+      border-radius: 5px;
+    }
+    #fiveUl>li{
+      margin: 0;padding: 0;
+      width:100%;height:30px;
+      display: flex;
+      justify-content: center;align-items: center;
+      color: green;
+      font-size: 1.2em;
+      /* background-color: yellowgreen; */
+      margin-bottom: 5px;
+    }
+    /* 第六题 */
+    /* 要放大的盒子 */
+    #box{
+      width:100px;height: 100px;
+      background-color: tan;margin-top: 10px;
+      display: flex;justify-content: center;align-items: center;
+      font-size: 1.5em;
+    }
+    #h{
+      width: 100%;
+      margin:0px auto;margin-top: -10px;
+      background-color: rgb(187, 186, 186);
+      display: flex;justify-content: center;align-items: center;
+      color:red;
+    }
+    /* 换背景 */
+    #backimg{
+      width:100%;
+      height:250px;padding:0;margin: 0;
+      list-style-type: none;
+      display:flex;align-items: center;justify-content: space-between;
+    }
+    #backimg>li{
+      width:24%;
+      height:100%;border:1px solid red;
+      overflow: hidden;
+    }
+    #backimg>li>img{width:100%;height:100%}
+    #backimg>li:hover{
+      box-shadow: 0 0 8px rgba(102,175,255,.8); 
+    }
+    #backimg>li:hover>img{
+      transform:scale(1.1);
+    }
+  </style>
+  <script>
+    // 把ul解除隐藏;
+    function huan(){
+      let backimg=document.getElementById("backimg");
+      if(backimg.style.display == "none")
+        backimg.style.display="flex";
+      else
+        backimg.style.display="none";
+      alert(backimg.style.display);
+  
+    }
+    // 点击图片切换
+    window.onload=function(){
+      var liimg=document.getElementsByTagName("li");//获取li
+      let htm=document.getElementsByTagName("body")[0];// 获取根标签
+      for(var i=0;i<liimg.length;i++){
+        liimg[i].onclick=function(){
+          // let img=this.childNodes[1].src;//图片//有乱码
+          let img=this.childNodes[1].name;
+          htm.style.backgroundImage="url("+img+")";
+          console.log(htm.style.backgroundImage);
+        }
+      }
+      
+    }
+  </script>
+</head>
+<body style="background-image:url(img/pink1.jpg)"> 
+<h1 id="h" onclick="huan()"></h1>
+<ul id="backimg" style="display:none;">
+  <li value="url(img/上官婉儿.jpg)" >
+    <img src="img/上官婉儿.jpg" name="img/上官婉儿.jpg">
+  </li>
+  <li value="url(img/不知火舞.jpg)" >
+    <img src="img/不知火舞.jpg" name="img/不知火舞.jpg">
+  </li>
+  <li value="url(img/夏洛特.jpg)" >
+    <img src="img/夏洛特.jpg" name="img/夏洛特.jpg">
+  </li>
+  <li value="url(img/西施.jpg)" >
+    <img src="img/西施.jpg" name="img/西施.jpg">
+  </li>
+</ul>
+
+<p>作业.</p>
+<p>1. 判断问好时间早中晚休息0-12点是早上 13-14点是中午 14-24是晚上</p>
+  <button id="one" onclick="one()">第一题</button><span id="oneResult"></span>
+<p>2.比较两个数的最大值 二元运算</p>
+<button id="two" onclick="two()">第二题</button><span  id="twoResult"></span>
+<p>3.求100以内所有能被3和7整除的数的和</p>
+<button id="there" onclick="there()">第三题</button><span id="thereResult"></span>
+<p>4. 需求 ：有一群人，如果3个人站一排多出一人，如果4个人站一排多出来2个人；如果5人一排多出3人。问：这群人的数量</p>
+<button id="four" onclick="four()">第四题</button><span id="fourResult"></span>
+<p>5. 一个input一个ul，点增加按钮把输入的名字加到li中然后在加到ul中innerHTML</p>
+<input type="button" id="five" value="添加" onclick="five()">
+<ul id="fiveUl"></ul>
+<p>6.一个box宽度100px高度100px,点放大按钮,让box的宽高每次加10. 如果到300px 那么就停止style.width/height</p>
+<button id="six" onclick="six()">放大</button><div id="box" ></div>
+
+<script>
+  function judge(n){
+    if(isNaN(n)){//判断是否为不是数字类型，true不是数据类型
+      return false;
+    }else{
+      return true;
+    }
+  }
+  /* 第一题 */
+  function one(){
+    let time=prompt("输入时间");
+    let oneResult=document.getElementById("oneResult");//错误信息
+    if(judge(time)){
+      if(time<=24 && time>=0 ){
+        if(time>=0 && time<=12)
+        oneResult.innerText="早上好";
+        else if(time>=13 && time<=14)
+        oneResult.innerText="中午好";
+        else
+        oneResult.innerText="晚上好";
+      }else{
+        oneResult.innerText="时间有误，不得大于24，小于0";
+      }
+    }else{
+      oneResult.innerText="时间输入有误，非数字";
+    }
+  }
+  // 第二题
+  function two(){
+    let value=prompt("输入第一个值：");
+    let twoResult=document.getElementById("twoResult");//错误提示信息
+    if(judge(value)){
+      let value2=prompt("输入第二个值：");
+      if(judge(value2)){
+        if(value>value2){
+          twoResult.innerText=value+"与"+value2+"比较："+value+"大";
+        }else if(value<value2)
+        twoResult.innerText=value+"与"+value2+"比较："+value2+"大";
+        else
+        twoResult.innerText=value+"与"+value2+"比较：一样大";
+      }else{
+        twoResult.innerText="第二个值非数字";
+      }
+    }else{
+      twoResult.innerText="第一个值非数字";
+    }
+  }
+  // 第三题
+  function there(){
+    let sum=0;
+    let value="";
+
+    for(var i=0;i<=100;i++){
+      if((i%3==0)&&(i%7==0)&&i!=0){
+        sum=sum+i;
+        if(value.length<1){
+          value=value+i;
+        }else{
+          value=value+","+i;
+        }
+      }
+    }
+    let thereResult=document.getElementById("thereResult");
+    thereResult.innerText="被3和7整除的有："+value+"\t它们的和为："+sum;
+  }
+  // 第四题
+  function four(){
+    let value=0;
+    while(true){
+      if((value%3==1)&&(value%4==2)&&(value%5==3)){
+        let fourResult=document.getElementById("fourResult");
+        fourResult.innerText="这群人有"+value+"个"; 
+        return ;
+      }
+      value++;
+    }
+  }
+  // 第五题
+  function five(){
+    let name=prompt("输入你要添加的名字：");
+    if(name.length>1){
+      let ul=document.getElementById("fiveUl");
+      let ulHtml=ul.innerHTML;
+      console.log(ulHtml);
+      if(ulHtml.length<1)
+        ul.innerHTML="<li>"+name+"</li>";
+      else
+        ul.innerHTML=ulHtml+"<li>"+name+"</li>";
+    }else{
+      alert("输入不得为空");
+    }
+  }
+  // 第六题
+  var wh=100;//宽高的变量
+  function six(){
+    let box=document.getElementById("box");//要放大的盒子
+    // console.log(box.style);
+    let boxWidth=box.style.width;//盒子的宽
+    let boxHeight=box.style.height;//盒子的高
+    // console.log(boxWidth+"\t"+boxHeight);
+    if((boxWidth =="300px") && (boxHeight=="300px"))
+      box.innerText="停止，不能再大了";
+    else{
+      wh=wh+100;
+      // console.log("wh"+wh);
+      box.style.width=wh+"px";
+      box.style.height=wh+"px";
+      // console.log("结果："+box.style.width+"\t"+box.style.height);
+    }
+  }
+  // 时间;
+  function date(){
+    var date=new Date();
+    let year=date.getFullYear();//年
+    let mon=date.getMonth();//月
+    let day=date.getDay();//星期天数
+    let hao=date.getDate();//日
+    let hou=date.getHours();//小时
+    let minu=date.getMinutes();//分钟
+    let miao=date.getSeconds();//秒
+    let h1=document.getElementById("h");//时间要写的地方
+    // 时间小于10在前面加个零
+    if(hou<10)
+      hou="0"+hou;
+    if(minu<10)
+      minu="0"+minu;
+    if(miao<10)
+      miao="0"+miao;
+    // 把星期给转换成汉字
+    switch(day){
+      case 1:
+        day="一";
+        break;
+      case 2:
+        day="二";
+         break;
+      case 3:
+        day="三";
+        break;
+      case 4:
+        day="四";
+        break;
+      case 5:
+        day="五";
+        break;
+      case 6:
+        day="六";
+        break;
+      default:
+        day="天";
+        break;
+    }
+    let hy;
+    if((hou>=0)&&(hou<6)){
+      hy="凌晨好！";
+    }else if((hou>=6)&&hou<12)
+      hy="下午好！";
+    else if(hou==12)
+      hy="中午好！";
+    else if((hou>=13)&&(hou<18))
+      hy="下午好！";
+    else
+      hy="晚上好！";
+     h1.innerText=hy+"今天是"+year+"年"+(mon+1)+"月"+hao+"日"+"\t"+hou+"时"+minu+"分"+miao+"秒\t星期"+day;
+  }
+  setInterval(date,1000);
+</script>
+</body>
+</html>

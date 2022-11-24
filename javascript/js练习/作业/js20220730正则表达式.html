@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      background-color: thistle;
+    }
+    .title{
+      white-space: pre-wrap;
+    }
+    #form{
+      width:400px;height:100%;background-color: white;
+      padding: 20px;text-align: center;
+      background-color: gainsboro;
+    }
+    #form>label{
+      display:inline-block;
+      width:100px;text-align: center;
+    }
+    #form>input{
+      margin-left: 10px;
+    }
+    #form>span{
+      color:red;text-indent:10px ;
+    }
+  </style>
+</head>
+<body>
+<!--       
+      
+ <label for="email">email</label>
+        <input type="text" name="email" id="email" placeholder="">
+<span></span> -->
+    <p class="title">表单事件onsubmit onreset  
+      输入onclick onblur oninput onchage回车或改变 onselect onfocus 
+练习:</p>
+    <p class="title">1.注册表单
+      姓名必须是3到8个中文，email，qq，手机号码，邮编，驾驶证，工号，简介textarea
+     写在每个input的onblur上</p>
+     <form id="form">
+        <!-- 邮件 -->
+      <label for="email">email</label>
+        <input type="text" name="email" id="email" placeholder="">
+        <br>
+        <span></span>
+        <br>
+      <!-- QQ -->
+      <label for="QQ">QQ</label>
+        <input type="text" name="QQ" id="QQ" placeholder="">
+        <br>
+        <span></span>
+      <br>
+      <!-- 手机号 -->
+      <label for="sj">手机号</label>
+        <input type="text" name="sj" id="sj" placeholder="">
+        <br>
+        <span></span>
+        <br>
+      <!-- 邮编 -->
+      <label for="yb">邮编</label>
+        <input type="text" name="yb" id="yb" placeholder="">
+        <br>
+        <span></span>
+        <br>
+      <!-- 驾驶证 -->
+      <label for="jsz">驾驶证</label>
+        <input type="text" name="jsz" id="jsz" placeholder="">
+        <br>
+        <span></span>
+        <br>
+      <!-- 工号 -->
+      <label for="gh">工号</label>
+        <input type="text" name="gh" id="gh" placeholder="">
+        <br>
+        <span></span>
+        <br>
+      <!-- 简介textarea -->
+      <label for="jj">简介textarea</label>
+        <input type="text" name="jj" id="jj" placeholder="">
+        <br>
+        <span></span>
+        <br>
+     </form>
+    <p class="title">2.去掉工号两边的空格/^\s+|\s+$/</p>
+    <button id="two">输入工号</button><span></span>
+    <p class="title">3.替换textarea中所有>为& gt; <为& lt; </p>
+    <textarea id="there" style='width:300px; height:300px'></textarea>
+    <script>
+      const $=(ele)=>document.getElementById(ele);
+      const log=(...msg)=>console.log(...msg);
+      //第一题
+      {
+        var email=$("email");//邮箱
+        var emailSpan=email.nextElementSibling.nextElementSibling;
+        var QQ=$("QQ");//QQ
+        var QQSpan=QQ.nextElementSibling.nextElementSibling;
+        var sj=$("sj");//手机号
+        var sjSpan=sj.nextElementSibling.nextElementSibling;
+        var yb=$("yb");//邮编
+        var ybSpan=yb.nextElementSibling.nextElementSibling;
+        var jsz=$("jsz");//驾驶证
+        var jszSpan=jsz.nextElementSibling.nextElementSibling;
+        var gh=$("gh");//工号
+        var ghSpan=gh.nextElementSibling.nextElementSibling;
+        var jj=$("jj");//简介
+        var jjSpan=jj.nextElementSibling.nextElementSibling;
+        email.onblur=function(){
+          join(this,/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,emailSpan);
+        }
+        QQ.onblur=function(){
+          join(this,/[1-9][0-9]{4,}/,QQSpan);
+        }
+        sj.onblur=function(){
+          join(this,/^1[3|4|5|7|8][0-9]{9}$/,sjSpan);
+        }
+        yb.onblur=function(){
+          join(this,/[1-9]\d{5}(!?\d)/,ybSpan);
+        }
+        jsz.onblur=function(){
+          join(this,/^((^[0-9]{18}$)|(^[0-9]{17}[Xx])$)$/,jszSpan);
+        }
+        gh.onblur=function(){
+          join(this,/^[0-9a-zA-Z]*$/g,ghSpan);
+        }
+        jj.onblur=function(){
+          join(this,/\w*/,jjSpan);
+        }
+        function join(obj,regExp,span){
+            const re=new RegExp(regExp);
+            console.log(re);
+            if(!re.test(obj.value)){            
+              span.innerText="*---格式有误---*";
+              obj.value="";
+            }
+        }
+      }
+      
+      function spans(){
+          var spans=$("form").querySelectorAll("span");
+          spans.forEach(span=>{
+            if(span.innerText!=""){
+              span.innerText="";
+            }
+          })
+        }
+        setInterval(spans,5000);
+      //第二题
+      {
+        var two=$("two");
+        var twoSpan=two.nextElementSibling;
+        two.onclick=function(){
+            var str=prompt("输入工号：");
+            if(/^[0-9a-zA-Z]*$/g.test(str)){//判断格式
+              var reg = /^\s*|\s*$/g;
+              var xin=str.replace(reg,"");//去头尾空格
+              twoSpan.innerText="去重之后:"+xin+";";
+            }else{
+              twoSpan.innerText="格式有误"
+            }
+        }
+      }
+      //第三题
+      {
+        var there=$("there");
+        there.onblur=function(){
+          var str=there.value;
+          str=str.replace(/</g,"& gt;");
+          str=str.replace(/>/g,"& it;");
+          this.value=str;
+        }
+      }
+    </script>
+</body>
+</html>

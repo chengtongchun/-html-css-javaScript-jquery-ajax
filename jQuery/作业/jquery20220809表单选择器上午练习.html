@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery-1.10.1.js"></script>
+</head>
+
+<body>
+   <p></p>
+    <form action="">
+        <input type="text" name="name" value="cjy" disabled><br>
+        <input type="password" name="pwd" placeholder="" ><br>
+        性别<input type="radio" name="sex" value="0" checked>女
+        <input type="radio" name="sex" value="1" >男<br>
+        爱好 <input type="checkbox" name="favor" value="篮球">篮球
+        <input type="checkbox" name="favor" value="足球" checked>足球
+        <input type="checkbox" name="favor" value="乒乓球">乒乓球
+        <input type="checkbox" name="favor" value="水球">水球<br>
+        特长
+        <select multiple name="techang">
+            <option value="1">java</option>
+            <option value="2" selected>js</option>
+            <option value="3">web</option>
+            <option value="4">c</option>
+        </select>
+    </form>
+    <div>
+        <button>把name的值改为张三并将name的disabled改为false</button>
+        <button>打印出性别的值并选中男</button>
+        <button>打印所有爱好的值并选中所有爱好</button>
+        <button>输出特长所有的文本</button>
+        <button>输出选中特长的值</button>
+    </div>
+    <script>
+        $(function(){
+        // <button>把name的值改为张三并将name的disabled改为false</button>
+            $(":button:eq(0)").click(function(){
+                $("input[name='name'").val("张三").attr("disabled",false);
+            })
+
+        // <button>打印出性别的值并选中男</button>
+            $(":button:eq(1)").click(function(){
+                let sexs=$(":radio");//单选框
+                for(var i=0;i<sexs.size();i++){
+                    console.log($(sexs[i]).val());
+                    if($(sexs[i]).val()==1){
+                        $(sexs[i]).prop("checked",true)//?
+                        console.log($(sexs[i]).prop("checked"));
+                    }
+                }
+            })
+
+            // <button>打印所有爱好的值并选中所有爱好</button>
+            $(":button:eq(2)").click(function(){
+                let ah=$(":checkbox");//多选框
+                for(var i=0;i<ah.length;i++){
+                    console.log($(ah[i]).val());
+                    $(ah[i]).attr("checked",true);
+                }
+                
+            })
+
+            // <button>输出特长所有的文本</button>
+            $(":button:eq(3)").click(function(){
+                let opts=$("select>option");
+                for(var i=0;i<opts.size();i++){
+                    console.log($(opts[i]).text());
+                }
+            })
+
+            // <button>输出选中特长的值</button>
+            $(":button:eq(4)").click(function(){
+                let opvals=$("option:selected");
+                for(var i=0;i<opvals.length;i++){
+                    console.log($(opvals[i]).val())
+                }
+            })
+            
+        })
+    </script>
+</body>
+
+</html>

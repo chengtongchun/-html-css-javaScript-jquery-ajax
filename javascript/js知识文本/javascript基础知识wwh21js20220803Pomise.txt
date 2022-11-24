@@ -1,0 +1,72 @@
+JavaScript异步编程
+同步异步
+ 实现异步的几种方式：1.回调函数 2.函数调用 3.promise
+  我承诺Promise
+     三个状态:pending等待中 Fulfilled已经履行承诺 rejected已拒绝
+     promise 对象初始化状态为 pending
+         当调用resolve(成功)，会由pending => fulfilled
+         当调用reject(失败)，会由pending => rejected
+    构造函数Promise((resolve解决方法, reject拒绝方法)) 
+    把大象放到冰箱里：打开冰箱--放入大象--关闭冰箱 
+     console.log('打开冰箱')
+       new Promise(function(resolve,reject){
+        setTimeout(()=>{
+            console.log('放入大象');
+            resolve('')
+          },2000);
+       }).then(()=>console.log("关闭冰箱"))
+         .catch(()=>console.log("冰箱坏了"));
+   静态方法
+       Promise.resolve()  Promise.reject()直接构造Promise对象
+       实例方法then(onFulfilled, onRejected);
+    例子 
+        const promise = new Promise((resolve, reject) => {
+              resolve('成功');//状态会由pending => fulfilled
+              reject('拒绝'); // 状态由 pending => rejected
+          });
+        promise.then(result => {console.log(result); }, 
+                             reason => {console.log(reason); })
+      也可以写成
+          promise.then(onFulfilled)
+                      .catch(onRrejected);  
+
+    笔试:下面代码输出什么
+         Promise.resolve(1).then(2).then(console.log);
+         Promise.reject(1).then(2, 2).then(console.log, console.log);
+    then的链式写法
+         function taskA() {console.log("开电脑");}
+         function taskB() { console.log("打打游戏"); }
+          function taskC() { console.log("努力写代码"); }
+         function onRejected(error) { console.log("捕获 ABC任务的错误", error); }
+         var promise = Promise.resolve(); 
+         promise.then(taskA).then(taskB).then(taskC).catch(onRejected)
+
+    关键静态方法all any race
+     const p1 = new Promise(function (resolve, reject) {setTimeout(resolve, 100, '刷牙');});
+     const p2 = new Promise(function (resolve, reject) {setTimeout(resolve, 500, '上厕所');});
+     const p3='睡觉';
+     const ps=[p1,p2,p3];
+     Promise.all(ps).then((value)=>console.log(value));
+     Promise.any(ps).then((value) => console.log(value));
+     Promise.race(ps).then((value) => console.log(value));
+     all全部成功resolve最终返回成功有一个为失败reject会返回失败 按任务顺序执行
+     any只要有一个成功返回成功，只有所有失败才会返回失败的状态
+     race赛跑 最先执行的状态返回出来，无论失败还是成功
+
+练习:  
+1.同步和异步的区别
+   同步：要等待 耗费资源 严格按顺序执行
+   异步：快不费资源 但没法控制执行顺序
+2下列输出什么
+         Promise.resolve(1).then(2).then(console.log);//输出1
+         Promise.reject(1).then(2, 2).then(console.log, console.log);//输出1
+         Promise.reject(1).then(2).then(console.log);//报错：Uncaught (in promise) 1
+3.Promise.all,Promise.any,Promise.race的区别
+all全部成功resolve最终返回成功，有一个失败则返回失败，按任务顺序执行
+any只要有一个成功返回成功，只要所以失败才会返回失败的状态
+race，赛跑，最先执行的状态返回回来，无论失败还是成功
+
+4.小鸡炖蘑菇：准备材料200--炒鸡500--炖鸡500--上菜200
+console.log("小鸡炖蘑菇：")
+var p=Promise.resolve();
+p.then(()=>console.log("准备材料200")).then(()=>console.log("炒鸡500")).then(()=>console.log("炖鸡500")).then(()=>console.log("上菜200"));

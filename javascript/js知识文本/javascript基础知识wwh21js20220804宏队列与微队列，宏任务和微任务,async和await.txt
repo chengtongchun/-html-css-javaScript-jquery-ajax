@@ -1,0 +1,82 @@
+宏队列与微队列，宏任务和微任务
+     js是单线程运行的，从头到尾顺序执行，如果是同步代码立即执行，如果是异步事件
+    按类型分别放入宏队列和微队列排队执行
+         宏队列：定时器回调/DOM事件回调/ajax回调 （时间慢）
+         微队列：Promise 的回调，Mutation回调，I/O 操作，UI 渲染 （时间快）
+         执行顺序：同步——>微队列——>宏队列
+
+宏列队：用来保存待执行的宏任务（回调），比如：定时器回调、DOM 事件回调、ajax 回调
+
+微列队：用来保存待执行的微任务（回调），比如：promise的回调、MutationObserver 的回调
+       笔试题1
+           log = (...arg) => console.log(...arg);
+           Promise.resolve().then(()=>log("p1"))
+            log('同步1');
+           setTimeout(() => {
+               log('st..同步..');
+               Promise.resolve().then(()=>log("st...p1"))
+            }, 0);
+           Promise.resolve().then(()=>log("p2"))
+           log('同步2');
+2.async和await
+   async/await是什么？ async异步  await是等待
+   async/await其实是Promise的语法糖，为优化then链而开发出来的。
+   await只能放在async函数里面，如果不放在里面，代码会直接报错，不能运行
+   例子1
+       async function A() {return "开电脑";}
+        let a = taskA(); 
+        console.log(a)
+        a.then(v => { console.log(v) }) 
+    例子2   
+       function f1() {
+            return new Promise(resolve => {
+                setTimeout(() => { console.log("大象放到冰箱里");   resolve();}, 300)})}
+      async function f2() {
+             console.log('打开冰箱')   
+            let result = await A();
+            console.log('关上冰箱')   
+        }
+        f2();
+练习
+  1.宏队列和微队列是什么？分别放哪些任务
+  2.下面代码输出什么
+       const { log } = console;
+        Promise.reject('打游戏').catch(log);
+        Promise.resolve('写代码').then('看视频').then(log)
+        setTimeout(() => {
+            Promise.resolve("蹲坑").then(log);
+            Promise.reject('表白').then(log,log);
+            setTimeout(() => log('看手机'), 0);
+            log('吃辣条');
+        }, 0);
+        window.onload = log('背单词');
+        log('开电脑');
+输出：
+	背单词
+	开电脑
+	打游戏
+	写代码
+	吃辣条
+	蹲坑
+	表白
+	看手机
+3.async只能放在什么前面，await只能放在async函数里面
+4.用async和await封装ajax
+        const { log } = console;
+        const url = "http://127.0.0.1:5500/1.txt";
+        async function ajax(method, url) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open(method, url);
+                xhr.onload = () => resolve(xhr.responseText)
+                xhr.onerror = () => reject(xhr.statusText)
+                xhr.send()
+            });
+        }
+        async function getData() {
+            let data = await ajax('get', url);
+            log(data);
+        }
+        getData();
+}
+   

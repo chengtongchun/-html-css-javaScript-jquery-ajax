@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			body{
+				background-image:url(img/夏洛特.jpg);
+				background-repeat: no-repeat;
+				/* background-position:  center left; */
+				background-size:100vw 100vh ;
+				background-attachment: fixed;
+				color: red;
+				font-size: 1em;
+			}
+			@media screen and (max-width:1249px) {
+				body{
+					background-size: cover;
+				}
+			}
+			p{
+				white-space: pre-wrap;
+			}
+			/* 第二题 */
+			.form{
+				width:420px;
+				height:160px;
+				background-color:rgb(212, 212, 209);
+				display: flex;flex-direction: column;justify-content: center;align-items: center;
+			}
+			.lab{
+				display: flex;
+				width:400px;height:50px;
+				/* height:100px; */
+				/* flex-wrap: wrap; */
+				justify-content: space-around;align-content:center;
+				padding: 0;
+			}
+			.lab>span{
+				display: flex;justify-content: center;align-items: center;
+				width:20%;height:40px;
+				/* border-radius: 10px; */
+				border:0px solid black;
+			}
+			.lab>input{
+				border-radius: 10px;
+				width:70%;height:40px;background-color: white;
+				border:0px solid black;
+			}
+			#phoneSpan{width:100%;
+				display: flex;justify-content: center;align-items: center;
+				height:40px;
+			}
+			button{
+				display: flex;justify-content: center;align-items: center;
+				width:50%;
+				height:40px;
+				background-color: blue;
+				border-radius: 20px;
+				font-size: 1.3em;
+			}
+		</style>
+	</head>
+	<body>
+		<p class="title">1. 在//后面写出值</p>
+		<p class="result">
+			var v1 = Number(1); //1
+			var v1 = Number(-1);//-1
+			var v1 = Number(0.1E-6); //1e-7
+			var v1 = Number(NaN); //NaN
+			var v1 = Number(undefined); //NaN
+			var v1 = Number(null); //0
+			var v1 = Number(0xf); //15
+			var v1 = Number("true"); //NaN
+			var v1 = Number(false); //0
+			var v1 = Number(true); //1
+		    //Number()不能把NaN,undefned,String类型转换为数字类型
+
+			var n1 = Infinity / 1;//Infinity
+			var n1 = Infinity * Infinity; //Infinity
+			var n1 = Infinity + Infinity; //Infinity
+			var n1 = Infinity - Infinity; //NaN
+			var n1 = Infinity / Infinity; //NaN
+			var n1 = Infinity > 1; //true
+			var n1 = Infinity > Infinity; //false
+			//Infinity正无穷可以和数字+-*/，和数字比较，
+			//两个正无穷之间除了+ * 等于Infinity外,/ -都是NaN，互相比较是false
+			
+			var n1 = NaN / 1; //NaN
+			var n1 = NaN > 1; //false
+			//NaN是一个特殊的数字，表示not a Number不是数字类型(使用typeof检查也会返回number),
+			//NaN表示非数字类形，和数字+-*/都会返回NaN本身，也无法和数字比较
+		   
+			var str1 = String(null); //null
+			var str1 =  String(undefined); //undefined
+			var str1 =  String(true);//true
+			var str1 =  String(0x11);//17 转变为String类型了
+			var str1 =  String(011);//9 转变为String类型了
+			var jsonObj = {"age":19,"name":"小明"}
+			var str1 =  String(jsonObj); //[object Object]	转变为String类型了
+			//console.log(str1.age+"\t"+str1.names);//undefined	undefined
+			//String()不管是什么都转换为String类型
+			var b1 = Boolean(1); //true
+			var b1 = Boolean(0); //false
+			var b1 = Boolean(NaN); //false
+			var b1 = Boolean(3.1); //true
+			var b1 = Boolean(null); //false
+			var b1 = Boolean(undefined); //false
+			var b1 = Boolean(""); //false	空白是false
+			var b1 = Boolean(" "); //true 空格是true
+			var b1 = Boolean("什么鬼？"); //true String是true
+			var b1 = Boolean({}); //true
+			var b1 = Boolean([]); //true
+			var b1 = Boolean([1,2,3]); //true
+			//Boolean()除了0，NaN,null,undefined,""外，都是true
+			/*
+			  下列语句有没有问题
+			*/
+			console.log(abcd)
+			//有问题 下面没有全局变量 var abcd来提升变量，也没有在前面设变量赋值
+			 var ab=10;
+			{
+			   var ab=20;
+			   let cd=30;
+			}
+			console.log(cd);
+			//有问题，下面没有全局变量 var cd来提升变量，也没有在前面设全局变量，
+			//只有前面的代码块里有let定义的变量，但那是局部作用域，无法赋值给它，不在范围
+			console.log(c1);
+			//有问题，下面没有全局作用域 var c1来提升变量，也没有在前面设全局变量，
+			//只有后面const c1=20定义的常量，局部作用域，console定义常量，没有提升变量的功能
+			const c1=20;
+			//没问题，但常量建议大写
+			c=200;//没问题 字面量;
+			console.log(typeof c+"\t"+c);//number	200
+		</p>
+		<p class="title">2. 检测电话号码</p>
+		<div class="form">
+			<label class="lab">
+				<span>电话号码：</span>
+				<input type="text" placeholder="输入电话号码，检测是否有误" id="phone"s>
+			</label>
+			<button onclick="pho()">检测</button>
+			<span id="phoneSpan"></span>
+		</div>
+		<p class="title">3.说出let const var的区别</p>
+		<p>(1)var 是全局作用域，可以变量提升，可以多次定义重复的变量名
+(2)let 是局部作用域，不能变量提升，不可以定义重复的变量名
+(3)const 是局部作用域，不能变量提升，不可以定义重复的变量名const定义常量，const不能修改指的是在其作用域内不能被修改
+		</p>
+		<script type="text/javascript">
+		/*
+		  1. 在//后面写出值
+		  2. 检测电话号码
+		  3.说出let const var的区别
+			(1)var 是全局作用域，可以变量提升，可以多次定义重复的变量名
+			(2)let 是局部作用域，不能变量提升，不可以定义重复的变量名
+			(3)const 是局部作用域，不能变量提升，不可以定义重复的变量名const定义常量，const不能修改指的是在其作用域内不能被修改
+		*/
+			var v1 = Number(1); //1
+			var v1 = Number(-1);//-1
+			var v1 = Number(0.1E-6); //1e-7
+			var v1 = Number(NaN); //NaN
+			var v1 = Number(undefined); //NaN
+			var v1 = Number(null); //0
+			var v1 = Number(0xf); //15
+			var v1 = Number("true"); //NaN
+			var v1 = Number(false); //0
+			var v1 = Number(true); //1
+		    //Number()不能把NaN,undefned,String类型转换为数字类型
+
+			var n1 = Infinity / 1;//Infinity
+			var n1 = Infinity * Infinity; //Infinity
+			var n1 = Infinity + Infinity; //Infinity
+			var n1 = Infinity - Infinity; //NaN
+			var n1 = Infinity / Infinity; //NaN
+			var n1 = Infinity > 1; //true
+			var n1 = Infinity > Infinity; //false
+			//Infinity正无穷可以和数字+-*/，和数字比较，
+			//两个正无穷之间除了+ * 等于Infinity外,/ -都是NaN，互相比较是false
+			
+			var n1 = NaN / 1; //NaN
+			var n1 = NaN > 1; //false
+			//NaN是一个特殊的数字，表示not a Number不是数字类型(使用typeof检查也会返回number),
+			//NaN表示非数字类形，和数字+-*/都会返回NaN本身，也无法和数字比较
+		   
+			var str1 = String(null); //null
+			var str1 =  String(undefined); //undefined
+			var str1 =  String(true);//true
+			var str1 =  String(0x11);//17 转变为String类型了
+			var str1 =  String(011);//9 转变为String类型了
+			var jsonObj = {"age":19,"name":"小明"}
+			var str1 =  String(jsonObj); //[object Object]	转变为String类型了
+			//console.log(str1.age+"\t"+str1.names);//undefined	undefined
+			//String()不管是什么都转换为String类型
+			var b1 = Boolean(1); //true
+			var b1 = Boolean(0); //false
+			var b1 = Boolean(NaN); //false
+			var b1 = Boolean(3.1); //true
+			var b1 = Boolean(null); //false
+			var b1 = Boolean(undefined); //false
+			var b1 = Boolean(""); //false	空白是false
+			var b1 = Boolean(" "); //true 空格是true
+			var b1 = Boolean("什么鬼？"); //true String是true
+			var b1 = Boolean({}); //true
+			var b1 = Boolean([]); //true
+			var b1 = Boolean([1,2,3]); //true
+			//Boolean()除了0，NaN,null,undefined,""外，都是true
+			/*
+			  下列语句有没有问题
+			*/
+			//console.log(abcd)
+			//有问题 下面没有全局变量 var abcd来提升变量，也没有在前面设变量赋值
+			 var ab=10;
+			{
+			   var ab=20;
+			   let cd=30;
+			}
+			//console.log(cd);
+			//有问题，下面没有全局变量 var cd来提升变量，也没有在前面设全局变量，
+			//只有前面的代码块里有let定义的变量，但那是局部作用域，无法赋值给它，不在范围
+			//console.log(c1);
+			//有问题，下面没有全局作用域 var c1来提升变量，也没有在前面设全局变量，
+			//只有后面const c1=20定义的常量，局部作用域，console定义常量，没有提升变量的功能
+			const c1=20;
+			//没问题，但常量建议大写
+			c=200;//没问题 字面量;
+			// console.log(typeof c+"\t"+c);//number	200
+		</script>
+		<script>
+			//电话号码
+			function pho(){
+				var phone=document.getElementById("phone").value;
+				var phoneSpan=document.getElementById("phoneSpan");//错误提示信息
+				if(phone.length != 0){
+					if(phone.length == 11){
+						if(isNaN(phone)){
+							phoneSpan.innerText="非法字符";
+						}else{
+							var zz=/^1[3-9]\d{9}$/;//正则表达式
+							if(zz.test(phone)){
+								phoneSpan.innerText="电话号码正确";
+							}else{
+								phoneSpan.innerText="不是有效号码";
+							}
+						}
+					}else{
+						phoneSpan.innerText="电话号码不正确";
+					}
+				}else{
+					phoneSpan.innerText="不得为空";
+				}
+				setTimeout(miao,5000);// 5变0后就改变值
+			}
+			// 5变0后就改变值
+			function miao(){
+				let phs=document.getElementById("phoneSpan");
+				phs.innerText="";
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,53 @@
+﻿BOM
+    浏览器对象模型(BOM)就是js与浏览器窗口进行交互的对象,BOM是一个分层结构
+     打开网页后，先看到浏览器窗口window,其次是网页文档内容即document还有地址location和历史history对象    
+window对象
+     事件onload当页面加载完成后触发 
+              DOMContentLoaded（搭配addEventListener）是DOM加载完毕，还没加载图片js css 等，加载速度比 load更早一些
+      onunload跳转、回退前进、关闭窗口  
+      onresize事件窗口重置后被触发  
+                window.innerWidth <= 800;  div.style.display = 'none';
+     属性: history访问过的历史   location地址栏  screen屏幕信息
+     方法: alert prompt confirm close() open(url)
+         let newWin=window.open("1.html","newWin","width=300px,height=300px,top=200px,left=450px");
+          if(newWin.closed)  
+              newWin.close();
+      回到顶部window.scrollTo(0,0); 
+  location 对象
+     属性： host主机名和端口   hostname主机名  href地址  search 
+     方法：reload() 重新加载当前文档   replace用新的文档替换当前文档
+        重定向location.assign(url)，location.href="url"; 替换location.replace(url);
+  history对象
+    方法: back()后退forward()前进go(n)  -1后退1页
+ 
+document对象
+   属性:referrer谁载入的当前文档  
+          if(document.referrer.endsWith("1.html"))
+               setTimeout("location.href='login.html'",1000);
+
+sessionStorage保存浏览器会话状态
+      保存 window.session.Storage.setItem('key', 'value'); 
+      读取session.getItem('key'); 
+      删除session.removeItem('key'); 清除session.clear();
+本地存储
+      保存 localStorage.setItem('name', 'cjy');  
+      获取localStorage.getItem  
+      移除localStorage.removeItem  清除localStorage.clear()
+      保存对象localStorage.setItem('peron', JSON.stringify(person))  
+             获取JSON.parse(localStorage.getItem('person'))
+cookie存储
+     document.cookie="name=cjy";
+     document.cookie="name=cjy; expires="+d.toUTCString();d.setTime(d.getTime()+(days * 24 * 60 * 60 * 1000));
+     获取c=decodeURIComponent(document.cookie);c.split("; ");
+Navigation 判断浏览器类型
+       if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|WebOS|Windows Phone)/i))) 
+              {window.location.href = "h5.html"; //手机 }
+练习
+ 1.DOMContentLoaded和onload的区别
+ 2.弹出确认删除窗口
+ 3.重新定向到另一个网页的三种方式
+ 4.document的referrer是干嘛用的
+ 5.sessionStorage和 localStorage的区别
+ 6.点按钮打开一个窗口(长300宽300），3秒后关闭该窗口
+ 7.保存window对象到本地
+ 

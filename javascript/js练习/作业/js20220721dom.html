@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-weight: bold;
+            letter-spacing:2px;/* 文字之间的间距 */
+            background-color: #383c45;
+        }
+        p{
+            white-space:pre-wrap;
+            color:white;
+            text-shadow: 0px 0px 10px red;
+
+        }
+        button{
+            width:150px;height:45px;border-radius: 5px;border:0px solid black;
+        }
+        /* 第五题的p */
+        #five>ul{
+            color:black;text-shadow: 0px 0px 0px transparent;
+        }
+        /* 第六题 */
+        #six_button{width:160px;color:red; letter-spacing:3px;/* 文字之间的间距 */}
+        #six_button+div{
+            white-space:pre-wrap;
+        }
+        /* 第七题 */
+        #sevenImg{
+            width:550px;
+            height:300px;
+            /* margin-left: 27.5%; */
+            display: block;
+            margin:0 auto;
+        }
+        /* 第八题 */
+        #eight{
+            width:100%;
+            height:70vh;
+            background-color: white;
+            border:1px solid black;
+            position: relative;
+        }
+        #box8{
+            width:100px;
+            height:100px;
+            border-radius: 50%;
+            background-color:burlywood;
+            position:absolute;
+        }
+        #eight_button{
+            height:30px;margin-left:27.5%;
+        }
+        #eight_span{
+            margin-left:10px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            let eight=document.getElementById("eight");//大div
+            var box8=document.getElementById("box8");//地鼠
+            var bnt8=document.getElementById("eight_button");//开始按钮
+            var eight_span=document.getElementById("eight_span");//敲了老鼠多少        
+            box8.style.position="absolute";
+            bnt8.onclick=function(){
+                let outP=document.getElementById("outP");//提示框
+                var value=5;//开始时间
+                var value2=0;//敲了多少
+                var value3=10;//结束倒计时
+                var tr;//
+                //规定移动范围：x:68-1000;y:287-450
+                function xy(){
+                   tr=setInterval(xy2(),800)
+                }   
+                function xy2(){
+                    let x,y;
+                    while(true){
+                        x=Math.trunc(Math.random()*1000);
+                        y=Math.trunc(Math.random()*450);
+                        if((x>=68 && x<=1107)&&(y>=287 && y<=450)){
+                            console.log(x+","+y);
+                            box8.style.left=x+"px";
+                            box8.style.top=y+"px";
+                            break;
+                        }
+                    }
+                    console.log(box8.style);
+                }
+                box8.onclick=function(){
+                    value2++;
+                    eight_span.innerText="累计敲了地鼠："+value2+"只";
+                }
+                var ts=setInterval(()=>{
+                    if(value>=0){
+                        outP.innerText="游戏还有\t "+value+"\t秒开始";
+                        if(value==0){
+                            outP.innerText="开始！！！";
+                            eight_span.innerText="累计敲了地鼠："+value2+"只";
+                        }
+                            value--;
+                        
+                    }else{
+                        box8.style.display="block";
+                        outP.innerText="";
+                        bnt8.disabled="disabled";
+                        console.log(value3);
+                        if(value3>0){
+                            xy();
+                            outP.innerText="离结束还有\t"+value3+"\t秒";
+                            value3--;
+                        }else{
+                            outP.innerText="游戏结束";
+                            bnt8.disabled="";
+                            setTimeout(()=>{
+                                outP.innerText="";
+                                eight_span.innerText="";
+                            },2000);
+                            box8.style.display="none";
+                            clearInterval(ts);
+                            clearInterval(tr);
+                        }
+                    }
+                     
+                },1000);    
+                
+            }
+            
+        }
+        // window.onload=function(){//随机换背景颜色
+        //     document.body.onclick=function(){
+        //         var col="#"+(Math.random().toString(16).slice(2).substr(0,6));
+        //         console.log(col);
+        //         this.style.backgroundColor=col;
+        //     }
+        // }
+       
+    </script>
+</head>
+<body>
+ <p>1.访问www.qq.com时发生了什么
+        输入url地址：www.qq.com，http协议会从服务端下载index.html文件，构成dom树和cssom树，合并发生DOMContentLoaded事件,
+        加载图片视频资源，发生onload事件,渲染并显示
+ </p>
+ <p>2.document.body和document.documentElement的区别
+        document.body获取的是body，只含body标签
+        document.documentElement获取所有的网页
+ </p>
+ <p>3.querySelector和querySelectorAll的区别
+        querySelector根据css标签获取符合条件的第一位
+        querySelector获取所有符合条件的
+ </p>
+ <p>4.img的title和alt的区别 
+        img的title是鼠标移到图片上显示的内容，alt是图片加载失败或找不到时才出现的内容
+ </p>
+ <p id="five">5.把第三个li的底色变为pink</p>
+<ul><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ul>
+<button id="five_button">点击把第三li变为pink色</button>
+ <p>6. 阅读协议，10秒后才能进入下一步</p>
+ <button id="six_button">点我阅读</button>
+ <div style="display: none;">
+    操作DOM对象
+   DOM是文档对象模型，DOM规范允许访问和操作HTML页面中的每个单独元素
+   用JavaScript操作DOM时分为三个方面: DOM Core (核心). HTML-DOM 和CSS-OM
+  输入地址后:www.baidui.com-->用http从服务端下载index.html文件  
+                  构建dom树->构建cssom树->合并dom和cssom(发生DOMContentLoaded事件)
+                   ->加载图片图片视频资源-->渲染并显示(发生onload事件）
+     http协议：超文本传输协议
+   Core：getElementById、getElementsByTagName getElementsByClassName
+   HTML:document.body只含body、document.documentElement所有的网页、document.forms
+   CSS:   querySelector、querySelectorAll
+获取元素   
+   getElementById根据id获取元素 
+   getElementsByTagName根据标签获取元素
+   getElementsByClassName根据类获取元素 
+      var ul = document.getElementById('ul');console.log(ul.getElementsByTagName('li'));
+      var box1=document.getElementsByClassName('box1');
+     根据css的元素选择器获取元素 .class #id 
+      var box1 = document.querySelector('.box1'); 
+      boxs=document.querySelectorAll('.box');
+给元素加事件
+    事件三要素:事件源  事件类型  事件处理程序
+    执行事件步骤1. 获取事件源querySelector 2.绑定注册事件onClick  3.添加事件处理函数
+修改节点内容
+          innerText innerHTML textContent改变节点内容    
+修改元素属性
+      img.src  img的title alt的区别 
+      input的type和value    button的disabled="disabled"
+     例子: 隐藏显示密码  
+   必须阅读5秒后下一步setTimerout setTimerInterval
+   button显示还剩3秒
+练习
+ </div>
+ <p>7. 找4张图片，点每张切换到下一张</p>
+ <p id="sevenP"></p>
+ <img id="sevenImg" src="./img/上官婉儿.jpg" alt="啊哦哦，图片不见了" title="王者荣耀">
+ <p>8.打地鼠游戏--不计分<button id="eight_button">点击开始</button><span id="eight_span"></span></p>
+ <div id="eight">
+    <p id="outP" style="text-align:center;color:red;"></p>
+    <div id="box8" style="display:none"></div>
+ </div>
+ <script>
+    //第五题
+    let five_button=document.getElementById("five_button");
+    five_button.onclick=function(){
+        let li3=document.querySelector("#five+ul>li:nth-child(3)");
+        console.log(li3);
+        li3.style.color="red";
+    }
+    //第六题
+    let six_button=document.getElementById("six_button");
+    six_button.onclick=function(){
+        let sixdiv=document.querySelector("#six_button+div");
+        if(this.innerText!="下一步"){
+            clearInterval(ts);
+            let count=10;
+            var ts=setInterval(()=>{
+                if(count>0){
+                    count--;
+                    six_button.innerText="还剩"+count+"秒才能下一步"
+                    six_button.disabled="disabled";
+                }else{
+                    clearInterval(ts);
+                    six_button.innerText="下一步";
+                    six_button.disabled="";
+                    sixdiv.style.display="block";
+                }
+            },1000);
+        }else{
+            sixdiv.style.display="none";
+            six_button.innerText="点击阅读";
+            six_button.disabled="disabled";
+        }
+    }
+    //第七题
+    let imgArr=["./img/上官婉儿.jpg","./img/不知火舞.jpg","./img/夏洛特.jpg","./img/西施.jpg"];
+    let sevenImg=document.getElementById("sevenImg");//图片
+    let sevenP=document.getElementById("sevenP");//p
+    sevenP.style.textAlign="center";
+    var index=0;
+    sevenP.innerText="一共有\t"+imgArr.length+"\t张图片，这是第\t"+(index+1)+"\t张图片"
+    sevenImg.onclick=function(){
+        index++;
+        if(index>imgArr.length-1){
+            index=0;
+        }
+        this.src=imgArr[index];
+        sevenP.innerText="一共有\t"+imgArr.length+"\t张图片，这是第\t"+(index+1)+"\t张图片"
+    }
+ </script>
+</body>
+</html>

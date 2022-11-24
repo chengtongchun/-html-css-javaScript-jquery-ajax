@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{padding: 0;margin: 0;}
+        body{
+            /* background-image:url(./img/步行.jpg) ; */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center center;
+            /* color:white; */
+            background-color: #b8c6db;
+            background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 100%);
+        }
+        .title{
+            white-space: pre-wrap;
+            text-shadow: 0px 0px 10px greenyellow;
+            margin-top: 10px;margin-bottom: 5px;
+        }
+        #one{
+            width:100px;
+            height:100px;
+            background-color: tomato;
+            position: relative;
+            border-radius: 50%;
+        }
+        button{
+            width: 150px;height:40px;margin-right:20px ;
+        }
+        /* 第四题 */
+        #quiz{
+            width:602px;
+            /* height:470px; */
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px gainsboro;
+            background-color: white;
+            overflow: hidden;
+            margin:0 auto;
+        }
+        .quiz-header{
+            width:100%;
+            height:403px;
+            display: flex;justify-content:flex-end;align-items: center; flex-direction: column;
+           padding:0 70px;
+           box-sizing: border-box;
+        }
+        #question{ /* h2 */
+            width:372px;margin:0 auto;
+            text-align: center;
+        }
+        .quiz-header>ul{
+            list-style: none;width: 100%;height:226px;
+            margin-top: 37px;box-sizing: border-box;
+        }
+        .quiz-header>ul>li{
+            margin-bottom: 17px;
+            font-size: 1.2em;width: 100%;
+            display: flex;align-items: center;
+        }
+        .quiz-header>ul>li>input{
+            margin:0 8px;width: 16px;height:16px;
+        }
+        .quiz-header>ul>li>label{
+            cursor: pointer;
+        }
+        #submit{
+            width:100%;
+            height:66px;
+            background-color: #732d91;
+            border:0px;cursor: pointer;
+            font-size:1.2em;
+            color:white;
+            display: flex;justify-content: center;align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <p class="title">练习</p>
+    <p class="title"> 1.写触摸移动</p>
+    <div id="one"></div>
+    <p class="title"> 2.节流和防抖的区别 
+        区别：节流会重新开始计时
+    </p>
+    <p class="title"> 3.实现节流防抖函数</p>
+    <button id="fd">防抖</button><button id="jl">节流</button>
+    <p class="title">4.</p>
+    <div id="quiz">
+        <div class="quiz-header">
+            <h2 id="question">Question text</h2>
+            <ul>
+              <li>
+                <input type="radio" name="answer" id="a" class="answer">
+                <label for="a" id="a_text">Question</label>
+              </li>
+    
+              <li>
+                <input type="radio" name="answer" id="b" class="answer">
+                <label for="b" id="b_text">Question</label>
+              </li>
+    
+              <li>
+                <input type="radio" name="answer" id="c" class="answer">
+                <label for="c" id="c_text">Question</label>
+              </li>
+    
+              <li>
+                <input type="radio" name="answer" id="d" class="answer">
+                <label for="d" id="d_text">Question</label>
+              </li>
+            </ul>
+        </div>
+        <button id="submit">Submit</button>
+    </div>
+    <script>
+        const $=(ele)=>document.getElementById(ele);
+        const log=(...msg)=>console.log(...msg);
+        //第一题
+        {
+            var one=$("one");
+            var sx=0,sy=0,bleft=0,btop=0;
+            one.addEventListener('touchstart',function(ev){
+                log('touchstart',ev);
+                sx=ev.touches[0].pageX;//ev.touches[0]一个手指
+                sy=ev.touches[0].pageY;
+                bleft=one.offsetLeft;
+                btop=one.offsetTop;
+                log(sx,sy,bleft,btop);
+                return false;
+            },false)
+            one.addEventListener('touchmove',function(ev){
+                let mx=ev.touches[0].pageX-sx+bleft;
+                let my=ev.touches[0].pageY-sy+btop;
+                one.style.left=mx+"px";
+                one.style.top=my+"px";
+                ev.preventDefault();
+                return false;
+            },false)
+            one.addEventListener('touchend',function(ev){
+                log('touchend',ev);
+                return false;
+            },false)
+        }
+        //第二题
+        {
+            let fd=$("fd");let jl=$("jl");
+            //防抖
+            fd.addEventListener('click',function(){jl.onclick=null;
+                console.log("这里是防抖");
+                document.onmousemove=function(ev){
+                    debounce(log,1000)("防抖x："+ev.clientX,"防抖y："+ev.clientY);
+                }
+                function debounce(fn,delay){
+                    let timer=null;
+                    function _debonce(...arg){
+                        if(timer !== null){
+                            clearTimeout(timer);
+                        }
+                        setTimeout(()=>{
+                            fn(...arg)
+                        },delay);
+                    }
+                    return _debonce;
+                }
+            })
+            
+            //节流
+            jl.addEventListener('click',function(){ fd.onclick=null;
+                console.log("这里是节流");
+                document.onmousemove=function(ev){
+                    throttle(log,1000)("节流X："+ev.clientX,"节流Y："+ev.clientY);
+                }
+                function throttle(fn,delay=1000){
+                    let last=0;//保留上次事件
+                    return function(...arg){
+                        var now=new Date().getTime();
+                        if(now-last>delay){
+                            fn(arg);
+                            last=new Date().getTime();//重新开始计时
+                        }
+                    }
+                }
+            });
+            
+        }
+        //第四题
+        {
+            var dates=[
+                {
+                    question: "Which language runs in a web browser?",
+                    a: "Java",
+                    b: "C",
+                    c: "Python",
+                    d: "JavaScript",
+                    correct: "d",
+                },
+                {
+                    question: "What does CSS stand for?",
+                    a: "Central Style Sheets",
+                    b: "Cascading Style Sheets",
+                    c: "Cascading Simple Sheets",
+                    d: "Cars SUVs Sailboats",
+                    correct: "b",
+                },
+                {
+                    question: "What does HTML stand for?",
+                    a: "Hypertext Markup Language",
+                    b: "Hypertext Markdown Language",
+                    c: "Hyperloop Machine Language",
+                    d: "Helicopters Terminals Motorboats Lamborginis",
+                    correct: "a",
+                },
+                {
+                    question: "What year was JavaScript launched?",
+                    a: "1996",
+                    b: "1995",
+                    c: "1994",
+                    d: "none of the above",
+                    correct: "b",
+                },
+            ]
+            const quiz=$("quiz");//最大的盒子
+            const quiz_header=document.querySelector(".quiz-header");//装着题目答案的div
+            const question=$("question");//题目
+            const answers=document.querySelectorAll(".answer");//是否选答案input
+            const a_text = document.getElementById('a_text')//a
+            const b_text = document.getElementById('b_text')//b
+            const c_text = document.getElementById('c_text')//c
+            const d_text = document.getElementById('d_text')//d
+            let value=0;//试卷页数
+            let corrects=0;//正确数
+            let num=dates.length;
+            const submit=$("submit");//提交
+            title();
+            function title(){
+                dates.forEach((date,index)=>{
+                    if(index == value && value!=num){
+                        question.innerText=date.question;
+                        a_text.innerText=date.a;
+                        b_text.innerText=date.b;
+                        c_text.innerText=date.c;
+                        d_text.innerText=date.d;
+                    }
+                })
+            }
+            submit.addEventListener('click',function(){
+                log("关英平"+value)
+               if(value<num){
+                    var flag=-1;
+                    answers.forEach((answer,index)=>{
+                        if(answer.checked)
+                        {
+                            flag=index;
+                        }
+                    })
+                    if(flag!=-1){
+                        let z;
+                        switch(flag){
+                            case 0:
+                                z="a";
+                                break;
+                            case 1:
+                                z="b";
+                                break;
+                            case 2:
+                                z="c";
+                                break;
+                            default:
+                                z="d";
+                                break;
+                        }
+                        if(dates[value].correct==z){
+                            corrects++;
+                        }       
+                        log("选择的答案："+z+answers[flag].nextElementSibling.innerText,"正确答案："+dates[value].correct)       
+                        value++;
+                        if(value<num){
+                               console.log("哈哈哈哈"+value)
+                            title();    
+                            answers.forEach(answer=>answer.checked=false);//更新单选框全不选
+                        }else{
+                            over();//总结对了几道题
+                        }
+                    }
+               }else{
+                    value=0;
+                    corrects=0;
+                    location.reload(true);
+               }
+            })
+            function over(){
+                // let h2=question.style;//h2样式
+                question.style.width="100%";//h2样式
+                quiz_header.style.height=60+"px";//装着题目答案的div的高
+                quiz_header.style.padding="0px";
+                let h2=quiz_header.style;
+                //装着题目答案的div的样式
+                h2.width="100%";h2.display="flex";h2.justifyContent="center";h2.alignItems="center";
+                answers[0].parentNode.parentNode.style.display="none";//答案ul隐藏
+                question.innerText="You answered "+corrects+"/"+num+" questions correctly"
+                submit.innerText="Reload";
+            }
+        }
+    </script>
+</body>
+</html>

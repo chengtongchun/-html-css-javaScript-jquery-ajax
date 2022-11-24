@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <script src="./js/jquery-1.10.1.js"></script>
+   <style>
+    body{
+      background-color:grey;
+            background-image: url(./img/原神cos1.jpg),url(./img/原神cos2.jpg),url(./img/原神cos.jpg);
+            background-position:left center,right center, center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-attachment: fixed;
+    }
+    [name='zs']{
+      display: none;
+    }
+    body{
+      display: flex;flex-direction: column;
+      /* background-color: burlywood; */
+    }
+    button{
+      width:300px;margin:5px;
+    }
+   </style>
+</head>
+
+<body>
+  <ul>
+    <li name="cjy">1</li>
+    <li>2</li>
+    <li id="id1">3</li>
+    <li></li>
+    <li class="cls1">5</li>
+    <li>6</li>
+      <ol>
+        <li name="cjy1">--ol1</li>
+        <li>ol2</li>
+        <li class="cls2">--ol3</li>
+        <li name="cjy2">--ol4</li>
+        <li>ol5</li>
+        <li>3333cjy111</li>
+        <li></li>
+        <li></li>
+      </ol>
+    <li name="zs1">7</li>
+    <li class="clss2">8</li>
+    <li></li>
+    <li name="zs2"></li>
+ 
+  </ul>
+  <p>这是p</p>
+<div>这是div</div>
+<div>
+  <button id="btn01">选出所有ul,p,div元素, 设置颜色为blue</button>
+
+<button id="btn02">选出ul下的所有层li, 设置颜色为blue</button>
+
+<button id="btn03">选出ul下第一层li, 设置颜色为pink</button>
+
+<button id="btn04">选出类为cls2的li的下一个兄弟</button>
+
+<button id="btn05">选出类为cls2的li的后面所有的兄弟</button>
+
+<button id="btn06">选出所有li的第一个元素</button>
+
+<button id="btn07">选出所有li的最后一个元素</button>
+<button id="btn08">选出奇数行li</button>
+<button id="btn09">选出偶数行li</button>
+<button id="btn10">选出除索引值为3和4外的li</button>
+<button id="btn11">选出索引值在第6到10个li</button>
+
+<button id="btn12">选出有id属性li</button>
+
+<button id="btn13">选出name属性值等于cjy的li</button>
+
+<button id="btn14">选出name属性值含有cjy的li</button>
+<button id="btn15">选出name属性值不含cjy的li</button>
+<button id="btn16">选出class属性值以2结尾的li</button>
+<button id="btn17">隐藏所有内容为空的li</button>
+<button id="btn18">把所有内容有ol的li字体加大</button>
+<button id="btn19">把所有内容隐藏的li显示出来</button>
+</idv>
+
+<script>
+  const {log}=console;
+  $(function(){
+    // <button id="btn01">选出所有ul,p,div元素, 设置颜色为blue</button>
+    $('#btn01').click(function(){
+      $("ul,p,div").css("color","blue");
+    })
+
+    //<button id="btn02">选出ul下的所有层li, 设置颜色为blue</button>
+    $('#btn02').click(function(){
+      $("ul  li").css("color","blue");
+    })
+
+    // <button id="btn03">选出ul下第一层li, 设置颜色为pink</button>
+    $("#btn03").click(function(){
+      $("ul>li").css('color',"pink");
+    })
+
+    // <button id="btn04">选出类为cls2的li的下一个兄弟</button>
+    $("#btn04").click(function(){
+      log($(".cls2 +"));
+    })
+
+    // <button id="btn05">选出类为cls2的li的后面所有的兄弟</button>
+    $("#btn05").click(function(){
+      log($(".cls2 ~"));
+    })
+
+    // <button id="btn06">选出所有li的第一个元素</button>
+    $("#btn06").click(function(){
+      log($("li:first-child"));
+      $("li:first-child").css("background","green")
+    })
+
+    // <button id="btn07">选出所有li的最后一个元素</button>
+    $("#btn07").click(function(){
+      log($("li:last-child"));
+      $("li:last-child").css("background","green")
+    })
+
+    // <button id="btn08">选出奇数行li</button>
+    $("#btn08").click(function(){
+      log($("li:odd"));
+      $("li:odd").css("background","yellowgreen")
+    })
+
+    // <button id="btn09">选出偶数行li</button>
+    $("#btn09").click(function(){
+      log($("li:even"));
+      $("li:even").css("background","red")
+    })
+    
+    // <button id="btn10">选出除索引值为3和4外的li</button>
+    $("#btn10").click(function(){
+      log($("li:not(:eq(4)):not(:eq(3))"))
+      $("li:not(:eq(4)):not(:eq(3))").css("background","yellow")
+    })
+
+    // <button id="btn11">选出索引值在第6到10个li</button>
+    $("#btn11").click(function(){
+      log($("li:lt(11):gt(5)"))//先算小号再算大号，不然出错
+      $("li:lt(11):gt(5)").css("background","blue")
+    })
+
+    // <button id="btn12">选出有id属性li</button>
+    $("#btn12").click(function(){
+      log($("li[id]"));
+      $("li[id]").css("color","orange")
+    })
+    
+    // <button id="btn13">选出name属性值等于cjy的li</button>
+    $("#btn13").click(function(){
+      log($("li[name=cjy]"));
+      $("li[name=cjy]").css("color","yellow")
+    })
+    // <button id="btn14">选出name属性值含有cjy的li</button>
+    $("#btn14").click(function(){
+      log($("li[name*=cjy]"));
+      $("li[name*=cjy]").css("color","red")
+    })
+
+    // <button id="btn15">选出name属性值不含cjy的li</button>
+    $("#btn15").click(function(){
+      log($("li:not(li[name*=cjy])"))
+      $("li:not(li[name*=cjy])").css("color","pink")
+    })
+    
+    // <button id="btn16">选出class属性值以2结尾的li</button>
+    $("#btn16").click(function(){
+      log($("li[class$=2]"))
+      $("li[class$=2]").css("color","burlywood")
+    })
+
+    // <button id="btn17">隐藏所有内容为空的li</button>
+    $("#btn17").click(function(){
+      $("li:empty").hide();
+    })
+
+    // <button id="btn18">把所有内容有ol的li字体加大</button>
+    $("#btn18").click(function(){
+      $("li:contains(ol)").css("font-size","30px");
+    })
+    
+    // <button id="btn19">把所有内容隐藏的li显示出来</button>
+    $("#btn19").click(function(){
+      $("li:hidden").show();
+    })
+    
+  })
+</script>
+</body>
+
+</html>

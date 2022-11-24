@@ -1,0 +1,38 @@
+﻿事件和委托
+   DOM规定事件流3个阶段：捕获阶段(从上到下)--目标阶段--冒泡阶段(从下到上)
+   事件处理程序
+     DOM 0 级：btn.onclick=callback 特点:简单、跨浏览器、永远是冒泡   通过btn.onclick=null删除事件
+     DOM 2 级：btn.addEventListener/removeEventListener可注册多个
+                  第三个参数标志=true用事件捕获，若=false采用事件冒泡。
+     从兼容性角度建议使用事件冒泡模型。
+      老IE只支持冒泡，它提供了attachEvent、detachEvent() 方法支持冒泡 ie<8
+   阻止默认行为:让链接不跳转a  或者让提交按钮button不提交
+           标准写法e.preventDefault(); 对onXXX注册的用return false;
+   阻止传播：冒泡或捕获都有传播的特征，如何阻止事件向上或下继续传播
+            ev.stopPropagation() && (ev.cancelBubble = true);//老ie用cancelBubble              
+   事件委托：给父加事件，用冒泡影响每一个子节点
+         // 判断事件的目标如果是子元素li 就执行
+         if(ev.target.parentElement == this || ev.target.nodeName.toLowerCase() == "li") {
+	ev.target.style.backgroundColor = "red";
+         }
+      window的事件onload窗口装载前触发 onbeforeunload窗口关闭前触发(谷歌浏览器支持)
+                      onscroll滚动时触发  onresize改变大小时触发 DOMContentLoaded文档内容准备好时触发
+                    DOMContentLoaded在onload前触发
+      键盘事件: keydown(能识别功能键)-->keypress--> keyup
+         keyup和keydown不区分大小写keypress区分
+        鼠标事件属性e.code  e.key e.keyCode是Ascii码   
+     鼠标拖动事件：draggable="true" ondragstart开始拖动 ondragend=结束拖动 ondragover拖到上面 ondrop放下
+         步骤:1.让元素可拖draggable="true"   2.保留拖动对象ondragstart{x= event.target;}     
+               3.拖到上空ondragover{event.preventDefault();默认不可以放元素}   4.放下ondrop{event.target.appendChild(x)} 
+    综合例子:
+         按键输入内容：自动跳到下一个数字if(ev.key<=0&&ev.key>=9) ev.key=='Backspace'
+  
+练习
+   1.DOM的3个阶段 有3个div{父亲儿子孙子} 捕获顺序是   冒泡顺序是
+   2.DOM 0 级和2级 它们的优点和缺点
+   3.如何让禁止文档的右键菜单和复制文字
+   4.键盘3事件是？ 如何检测ctrl、alt等键有没有按下
+   5.完成拖动排序
+   6.完成input案例
+      vscode安装easyless扩展，它能够自动将less文件转为css文件
+   less是简化css编写的 让你快速按层次编写css样式

@@ -1,0 +1,96 @@
+Node.js 是一个开源和跨平台的 JavaScript 运行时环境。 它几乎是任何类型项目的流行工具！
+vscode就是用nodejs写的
+官网：https://nodejs.org/en/
+
+npm 包管理器简介 用来管理别人写好的js包的 就像java的serlet-api.jar包 
+    你要想使用jquery必须先下载 npm install jquery -D
+    npm的常用命令：npm install  包 -D保存到本地目录给开发者用
+              npm update更新包   npm uninstall卸载包
+如果下载太慢要更改下载包的来源：npm config set registry http://registry.npm.taobao.org
+express包用来开发web服务端
+
+运行时，要在cmd里运行server.js 如D:\网页(结构html,表现css,行为javaScript)Nojs\javascript\js练习\作业>node server.js来启动端口
+
+    发送请求数据 xhr.send(null || new FormData || 'a=1&b=2' || 'json字符串');
+作业:1.安装nodejs
+    2.写ajaxGet.html
+    3.server.js app.get("/get")
+    4.ajaxPost.html
+    5.server.js app.get("/post")
+   
+Ajax概念
+   AJAX 全称为 Asynchronous JavaScript And XML，就是异步的 JS 和 XML。
+         最大的优势：无刷新获取数据。
+  AJAX 不是新的编程语言，而是一种将现有的标准组合在一起使用的新方式
+      包括Javascript、HTML和CSS、DOM、XML和JSON数据交换与处理、XMLHttpRequest异步请求数据读取
+   用途：百度的搜索框词条建议，收货地址三级联动，京东注册用户名检查，今日头条，掘金
+  传统web的痛点：如果仅需改变页面的某一部分的内容，不得不刷新整个页面。
+  优点：减轻服务器的负担；减少用户等待时间提高用户体验；彻底将页面与数据分离
+  缺点：没有浏览历史, 不能回退；存在跨域请求问题；对seo不友好
+XMLHttpRequest 对象
+       1.创建 
+             let xhr=null;
+              if (window.XMLHttpRequest){xhr=new XMLHttpRequest();} 
+             else {xhr=new ActiveXObject("Microsoft.XMLHTTP");}//老版IE6, IE5
+      2. 设置监听回调
+          xhr.onreadystatechange
+                readyState=0请求未初始化  1服务器连接已建立  2请求已接收  3请求处理中  4请求已完成且响应已就绪
+                status =200  "OK"    404未找到页面     505服务器发生错误
+                if (xhr.readyState == 4 && xhr.status == 200)
+                    console.log(xhr.responseText);
+                  服务器返回    responseText字符串形式 responseXML响应数据
+      3.发送请求
+         url='http://127.0.0.1:5500/1.text';
+         Get请求 xhr.open("GET",url,true);    xhr.send();
+         如何设置请求的同步或异步?xhr.open(method, url, async) async默认true异步,alse同步
+发送post请求
+            const xhr= new XMLHttpRequest();
+            xhr.open('post', "./package.json", true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            xhr.onload = () => console.log(JSON.stringify(xhr.responseText));
+            xhr.onerror = () => console.err(xhr);
+            xhr.send("name=cjy&age=23");
+  get和post的区别
+    get通过地址栏发送信息 明文 小
+    post   body发送的        不是明文   大文件
+       
+  发送请求数据 xhr.send(null || new FormData || 'a=1&b=2' || 'json字符串');
+  设置返回格式xhr.responseType= 'json'    'text'    'document' 
+           xhr.responseType = 'json';
+    添加头
+      获取和设置请求头application/x-www-form-urlencoded表单格式；application/json；multipart/form-data文件上传；
+          xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+          xhr.setRequestHeader("ems-token","qwersdfsd.fdasfsadf.1234234");
+          xhr.send("name=cjy&age=100");
+          获得指定响应头xhr.getResponseHeader('Content-Type')
+     处理超时
+           xhr.timeout = 500;
+           xhr.ontimeout = function() {alert("网络超时，请重试!"); }
+     取消发送
+          xhr.abort();
+
+跨源:不同源就是跨域，是浏览器的一种安全策略，是指浏览器不能执行其他网站的脚本
+   同源： 域名、协议、端口号 完全相同
+下面网址是同源吗  如果是跨域 具体是哪些不同
+        http://www.baidu.com  https://www.baidu.com 
+            不同源，协议不同
+        https://www.baidu.cn  https://www.baidu.com 
+            不同源，域名不同
+        https://www.baidu.cn:443  https://www.baidu.com:8080 
+            不同源，端口号不同
+
+  如何实现跨域请求?JSONP 和 CORS
+     JSONP:只能发get请求
+         客户端:创建<script src=服务端url?cb=callback>；写callback函数
+         服务端:var callback=req.query.cb；res.send(callback+'('+服务端的数据+')');
+     CORS Cross-Origin Resource Sharing(跨域资源共享):支持get和post请求
+         客户端不用动；服务端设置响应头Access-Control-Allow-Origin: *所有网址都可以访问了
+作业
+  1. 下面网址是同源吗  如果是跨域 具体是哪些不同
+     http://www.baidu.com  https://www.baidu.com 
+     https://www.baidu.cn  https://www.baidu.com 
+     https://www.baidu.cn:443  https://www.baidu.com:8080 
+  2. ajax是什么？解决的是什么问题？它的优点和缺点
+  3. get和post的区别 从三个方面
+  4. readyState的状态有哪些？status的状态有哪些
+  5. 实现跨域的方案有哪两种？区别是

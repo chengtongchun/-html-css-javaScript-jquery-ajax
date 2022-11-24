@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: cadetblue;
+        }
+        .title{
+            white-space: pre-wrap;
+        }
+        #ajaxGet,#ajaxPost{
+            width:100px;height:100px;border-radius: 50%;
+            background-image: url(./img/快手/叉腰.jpg);
+            background-size:cover ;
+            display: flex;align-items: center;justify-content: center;
+            color: red;
+        }
+        #ajaxPost{
+            background-image: url(./img/快手/扇子.jpg);
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <p class="title">作业</p>
+    <p class="title">2.写ajaxGet.html</p>
+    <div id="ajaxGet"></div>
+    <p class="title">3.server.js app.get("/get")
+        //引入express包
+        const express=require('express');
+        //实例化
+        const app=express();
+
+        app.get("/get",function(request,response){
+            response.setHeader("Access-Control-Allow-Origin","*");
+            response.send("...get....")
+        })
+    </p>
+    <p class="title">4.ajaxPost.html</p>
+    <div id="ajaxPost"></div>
+    <p class="title">5.server.js app.get("/post")
+        //引入express包
+        const express=require('express');
+        //实例化
+        const app=express();
+        // app.post("/post",function(request,response){
+        //     response.setHeader("Access-Control-Allow-Origin","*");
+        //     response.send("..post...ok");
+        // })
+    
+    </p>
+    <p class="title">作业</p>
+    <p class="title">1. 下面网址是同源吗  如果是跨域 具体是哪些不同
+        http://www.baidu.com  https://www.baidu.com 
+            不同源，协议不同
+        https://www.baidu.cn  https://www.baidu.com 
+            不同源，域名不同
+        https://www.baidu.cn:443  https://www.baidu.com:8080 
+            不同源，端口号不同
+    </p>
+    <p class="title">2. ajax是什么？解决的是什么问题？它的优点和缺点
+            ajax是局部刷新，是一种将现有的标准组合在一起使用的新方式，不是新的编程语言
+            解决获取数据刷新整个页面的问题
+            优点：减轻服务器负担，减少用户等待时间，彻底将页面和数据分离
+            缺点：浏览器回退和前进失灵
+    </p>
+    <p class="title">3. get和post的区别 从三个方面
+        get是通过地址栏发送数据，是明文，有大小限制，多数是传小文件
+        post是body发送，不是明文，没有大小限制，多数是大文件
+    </p>
+    <p class="title">4. readyState的状态有哪些？status的状态有哪些
+        readyState的状态：0 => 请求未初始化；1 => 服务器连接已建立；2 => 请求已接收；3.请求处理中；4 => 请求已完成且响应已就绪；
+        status的状态：200 => 成功；404 => 未找到页面；505 => 服务器发生错误
+    </p>
+    <p class="title">5. 实现跨域的方案有哪两种？区别是</p>
+    <script>
+        const $=(ele)=>document.getElementById(ele);
+        const log=(...ele)=>console.log(...ele);
+        // 第一题
+        {
+            const ajaxGet=$("ajaxGet");
+            const url="http://127.0.0.1:8000/get";
+            ajaxGet.onclick=function(){
+                const xhr=new XMLHttpRequest();
+                log(xhr);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200)
+                        ajaxGet.innerText = xhr.responseText;
+                    log(xhr.readyState,xhr.status)
+                }
+                xhr.open('get',url)
+                xhr.send();
+        
+            }
+        }
+        //第三题
+        {
+            const ajaxPost=$("ajaxPost");
+            const url="http://127.0.0.1:8000/post";
+            ajaxPost.onclick=function(){
+                const xhr=new XMLHttpRequest();
+                log(xhr);
+                xhr.onreadystatechange=function(){
+                    if(xhr.readyState==4&&xhr.status==200){
+                        ajaxPost.innerText=xhr.responseText;
+                    }
+                }
+                xhr.open("post",url)
+                xhr.send();
+            }
+        }
+    </script>
+</body>
+</html>

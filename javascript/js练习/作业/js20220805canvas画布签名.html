@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width:100vw;
+            height:100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #canvas{
+            border:30px solid black;
+            border-image: url(./img/竹水.jpeg) 30 30 stretch;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div>颜色样式：<input type="color" id="color" name="color">
+        线条样式：<input type="range" value="2" id="range" name="range" min="2" max="10">
+        <button id="clear">清除</button>
+        <button id="img">生成图片</button>
+    </div>
+    <canvas id="canvas" width="800px" height="500px"><!-- 画布不支持style里定宽高，会出大乱子 -->
+        这个叼毛浏览器不支持 画布
+    </canvas>
+    <div id="imgdiv"></div><!-- 保存 签名 -->
+    <script>
+        const $=(ele)=>document.getElementById(ele);
+        const log=(...msg)=>console.log(...msg);
+        const color=$("color");//颜色
+        const range=$("range");//线条样式
+        const canvas=$("canvas");//画布
+        const clear=$("clear");//清除
+        const img=$("img");//签名搞成图片
+        const imgdiv=$("imgdiv");//保存图片的地方
+        log(img)
+        let ctx=canvas.getContext('2d');
+        canvas.onmousedown=function(event){
+            ctx.beginPath();//新建一条路径
+            var x=event.offsetX;
+            var y=event.offsetY;
+            ctx.moveTo(x,y);//将笔移动到指定的坐标上
+            
+            canvas.onmousemove=function(ev){
+                var x2=ev.offsetX;
+                var y2=ev.offsetY;
+                ctx.lineTo(x2,y2)//将笔移动到指定坐标
+                ctx.strokeStyle=color.value;
+                ctx.lineWidth=range.value;
+                ctx.stroke();
+            }
+            canvas.onmouseup=function(){
+                // img.scr=canvas.toDataURL("jpg/png");//保存成图片
+                canvas.onmousemove=null;
+                canvas.onmouseup=null;
+            }
+        }
+        clear.onclick=function(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);//变透明
+            imgdiv.innerHTML="";//图片清除
+        }
+        img.onclick=function(){//生成图片
+            imgdiv.innerHTML="";
+            //画布空白的有10.8 kB//"++tIwAAAAASUVORK5CYII"画布没东西时最后出现的东东
+            if(canvas.toDataURL().toString().indexOf("++tIwAAAAASUVORK5CYII")<0){
+                var imgNew=document.createElement("img");
+                imgNew.setAttribute("id","imgNew");
+                imgNew.src=canvas.toDataURL();
+                imgdiv.appendChild(imgNew);
+            }else{
+                imgdiv.innerText="画布没东西"
+            }
+        }
+    </script>
+</body>
+</html>

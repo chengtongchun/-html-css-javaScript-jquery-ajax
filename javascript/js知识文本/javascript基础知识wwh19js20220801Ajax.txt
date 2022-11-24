@@ -1,0 +1,36 @@
+Ajax概念
+   AJAX 全称为 Asynchronous JavaScript And XML，就是异步的 JS 和 XML。
+  通过 AJAX 可以在浏览器中向服务器发送异步请求，最大的优势：无刷新获取数据。
+  AJAX 不是新的编程语言，而是一种将现有的标准组合在一起使用的新方式
+      包括Javascript、HTML和CSS、DOM、XML和JSON数据交换与处理、XMLHttpRequest异步请求数据读取
+   用途：百度的搜索框词条建议，收货地址三级联动，京东注册用户名检查，今日头条，掘金
+  传统web的痛点：如果仅需改变页面的某一部分的内容，不得不刷新整个页面。
+  优点：减轻服务器的负担；减少用户等待时间提高用户体验；彻底将页面与数据分离
+  缺点：没有浏览历史, 不能回退；存在跨域请求问题；对seo不友好
+XMLHttpRequest 对象
+       1.创建 
+             let xhr=null;
+              if (window.XMLHttpRequest){xhr=new XMLHttpRequest();} 
+             else {xhr=new ActiveXObject("Microsoft.XMLHTTP");}//老版IE6, IE5
+      2. 设置监听回调
+          xhr.onreadystatechange
+                readyState=0请求未初始化  1服务器连接已建立  2请求已接收  3请求处理中  4请求已完成且响应已就绪
+                status =200  "OK"  404未找到页面 505服务器发生错误
+                if (xhr.readyState == 4 && xhr.status == 200)
+                    console.log(xhr.responseText);
+                  服务器返回    responseText字符串形式 responseXML响应数据
+      3.发送请求
+         url='http://127.0.0.1:5500/1.text';
+         Get请求 xhr.open("GET",url,true);    xhr.send();
+         如何设置请求的同步或异步?xhr.open(method, url, async) async默认true异步,alse同步
+发送post请求
+            const xhr= new XMLHttpRequest();
+            xhr.open('post', "./package.json", true);
+            xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+            xhr.onload = () => console.log(JSON.stringify(xhr.responseText));
+            xhr.onerror = () => console.err(xhr);
+            xhr.send("name=cjy&age=23");
+作业
+ 1.用mock.js生成20个模拟数据  看mock.html
+ 2.用ajax2种方法
+     分别向服务器url='http://127.0.0.1:5500/1.text'提交get和post请求

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            /* background-image: url(./作业/img/pink1.jpg),url(./作业/img/pink2.jpg),url(./作业/img/pink3.jpg); */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            /* background-position: top center,top left,top right; */
+            background-image:url(./作业/img/头像.jpg) ;background-position: center center;
+            font-size:1.1em;
+            background-color: burlywood;
+        }
+        a{
+            text-decoration: none;
+        }
+        a:hover{
+            color:greenyellow;
+        }
+        a:focus{
+            color:red;
+        }
+        #tables{
+            width:400px;
+            height:100%;
+            background-color: burlywood;
+            border:1px solid black;
+            border-collapse: collapse;
+            
+            margin:0 auto;
+            text-align: center;
+        }
+        #add{
+            border: 1px solid black;
+            margin:4% auto;
+            width:300px;
+            height:100%;
+            padding-bottom:10px;
+            display: flex;justify-content: flex-start;flex-direction: column;
+            align-items: center;
+            background-color: gainsboro;
+        }
+        h4{
+            width:90%;
+        }
+        #xyg{
+            width:90%;
+            /* background-color: yellowgreen; */
+            border: 0px solid black;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        #xyg>tbody>tr>td{
+            width:30%;
+            text-align: right;
+        }
+        #xyg>tbody>tr>td:nth-child(2){
+            width:70%;
+            text-align: left;
+        }
+        #xyg input{
+            width: 80%;
+            border-radius: 5px;
+        }
+        #submit{
+            width:30%;
+            border-radius: 5px;
+            margin-left: 30px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            // 修改的更新
+            // alt2();  
+            function alt2(){
+                let tables=document.getElementById("tables");//员工表格
+                let tbody=tables.getElementsByTagName("tbody")[0];//员工表格行
+                let tr=tbody.getElementsByTagName("tr");//员工表格行
+                for(let i=1;i<tr.length;i++){
+                    let td4=tr[i].getElementsByTagName("td")[4];
+                    // for(let j=0;j<td.length;j++){}
+                    td4.onclick=function(){
+                        let td4_a=this.getElementsByTagName("a")[0];//第四个td里的a
+                        if(td4_a.innerText=="更新"){
+                            let td4ftr=this.parentNode;//tr
+                            let td=td4ftr.getElementsByTagName("td");//td集合
+                            for(let i=0;i<td.length;i++){
+                                let input=td[i].getElementsByTagName("input");//td里的内容input
+                                if(input.length>=1){
+                                    let input1=input[0];
+                                    let value=input1.value;
+                                    let pla=input1.placeholder;
+                                    td[i].innerHTML="";
+                                    if(value.length>=1){
+                                        td[i].innerText=value;
+                                    }else{
+                                        td[i].innerText=pla;
+                                    }
+                                    td4_a.innerText="修改";
+                                    for(let j=0;j<3;j++){
+                                            td[j].onclick=null;
+                                    };
+                                }
+                            }
+                        };
+                    }
+                }
+            }              
+            
+            //修改
+            function alt(){
+                let tr=this.parentNode.parentNode;//获取父元素.父元素tr
+                let tdArray=tr.getElementsByTagName("td");//员工信息一栏
+                alert("来啦");
+                if(this.innerText != '更新'){
+                    alert("没");
+                    for(let j=0;j<3;j++){
+                        let tdText=tdArray[j].innerText;//内容文本
+                        
+                        tdArray[j].onclick=function(){
+                            // debugger;
+                            this.innerText="";
+                            if(j==0){//姓名
+                                this.innerHTML="<input type='text' id='nameTable' placeholder='"+tdText+"' style='width:58px;'>";
+                            }else if(j==1){//QQ
+                                this.innerHTML="<input type='number' id='QQTable' min='100000' max='99999999999' placeholder='"+tdText+"'style='width:147px;'>";
+                            }else{//薪资
+                                this.innerHTML="<input type='number' id='salaryTable' min='100000' max='99999999999' placeholder='"+tdText+" 'style='width:84px;'>";
+                            }
+                            //修改项文本改变
+                            let a=tdArray[4].getElementsByTagName("a")[0];
+                            a.innerText="更新";
+                            this.onclick=null;
+                        }
+                    }
+                }else{
+                    alt2();
+                }
+                
+                return false;//消除a的默认跳转
+            } 
+            // 删除
+            function del(){
+                let tr=this.parentNode.parentNode;//获取父元素的父元素
+                let te=tr.parentNode;//要删除的员工那一行的父节点
+                let td=tr.getElementsByTagName("td")[0];//员工的名字td一格
+                let name=td.innerText;//员工姓名
+                let input=td.getElementsByTagName("input");//看看有没有修改的时候要删除的,那种情况有文本输入框
+                if(input.length>=1){
+                    // let value=input[0].value;
+                    let pla=input[0].placeholder;//因为是修改的中途删除，所以不取value,取placeholder
+                    // if(value.length>=1){
+                    //     name=value;
+                    // }else{
+                        name=pla;
+                    // }
+                }
+                //删除的员工名字
+                let flag=confirm(name+"是公司重要员工，确定要删掉吗？");
+                if(flag){
+                    te.removeChild(tr);
+                }
+                return false;//消除a的默认跳转
+            }
+            let aArray=document.getElementsByTagName("a");//获取删除修改超链接
+            for(let i=0;i<aArray.length;i++){
+                if(i%2==0){//删除
+                    aArray[i].onclick=del;
+                }else if(i%2!=0){//修改
+                    aArray[i].onclick=alt;
+                }
+            }
+            let submit=document.getElementById("submit");//添加按钮
+            submit.onclick=function(){
+                let name=document.getElementById("name");//姓名
+                let QQ=document.getElementById("QQ");//QQ
+                let salary=document.getElementById("salary");//薪资
+                let nameSpan=document.getElementById("nameSpan");//name错误提示框
+                let QQSpan=document.getElementById("QQSpan");//QQ错误提示框
+                let salarySpan=document.getElementById("salarySpan");//salary错误提示框
+                
+                if((name.value.length>1)&&(QQ.value.length>=6)&&(salary.value.length>1)){
+                 //没问题的进来
+                 let tables=document.getElementById("tables");//员工表
+                   let trArray=tables.getElementsByTagName("tr");//员工表里tr
+                   let flag=true;
+                   for(let i=1;i<trArray.length;i++){//检验是否存在
+                        let tdArray=trArray[i].getElementsByTagName("td");
+                        if(name.value == tdArray[0].innerText){
+                            name.innerText="姓名已存在";
+                            flag=false;
+                        }
+                        if(QQ.value == tdArray[1].innerText){
+                            QQ.innerText="姓名已存在";
+                            flag=false;
+                        }
+                   }
+                   if(flag==true){
+                        let newTr=document.createElement("tr");
+                        newTr.innerHTML="<td>"+name.value+"</td>"+
+                                "<td>"+QQ.value+"</td>"+
+                                "<td>"+salary.value+"</td>"+
+                                "<td><a href='?name="+name.value+";QQ="+QQ.value+";salary="+salary.value+"''>删除"+"</a></td>"+
+                                "<td><a href=javascript:;>修改</a></td>";
+                        var a=newTr.getElementsByTagName("a")[0];
+                        a.onclick=del;
+                        var a1=newTr.getElementsByTagName("a")[1];
+                        a1.onclick=alt;
+                        let tbody=tables.getElementsByTagName("tbody")[0];//获取tbody;
+                        tbody.appendChild(newTr);
+                        nameSpan.innerText="";QQSpan.innerText="";salarySpan.innerText="";//清除错误提示框内容
+                        name.style.width="80%";QQ.style.width="80%";salary.style.width="80%";//input的宽
+                        alert("添加员工"+name.value+"成功");
+                        name.value="";QQ.value="";salary.value="";
+
+                    }
+                }else{
+                    if(name.value.length<1){
+                        nameSpan.innerText="*不得为空";
+                        nameSpan.style.color="red";
+                        nameSpan.style.fontSize="0.8em";
+                        name.style.width="50%";//input的宽
+                    }
+                    if(QQ.value.length<1){
+                        QQSpan.innerText="*不得为空";
+                        QQSpan.style.color="red";
+                        QQSpan.style.fontSize="0.8em";
+                        QQ.style.width="50%";
+                    }
+                    if(QQ.value.length<6){
+                        QQSpan.innerText="*不小于6位";
+                        QQSpan.style.color="red";
+                        QQSpan.style.fontSize="0.8em";
+                        QQ.style.width="50%";
+                    }
+                    if(salary.value.length<1){
+                        salarySpan.innerText="*不得为空";
+                        salarySpan.style.color="red";
+                        salarySpan.style.fontSize="0.8em";
+                        salary.style.width="50%";
+                    }
+                    return;
+                }
+            }
+            //
+            function clearSpan()
+            {
+                let nameSpan=document.getElementById("nameSpan");
+                let QQSpan=document.getElementById("QQSpan");
+                let salarySpan=document.getElementById("salarySpan");
+                if(nameSpan.innerText !=""){
+                    nameSpan.innerText="";
+                    let name=nameSpan.previousSibling;
+                    name.style.width="80%";
+                }
+                if(QQSpan.innerText !=""){
+                    QQSpan.innerText="";
+                    let QQ=QQSpan.previousSibling;
+                    QQ.style.width="80%";
+                }
+                if(salarySpan.innerText !=""){
+                    salarySpan.innerText="";
+                    let salary=salarySpan.previousSibling;
+                    salary.style.width="80%";
+                }
+            }
+           // setInterval(clearSpan,5000);
+        }
+    </script>
+</head>
+<body>
+    <table id="tables" border="1">
+        <tr>
+            <td>姓名</td>
+            <td>QQ</td>
+            <td>薪资</td>
+            <td>删除</td>
+            <td>修改</td>
+        </tr>
+        <tr>
+            <td>程某</td>
+            <td>806650849</td>
+            <td>10000</td>
+            <td><a href="?name='程某';QQ=806650849;xin=10000" value="del">删除</a></td>
+            <td><a href="javascript:;?name='程某';QQ=806650849;xin=10000" value="alt">修改</a></td>
+        </tr>
+        <tr>
+            <td>邓某</td>
+            <td>806650849</td>
+            <td>10000</td>
+            <td><a href="?name='邓某';QQ=806650849;xin=10000" value="del">删除</a></td>
+            <td><a href="?name='邓某';QQ=806650849;xin=10000" value="alt">修改</a></td>
+        </tr>
+        <tr>
+            <td>钱某</td>
+            <td>806650849</td>
+            <td>10000</td>
+            <td><a href="?name='钱某';QQ=806650849;xin=10000" value="del">删除</a></td>
+            <td><a href="?name='钱某';QQ=806650849;xin=10000" value="alt">修改</a></td>
+        </tr>
+    </table>
+    <div id="add">
+        <h4>添加新员工</h4>
+        <table id="xyg">
+            <tr>
+                <td>姓名：</td>
+                <td><input type="text" id="name" placeholder="输入姓名" ><span id="nameSpan"></span></td>
+            </tr>
+            <tr>
+                <td>QQ：</td>
+                <td><input type="number" id="QQ" min="100000" max="99999999999" placeholder="输入QQ号码" ><span id="QQSpan"></span></td>
+            </tr>
+            <tr>
+                <td>薪资：</td>
+                <td><input type="number" id="salary" min="0" max="999999999999" placeholder="输入薪资"><span id="salarySpan"></span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button id="submit" >添加</button></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

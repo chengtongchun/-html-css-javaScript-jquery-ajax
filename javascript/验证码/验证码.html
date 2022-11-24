@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label >验证码</label>
+    <div >
+        <input type="text" id="Txtidcode" class="form-control" style="width:180px" name="code" placeholder="填写右侧的验证码" />
+        <span id="idcode" class="passcode" style="height: 35px; line-height: 35px   ; font-size: 20px; background: #eaeaea; width: 80px; cursor: pointer;"></span>
+
+    </div>
+    <script src="jquery.min.js"></script>
+    <script src="jquery.bootstrap.min.js"></script>
+    <script src="jquery.idcode.js"></script>
+    <script>
+        $.idcode.setCode();   //加载生成验证码方法
+        
+    </script>
+</body>
+</html>

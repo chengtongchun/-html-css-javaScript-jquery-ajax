@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url(img/西施.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center center;
+            background-color: burlywood;
+            color:red;
+            font-size: 18px;
+        }
+        .title{
+            white-space: pre-wrap;
+            text-shadow: 0px 0px 10px blueviolet;
+
+        }
+        .result{
+            text-indent: 10px;
+            white-space: pre-wrap;
+            color:white;
+            text-shadow: 0px 0px 10px red;
+        }
+    </style>
+</head>
+<body>
+    <p class="title">作业</p>
+    <p class="title">1.闭包是什么？他有什么作用 ？它的缺点是什么</p>
+    <p class="result">      闭包：在函数外部能操作内部的局部变量
+        作用：延长局部变量的生命周期，让函数外部能操作内部的局部变量，让这些变量的值始终保持在内存中
+        缺点：可能导致内存泄露 </p>
+    <p class="title">2.内存溢出是   内存泄漏是   闭包如何防止内存泄漏</p>
+    <p class="result">      （1）内存溢出：一般是指执行程序是，程序会向系统申请一定大小的内存，当系统现在的实际内存少于需要的内存是，就会造成内存溢出。内存溢出造成的结果是先前保存的数据会被覆盖或者后来的数据会没地方存
+        （2）内存泄露：是指程序执行时，一些变量没有及时释放，一直占用这内存，而这种内存的行为就叫做内存泄露。内存泄露如果一直堆积，最终会导致内存溢出问题。
+        （3）防止内存泄露：及时释放，=null，或者不用闭包
+    </p>
+
+    <p class="title">3.用闭包写anmial类 属性name 写get和set方法</p>
+    <p class="result" id="there"></p>
+
+    <p class="title">4.什么是函数的柯里化？ Max(a)(b)(c)求abc中的最大值</p>
+    <p class="result" id="four">        函数柯里化：将一个接受多个参数的函数分解成多个接受单个参数的函数的技术
+        <span id="fourSpan"></span>
+
+    </p>
+
+    <p class="title">5.自定义$ 
+          属性let dom=[];size=dom.length;
+          如果arguments.length>0 把dom.push(...arg);
+          方法push,pop,each,find</p>
+    <p class="result" id="five"></p>
+    <script>
+        //第三题
+        {
+            // var anmial=function(name){
+            function Anmial(name){
+                this.name=name;
+                console.log("1"+this.name);
+                return {
+                    getName:function(){
+                        console.log("2"+this.name);
+                        return name;
+                    },
+                    setName(newName){
+                        console.log("3"+this.name);
+                        name=newName;
+                    }
+                }
+            }
+           
+            let a=new Anmial("程某");
+            console.log(a.name);//undefined
+            console.log(a.getName());//程某
+            a.setName("O(∩_∩)O哈哈~");
+            console.log(a.getName());//O(∩_∩)O哈哈~
+            let there=document.getElementById("there");
+            there.innerHTML="// var anmial=function(name){ <br>\
+            function Anmial(name){  <br>\
+                this.name=name; <br>\
+                return { <br>\
+                    getName:function(){ <br>\
+                        return name; <br>\
+                    }, <br>\
+                    setName(newName){ <br>\
+                        name=newName; <br>\
+                    } <br>\
+                } <br>\
+            } <br>\
+            let a=new Anmial('程某'); <br>\
+            console.log(a.name);//undefined <br>\
+            console.log(a.getName());//程某 <br>\
+            a.setName('O(∩_∩)O哈哈~''); <br>\
+            console.log(a.getName());//O(∩_∩)O哈哈~";
+            // there.style.color="black";
+            
+            
+        }
+        //第四题
+        {
+            function Max(a){
+                return function(b){
+                    return function(c){
+                        let max=a;let m="a";
+                        if(b>max){
+                            max=b;m="b";
+                        }
+                        if(c>max){
+                            max=c;m="c";
+                        }
+                        return "abc中最大值是"+m+"："+max;
+                    }
+                }
+            }
+            console.log(Max(99)(10)(19));//99
+            let fourSpan=document.getElementById("fourSpan");
+            fourSpan.innerHTML="function Max(a){    <br>\
+                return function(b){  <br>\
+                    return function(c){  <br>\
+                        let max=a;let m='a'; <br>\
+                        if(b>max){ <br>\
+                            max=b;m='b'; <br>\
+                        } <br>\
+                        if(c>max){ <br>\
+                            max=c;m='c'; <br>\
+                        } <br>\
+                        return 'abc中最大值是'+m+'：'+max; <br>\
+                    }  <br>\
+                }  <br>\
+            }  <br>\
+            console.log('Max(99)(10)(19));//abc中最大值是a：99";
+        }
+        //第五题
+        {
+           var jQuery=function(){
+                let dom=[];
+                size=dom.length;
+                function push(...args){//添加
+                    let arguments=args;
+                    if(arguments.length>0){
+                        dom.push(...args);
+                        size=dom.length;
+                    }
+                }
+                function pop(){//删除最后一个，并返回
+                    let last=dom[size-1];
+                    dom.length--;
+                    size--;
+                    return last;
+                }
+                function each(){//遍历
+                    // debugger;
+                    for(let i=0;i<dom.length;i++){
+                       console.log("ddd\t"+dom[i]);
+                    }
+                    return dom;
+                }
+                function find(callback){//find() 方法返回通过测试（函数内判断）的数组的第一个元素的值。
+                    for(let i=0;i<size;i++){
+                        if(callback(dom[i])){
+                            return dom[i];
+                        }
+                    }
+                    return -1;
+                }
+                return {push,pop,each,find};
+            }
+            var $=jQuery();
+            $.push('喂喂','你是猪','不','你才是','一边去','走开');
+            console.log($.find(function(e){return isNaN(e)}));
+
+            let five=document.getElementById("five");
+            five.innerHTML="var jQuery=function(){ <br>\
+                let dom=[]; <br>\
+                size=dom.length; <br>\
+                function push(...args){//添加 <br>\
+                    let arguments=args; <br>\
+                    if(arguments.length>0){ <br>\
+                        dom.push(...args); <br>\
+                        size=dom.length; <br>\
+                    } <br>\
+                } <br>\
+                function pop(){//删除最后一个，并返回 <br>\
+                    let last=dom[size-1]; <br>\
+                    dom.length--; <br>\
+                    size--; <br>\
+                    return last; <br>\
+                } <br>\
+                function each(){//遍历 <br>\
+                    for(let i=0;i&lt;dom.length;i++){ <br>\
+                       console.log(dom[i]); <br>\
+                    } <br>\
+                    return dom; <br>\
+                } <br>\
+                function find(callback){//find() 方法返回通过测试（函数内判断）的数组的第一个元素的值。 <br>\
+                    for(let i=0;i&lt;size;i++){ <br>\
+                        if(callback(dom[i])){ <br>\
+                            return dom[i]; <br>\
+                        } <br>\
+                    } <br>\
+                    return -1; <br>\
+                } <br>\
+                return {push,pop,each,find}; <br>\
+            } <br>\
+            var $=jQuery(); <br>\
+            $.push('喂喂','你是猪','不','你才是','一边去','走开'); <br>\
+            console.log($.find(function(e){return isNaN(e)}));//喂喂";
+        }
+    </script>
+</body>
+</html>

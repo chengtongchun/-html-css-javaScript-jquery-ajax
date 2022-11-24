@@ -1,0 +1,37 @@
+正则表达式RegExp
+      用于匹配字符串中字符组合的模式
+      测试是否匹配，然后替换或提取子字符串
+      用途：表单验证 敏感词过滤  隐私计算
+      创建const re = new RegExp(/正则表达式/);  
+             const re = /正则表达式/;    /正则表达式/g全局 i忽略大小写
+      测试re.test(str) 提取re.exec(str)   
+      提取str.match(re)  替换str.replace(re,'替换字符');
+    
+    ^开始 $结束   [a-z]任意一个 [^abc]除了abc
+     前面字符重复次数:+ 1或n次   *0或n次   ?0或1次  {n}n次   {n,}n更多    {n,m}n到m次
+       预定义\d数字\D非数字 \s空白\S非空白 \w字母数字下划线 \W 
+  
+  总结: {n,m}重复次数 [字符集合]任意字符  ()表示优先级
+      Email地址/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+      手机号码/^1[3|4|5|7|8][0-9]{9}$/  
+      QQ: [1-9][0-9]{4,}  
+      中文^[\u4e00-\u9fa5]{2,8}$
+      员工工号/^[0-9a-zA-Z]*$/g   
+      支付密码/^\d{6}$/ 
+      邮编/[1-9]\d{5}(!?\d)/   
+      空格/^\s+$/        
+      学生证/^\d{0,17}$/ 
+      银行卡号/^(\d{16}|\d{19})$/    
+      驾驶证/^((^[0-9]{18}$)|(^[0-9]{17}[Xx])$)$/   
+      车牌号/^[A-Z]{1}[A-Z_0-9]{5}$/
+
+表单事件onsubmit onreset  
+输入onclick onblur oninput onchage回车或改变 onselect onfocus 
+练习:1.注册表单
+         姓名必须是3到8个中文，email，qq，手机号码，邮编，驾驶证，工号，简介textarea
+        写在每个input的onblur上
+      2.去掉工号两边的空格/^\s+|\s+$/
+      3.替换textarea中所有>为&gt; <为&lt;
+ <label for="email">email</label>
+        <input type="text" name="email" id="email" placeholder="">
+<span></span>

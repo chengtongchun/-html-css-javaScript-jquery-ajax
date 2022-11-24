@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<body>
+    <script>
+        function deepCopy(obj){
+            // 判断obj的类型是否是新建一个数组还是对象
+            let newObj =Array.isArray(obj)? []:{}
+
+            // 判断传入的obj存在，且类型为对象
+            if(obj && typeof obj === 'object'){
+                for(key in obj){
+                    //如果obj的子元素是对象，则进行递归操作
+                    if(obj[key] && typeof obj[key] === 'object'){
+                        newObj[key] =deepCopy(obj[key])
+                    }else{
+                        //如果obj的子元素不是对象，则直接赋值
+                        newObj[key]=obj[key]
+                    }
+                }
+            }
+            return newObj//返回新对象
+        }
+        let obj1={
+            name:'荧',
+            sex:'女',
+            element:'草',
+            attack:{
+                norma:'剑劈',
+                thump:'快速劈几剑',
+                small:'三个草籽',
+                big:'大草'
+            }
+        }
+        let obj2=deepCopy(obj1);
+        obj2.attack.big="生成一个弱化区域"
+        console.log(obj1)
+        console.log(obj2)
+    </script>
+</body>
+</html>

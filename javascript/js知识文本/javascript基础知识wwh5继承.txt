@@ -1,0 +1,69 @@
+继承
+    在ECMAScript中只支持实现继承无法实现接口继承，依靠原型来实现的。js可以多继承
+       Man.prototype=new Person();继承父类
+       Man.prototype.新方法=function(){}
+       重写Man.prototype.say=function(){}
+       原型的构造函数指向Person
+           要修正Man.prototype.constructor=Man;
+   存在的问题
+     1.引用类型会被所有实例共享
+     2.没法向父构造函数中传递参数
+     3.没有多继承
+ 怎么解决   
+   1.通过apply()或call()调用父类型的构造函数
+      function Man(){Person.call(this,参数);this.子类属性和方法}
+     函数对象.call(this,参数1,参数2,参数N)与函数对象.apply(this,参数数组)
+ 2.组合继承将原型链和借用构造函数的技术组合
+       function Man(){Person.call(this,参数);//继承属性 }
+       Man.prototype=new Person(); //继承方法
+    组合继承避免了原型链和借用构造函数的缺陷，融合了它们的优点，成为JavaScript中最常用的继承模式。
+面试考点  
+     1.原型链
+     函数都有prototype属性(显式原型)指向原型对象，定义函数时被自动赋值{} 它有个属性constructor指向函数对象
+     所有实例都有__proto__隐式原型属性，创建实例时自动添加赋值为构造函数的prototype值
+     原型链的作用: 获取属性方法时按原型链层层找直到null为止   对属性赋值不会用原型链只当前对象
+   2.this指向：指向方法的调用者
+       普通函数、定时器和立即执行函数 'use strict';严格模式this=undefined否则this指向window
+       构造函数中的this 指向实例对象.  对象方法调用指向该方法的对象
+       事件绑定this指向绑定事件的对象
+       箭头函数的this：取决于上下文
+   3.apply call bind  共同点：都可以改变函数内部的this指向
+     区别点:  
+        call 和 apply  会调用函数, 并且改变函数内部this指向，一次性改变
+        call 和 apply 传递的参数不一样, call 传递参数 aru1, aru2..形式  apply 必须数组形式[arg]
+        bind  不会调用函数, 可以改变函数内部this指向，永久改变
+   4.作用域和作用域链
+     作用域链:内部函数访问外部函数的变量，采取的是链式查找的方式来决定取那个值 这种结构我们称为作用域链   就近原则
+作业
+  1. function Person(name){this.name=name;}Person.prototype.say=function(){console.log("say...");
+      var p=new Person(); p的__proto__指向谁 Person.prototype指向谁 Person.prototype.constructor指向谁
+       Object.prototype指向谁
+  2. call apply的区别
+  3. 需求  
+        动物类Animal有name,weight体重属性,方法是eat和death死亡
+        飞行类Fly 有count里程属性 方法是fly
+        Dog继承Animal类 它有sex性别 方法有run，覆盖父类的eat方法
+        Bird类继承Animal和Fly类 它有color颜色属性
+
+ function Person(name='cjy'){
+            this.name=name;
+        }
+        Person.prototype.run=function(){
+            console.log("run....");
+        }
+        function Man(name,age){
+            Person.apply(this,[name]);
+            //Person.call(this,name);
+            this.age=age;
+        }
+        Man.prototype=new Person();
+        Man.prototype.constructor=Man;
+        Man.prototype.fly=function(){//子类特有的方法
+            console.log(this.name+"man ..fly");
+        }
+        Man.prototype.run=function(){//覆盖父类的run方法
+            console.log(this.name+"man ..run");
+        }
+        const zs=new Man('cjy',20);
+        zs.fly();
+        zs.run();

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url(./img/快手/白猫1.jpg), url(./img/快手/白猫2.jpg);
+            background-repeat: no-repeat;
+            background-position:300px 0px,805px 0px;
+            background-size:500px 1000px,500px 1000px;
+            background-attachment: fixed;
+        }
+        #form{
+            width:400px;
+            /* height:300px; */height:100%;
+            background-color: gainsboro;
+        }
+        #form>label{
+            display: flex;
+            width:400px;
+            justify-content: center;align-items: center;
+        }
+        #form>label>span,#form>label>input{
+            margin:10px 10px;display: flex;
+            justify-content: center;align-items: center;
+        }
+        #form>label>span{
+            width:100px;
+        }
+        #formsubmit{
+            width:150px;height:40px;
+            display: block;
+            margin: 0 auto;
+        }
+        /* 第七 */
+        .table{
+            text-align: center;
+            border-collapse: collapse;
+            color:red;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <p class="title"> 1.表单form1有用户名密码，用formdata封装form1，给form1加email字段</p>
+    <form id="form">
+        <label><span>用户名</span>
+        <input type="text" id="user" name="user">
+        </label>
+        <label><span>密码</span>
+            <input type="password" id="pwd" name="pwd">
+        </label>
+        <input type="submit" id="formsubmit" value="提交">
+    </form>
+    <p class="title">2.xml，json是用来干什么的 json比xml的好处
+        xml和json是用来存储和交换文本的语法。
+        json比xml更小，更快，更易解析，易于人阅读和编写
+    </p>
+
+    <p class="title">3.安装node   步骤是搜node 下载安装，用node -v看安装好了吗</p>
+    <p class="title">4.到代码目录 如d:\work下  运行npm install mock.js  -D</p>
+    <p class="title">5.写mockdata.js生成100个模拟数据</p>
+    <p class="title">6.运行node mockdata.js看数据有没有生成</p>
+    <p class="title"> 7.用mock.js生成20个模拟数据  看mock.html</p>
+    <table border="1" id="seven"></table>
+    <p class="title"> 8.用ajax2种方法分别向服务器url='http://127.0.0.1:5500/1.text'提交get和post请求</p>
+    <button id="oldget">旧的(get)</button><button id="oldpost">旧的(post)</button>
+    <button id="newget">新的(get)</button><button id="newpost">新的(post)</button>
+    <p id="eightSpan"></p>
+    <script src="./js/mock-min.js"></script>
+    <script>
+        const $=(ele)=>document.getElementById(ele);
+        const log=(...msg)=>console.log(...msg);
+        // 第一题
+        {
+            var form=$("form");
+            var formsubmit=$("formsubmit");
+            formsubmit.onclick=function(){
+                const formdatas=new FormData(form);
+                console.log(formdatas);
+                log(formdatas.get("user"));
+                log(formdatas.get("pwd"));
+                //给form添加email
+                formdatas.append("email","440882");
+                log("邮件"+formdatas.get("email"));
+                var input=form.getElementsByTagName("input");
+                for(var i=0;i<input.length;i++){
+                    log(input[i]);
+                }
+                return false;
+            }
+        }
+        //第7题
+        {
+            const data=Mock.mock({
+                'students|20':[{
+                    id: '@increment()',
+                    name:'@cname',
+                    address:'@city(true)',
+                    idcard:'@id()',
+                    modi:"@date(yyyy年MM月dd日 hh:mm:ss)",
+                    "grade|1":["大学","大专","高中"],
+                    "socre|.2":Math.random()*100
+                }]
+            });
+            log(data);
+            var seven=$("seven");
+            seven.classList.add("table");
+            var tbody=document.createElement("tbody");
+            var trfirst=document.createElement("tr");//第一个tr
+            trfirst.innerHTML="<td>id</td><td>name</td><td>address</td><td>idcard</td><td>modi</td><td>grade</td><td>socre</td>"
+            tbody.appendChild(trfirst);
+            for(var i=0;i<data.students.length;i++){
+                var tr=document.createElement("tr");//第一个tr
+                tr.innerHTML="<td>"+data.students[i].id+"</td><td>"+data.students[i].name+"</td><td>"+data.students[i].address+"</td><td>"+data.students[i].idcard+"</td><td>"+data.students[i].modi+"</td><td>"+data.students[i].grade+"</td><td>"+data.students[i].socre+"</td>"
+                tbody.appendChild(tr);
+            }
+            seven.appendChild(tbody);
+        }
+        //第八题
+        {
+            const oldget=$("oldget");
+            const oldpost=$("oldpost");
+            const newget=$("newget");
+            const newpost=$("newpost");
+            const eightSpan=$("eightSpan");
+            const url="txt/20220801Ajax.txt";
+                const xhr=new XMLHttpRequest();
+            oldget.onclick=function(){
+                xhr.onreadystatechange=function(){
+                    log(xhr.readyState,xhr.status);
+                    if(xhr.readyState==4&&xhr.status==200){
+                        log(xhr.responseText);
+                        eightSpan.innerHTML=xhr.responseText;
+                    }
+                }
+                xhr.open("get",url);
+                xhr.send();
+            }
+            oldpost.onclick=function(){
+                xhr.onreadystatechange=function(){
+                    log(xhr.readyState,xhr.status);
+                    if(xhr.readyState==4&&xhr.status==200){
+                        log(xhr.responseText);
+                        eightSpan.innerHTML=xhr.responseText;
+                    }
+                }
+                xhr.open("post",url);
+                xhr.send();
+            }
+            newget.onclick=function(){
+               xhr.onload=function(){
+                log(xhr.responseText);
+               }
+               xhr.onerror=()=>log(xhr);
+                xhr.open("get",url,true);
+                xhr.send();
+            }
+            newget.onclick=function(){
+               xhr.onload=function(){
+                log(xhr.responseText);
+               }
+               xhr.onerror=()=>log(xhr);
+                xhr.open("post",url,true);
+                xhr.send();
+            }
+        }
+    </script>
+</body>
+</html>

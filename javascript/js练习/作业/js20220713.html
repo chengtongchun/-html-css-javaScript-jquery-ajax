@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: burlywood;
+        }
+        .title{
+            white-space: pre-wrap;
+        }
+        .result{
+            text-indent:10px ;
+        }
+        button{
+            border-radius: 10px;width: 120px;height:40px;
+        }
+        #nine_left,#nine_right{
+           height:100%;width:40%;
+            float:left;border: 0px solid black;margin:0px 10px ;
+            text-indent: 0px;
+            padding: 10px;box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <p class="title">1.set最大的特点是什么  map的特点呢</p>
+    <p class="result">Set是类似数组的一种数据结构，不同点在于Set中没有重复的值。Map是类似Object的一种键值对集合，区别在于Map的键不仅限于是字符串，其他各种类型的值包括对象都可以成为Map的键</p>
+    <p class="title">2.输入4个学生姓名,判断有没有张三，有就删除没有就加</p>
+    <button id="two" >输入学生姓名</button><span id="twoSpan"></span>
+    <p class="title">3.weakset干嘛用的</p>
+    <p class="result">弱引用Set 只能包含对象引用不能有其他值，对象没有引用时启动GC回收垃圾</p>
+    <p class="title">4.function add(a,b){ console.log(a+b);}  let z=add(1); console.log(z)问输出什么</p>
+    <p class="result">undefined</p>
+    <p class="title">5.写insertSort函数
+        function insertSort(ar){
+          if(null!==ar && ar instanceof Array){//保证ar不为空且为array的实例
+              for(let i=0; i<ar.length; i++){
+                 for(let j=0; j<i; j++)
+                    if(ar[j]>ar[i])
+                      [ar[j],ar[i]]=[ar[i],ar[j]];//交换ar[j]和ar[i]
+              }
+          }   
+       }
+    </p>
+    <p class="title">6.写add()可以加任意个数如add(1,2) add(1,2,3,4,5,6)arguments</p>
+    <!--<button id="six">add()</button>--><span id="sixSpan"></span>
+    <p class="title">7.用Function构造一个函数arrMax求数组最大值      用Math.max(...ar)方法</p>
+    <p class="result" id="seven"></span></p>
+    <p class="title">8.下面的函数怎么调用，怎么把返回值取出来
+      (1) var fn=(a,b)=>{let c=a+b;return [a,b,c];} 
+            let [a,b,c]=fn(9,19);
+            console.log(a+","+b+","+c);//9,19,28
+
+      (2) var fn=()=>{let x=2;return ()=>x=x+10;} 
+            let fn2=fn()();
+            console.log(fn2);//12
+
+      (3) const fn=()=>[1,2,3]; 
+            let [a,b,c]=fn();
+            console.log(a+","+b+","+c);//1,2,3
+
+      (4) const fn=()=>({a:1,b:2,c:3});
+            let {a,b,c}=fn();
+            console.log(a+","+b+","+c);
+    </p>
+    <p class="title">9.写myMap返回新数组，myFind查找第一个符合条件的元素<!--
+         const ar=[12,23,4,56,77];
+       function myMap(ar=[],callback){
+            let newar=[];//返回新数组
+           ar.forEach((e)=>{//每个元素都执行callback
+               newar.push(callback(e)) ;
+           });
+           return newar;
+       }
+      var ar1= myMap(ar,(e)=>{return e+10});//所有元素都+10 --></p>
+    <p class="result">
+        <span id="nine_left"></span><span id="nine_right"></span>
+    </p>
+    <script>
+        //第二题
+        let two=document.getElementById("two");
+        two.onclick=function(){
+            let twoSpan=document.getElementById("twoSpan");//提示文本
+            let student=new Set();
+            student.add("程某");student.add("林某");student.add("黄某");student.add("张三");
+            fori:
+            while(true){
+                let select=prompt("\n输入1找张三，给他一脚 输入其他退出");
+                let stu="";
+                student.forEach(e=>{
+                    stu=stu+e+"  ";
+                });
+                switch(select){
+                    case '1':
+                        if(student.has('张三')){
+                            student.delete("张三");
+                            alert("找到张三了，给他一脚，并删了他，\n学生："+stu);
+                        }else{
+                            student.add("张三");
+                            alert("没找到张三，好气，添加一个\n学生："+stu);
+                        }
+                        break;
+                    default:
+                        twoSpan.innerText="退出成功,学生："+stu;
+                        break fori;
+                        break;
+                }
+            }
+
+        }
+       //第四题
+    //    function add(a,b){ console.log(a+b);}  let z=add(1); console.log(z);
+        //第六题
+        // let six=document.getElementById("six");
+        let sixSpan=document.getElementById("sixSpan");
+        sixSpan.innerText=add;
+        function add(){
+            let value=0;
+            for(let i in arguments)
+                value=value+Number(arguments[i]);
+            return value;
+        }
+        //第七题
+        //用Function构造一个函数arrMax求数组最大值
+        let ar=[320,873,9999,1920];
+        //(1)
+        // let arrMax=new Function('return function arrMax(ar=[]){return Math.max(...ar);}');
+        // let am=arrMax()(ar);
+        //(2)
+        let arrMax=new Function('ar=[]','return Math.max(...ar)');
+        let am=arrMax(ar);
+        console.log(am);
+        let seven=document.getElementById("seven");
+        seven.innerHTML="let ar=[320,873,9999,1920]; <br> let arrMax=new Function('ar=[]','return Math.max(...ar)'); <br>\
+         let am=arrMax(ar);//999";
+        //  第八题
+        // var fn=(a,b)=>{
+        //     let c=a+b;
+        //     return [a,b,c];
+        // }
+        // let [a,b,c]=fn(9,19);
+        // console.log(a+","+b+","+c);
+        // var fn=()=>{
+        //     let x=2;return ()=>x=x+10;
+        // }
+        // let fn2=fn()();
+        // console.log(fn2);
+        // const fn=()=>[1,2,3];
+        // let [a,b,c]=fn();
+        // console.log(a+","+b+","+c);
+        // const fn=()=>({a:1,b:2,c:3});
+        // let {a,b,c}=fn();
+        // console.log(a+","+b+","+c);
+        //第九题
+        {
+            //写myMap返回新数组
+            const ar=[12,23,4,56,77];
+            function myMap(ar=[],callback){
+                let newar=[];//返回新数组
+                ar.forEach(e=>{
+                    newar.push(callback(e));
+                });
+                return newar;
+            }
+            var ar1=myMap(ar,(e)=>{return e+10});//所有元素都+10；
+            var ar2=myMap(ar,(e)=>{return e});//原样
+            console.log("ar\t"+ar);
+            console.log("ar1\t"+ar1);
+            console.log("ar2\t"+ar2);
+            // myFind查找第一个符合条件的元素
+            function myFind(ar=[],callback){
+                for(var i=0;i<ar.length;i++){
+                    if(callback(ar[i]))
+                    return ar[i];
+                }
+            }
+            let value=myFind(ar,(e)=>{return e>30});
+            console.log(value);//56
+            // 
+            var nine_left=document.getElementById("nine_left");//myMap的span
+            nine_left.innerHTML="//写myMap返回新数组<br>\
+            const ar=[12,23,4,56,77]; <br>\
+            function myMap(ar=[],callback){<br>\
+                let newar=[];//返回新数组<br>\
+                ar.forEach(e=>{<br>\
+                    newar.push(callback(e)); <br>\
+                }); <br>\
+                return newar; <br>\
+            } <br>\
+            var ar1=myMap(ar,(e)=>{return e+10});//所有元素都+10； <br>\
+            var ar2=myMap(ar,(e)=>{return e});//原样 <br>\
+            console.log('ar\t'+ar);//12,23,4,56,77 <br>\
+            console.log('ar1\t'+ar1);//22,33,14,66,87 <br>\
+            console.log('ar2\t'+ar2);//12,23,4,56,77";
+
+            var nine_right=document.getElementById("nine_right");// myFind的span
+            nine_right.innerHTML="//myFind查找第一个符合条件的元素<br>\
+            const ar=[12,23,4,56,77]; <br>\
+            function myFind(ar=[],callback){ <br>\
+                for(var i=0;i<ar.length;i++){ <br>\
+                    if(callback(ar[i])) <br>\
+                    return ar[i]; <br>\
+                } <br>\
+            } <br>\
+            let value=myFind(ar,(e)=>{return e>30}); <br>\
+            console.log(value);//56";
+        }
+    </script>  
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            width:150px;height:45px;
+            background-image: url(./img/头像.jpg);
+            background-position: center center;
+            background-repeat: no-repeat;background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <button id="bbnq">裴波那契</button>
+    <p></p>
+    <script>
+        const {log}=console;
+        const $=(ele)=>document.getElementById(ele);
+        let bbnq=$("bbnq");
+        const worker=new Worker("./js20220805Web Workers计算");//新建后台工作者线
+        bbnq.onclick=function(){
+            worker.postMessage(20);//发消息给worker
+        }
+        worker.onmessage=function(ev){//接受后台worker计算结果
+            log(ev.data);
+            var p=document.querySelector("#bbnq+p");
+            p.innerHTML=ev.data;
+        }
+    </script>
+</body>
+</html>

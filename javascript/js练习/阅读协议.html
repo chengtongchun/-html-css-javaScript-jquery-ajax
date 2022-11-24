@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+     <style>
+      body{
+        background-image: url(./作业/img/再飞行TV版.mp4);
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+        #pid{
+          width: 50%;
+          height:100%;
+          /* height:200px; */
+          margin:0 auto;
+          background-color: burlywood;
+          padding:10px;box-sizing: border-box;
+          /* overflow: hidden; */
+          padding-bottom: 50px;
+        }
+        h3,p,input{
+         text-align:center;
+          margin:10px auto;
+        }
+        /* #xy{
+          width:100%;
+          position:fixed;
+          bottom:-12px;left:0;
+          background-color: yellowgreen;
+        } */
+     </style>
+     <script>
+      window.onload=function(){
+         let bodys=document.getElementsByTagName("body")[0];//获取body标签
+         console.log("body"+bodys);
+         let inputs=document.getElementsByTagName("input"); //获取两个表单input
+         console.log("input"+inputs);
+         bodys.onscroll=function(){
+            console.log(bodys);
+            console.log(bodys.scrollHeight+" -  "+ bodys.scrollTop+" == "+bodys.clientHeight);
+            if(bodys.scrollHeight - bodys.scrollTop == bodys.clientHeight){
+              //  alert("到底了，唉，好难过，要让你这掉叼毛去注册了");
+               inputs[0].disabled=false;
+               inputs[1].disabled=false;
+            }
+         }
+      }
+     </script>
+  </head>
+
+  <body>
+    <div id="pid">
+        <h3>欢迎亲爱的叼毛来注册用户</h3>
+        <p id="content">
+         第一章 javascript基础知识wwh
+1.1Web前端有三层 结构 样式 行为
+HTML：描述页面结构CSS：描述样式（美化页面）   JavaScript：描述行为（提升用户体验）
+
+为什么学习JavaScript 前端开发验证表单、制作特效等 vue react等的基础
+特点
+在HTML页面中添加互交行为。
+一种脚本语言，语法与Java类似。
+一种解释性语言，边执行边解释。
+    简单易学，交互性强
+js的组成:ECMAScript 文档对象模型（DOM）浏览器对象模型（BOM）
+ECMAScript国际脚本语言标准，最新ECMAScript6  以后都用年份命名如ES2020
+ES6规定了js组成部分：1.语法2.变量和数据类型3.关键字和保留字4.操作符5.控制语句6.对象
+html中js的三种方式
+	1.行内onClick="javascript:alert('欢迎');"
+  
+	 2.&it;script>{ } &it;/script>
+
+       3.独立的js文件&it;script src="js/1.js" [type="text/javascript"] [async异步加载][ defer延迟]>&it;/script>
+
+        区别:延迟会按在文档里的出现顺序执行   异步脚本在它们载入后执行，但是不能保证执行顺序。
+js输出
+   document.write('html') 
+   alert警告  console.log 控制台调试用的
+   操作dom对象var e=document.getElementByID，e.innerText=''
+   输入框var color = prompt("请输入你喜欢的颜色","红色"); 
+   确认框var flag=confirm("确认要删除此条信息吗?")
+1.2.2 注释 分行 空白 ,  {}
+     /*多行*/  //单行  ;可有可无但推荐必须有  空白随意  {}语句块  \分行
+
+1.2.3 变量的声明和赋值
+   var 变量名；
+  变量名由数字、字母、下划线和“$”组成首字母不能数字；区分大小写；
+  基本类型：undefined未定义类型  number数值类型  String字符串类型  boolean布尔值 object对象类型
+  用typeof判断值或变量的类型
+  变量的声明 
+   var str声明未初始值，值为undefined;   str="cjy"不声明 console.log(str)会出错
+   null对变量一个空值 注意与undefined的区别
+   好的编程习惯：在代码开始处，统一声明。
+   声明提升：
+      先预编译代码把所有声明的变量，提升到当前变量所在的作用域最前边开始解析
+     console.log(b);//报错  b变量找不到 未声明
+     console.log(c);//undefined  声明了但是找不到值
+     var c; c=10; //变量的赋值发生在JS的执行期 逐行执行
+开发者工具:f12打开控制台  源代码里片段里面写代码
+1.2.JavaScript核心语法
+ 基本类型：undefined未定义类型  Number数值类型  String字符串类型  Boolean布尔值 Object对象类型 null空对象
+1.2.1字面量
+    3.14  1001 1.23e5 0b11 012 0xFF数字; Infinity无穷大 NaN非数字 注意他们数字、逻辑运算的结果
+   IsNaN判断是否数字  
+    "cjy" 'zs'字符串;    'a'=="a"一样
+    数组[40, 100];
+     对象{name:"cjy",eyeColor:"blue"}
+  
+   类型转换 类型()  如String(null)
+   类型判断typeof
+1.2.4 变量的作用域
+     全局作用域：就是全部地方都可以用
+     全局:1.var x=10; 2.var window.x=20
+     {}内的是块作用域，只在块内能用
+es6：
+        var let const区别
+        var 全局  存在声明提升  值可以改
+        let 块      不存在声明提升 值可以改
+        const 块  不存在声明提升 不能改
+    
+1.2.5运算符：各种类型都可以参与运算
+    Number数字 String字符串 Boolean布尔 null空对象undefined NaN []数组{}对象
+   算术： +加  -减 *乘  /整除 %求余数 ++自增 --  
+              问var a=1; b = a++ + a++ + 1 + ++a + a++ + ++a + a++ + a;    
+   隐转换    把任意类型-0运算转为Number 把任意类型+字符串转为String if(任意类型)转为Boolean
+   赋值 =  （-  *  / %）= 
+   比较 == ===等值等型  !=  !==不等值或不等型  > >= < <= 重点==和===
+   逻辑 &&与 同为真结果为真   ||或 同为假结果为假   ！非
+   短路运算:  与运算&& 如果表达式1为真返回表达式2否则返回表达式1   如123&&456 0&&456
+                   或运算||      如果表达式1为真返回的是表达式1
+   回答:0 && 1 + 2 && 456 * 56789=?     ''&& 1 + 2 && 456 * 56789=?
+   ,运算符  var a,b=10,c=add(3,4);  let c=(1,alert(''),4+5);
+   非数字转换成数字parseInt和parseFloat:
+         parseInt('123.4e5') parseInt(11参数,16进值) parseFloat("0xff");parseFloat("1.2.3");
+
+1.2.6控制语句
+     一元运算符:+- 正负号  如+"1"，+{}，+true，-["4"]，-{age:1}
+    1.条件结构 if else if    
+         如果年龄大于18就可以上网否则滚回家学习if(age>18)
+         判断闰年:能被4整除但不能被100整除的或者能被 400 整除的就是闰年
+                 if((year%4==0 && year%100!=0)||year%400==0)
+         判断成绩的优良中差
+        
+    三元表达式 var result= num>60? 'ok' : 'bad'; 如果输入数字小于10则在这个数字前面补0
+    简化a>=60 && alert("no");
+    2.循环结构  for（初始值; 终止值; 步长值){} 
+                               如1-100的和  1-100偶数和、奇数和 能被3整除的数的和 
+                     for循环嵌套： 如打印n行n列* 记得\n'换行    九九乘法表i=1-9,j=1-i
+                     while和do while跟java一样
+          break中断循环break fori;  continue继续下一轮    如跳过3的倍数
+    3.多选
+      switch(){case:default:}    注意break
+    4.异常
+       try{
+         var result =  decodeURI("%"); //发生报错，后面都不会执行
+           console.log(result);
+      }catch(e){ //捕获异常
+         console.log(e.message);
+        } finally{ //不管有没有发生异常，都会执行
+         console.log("finally");
+       }
+      主动抛出异常 throw new SyntaxError("发生异常了");
+      异常种类:EvalError用eval不当导致   SyntaxError语法错误时  RangeError超出合法范围
+                    typeError值的类型发生错误  URIError:URI编码和解码的时候报错
+    回顾 ()的作用 1.提升优先级2.定义函数 调用函数
+           []1.定义数组2.获取下标
+           {}的作用 1.定义对象 2.代码块
+作业.
+     1. 判断问好时间早中晚休息0-12点是早上 01-14点是中午 14-24是晚上
+    2.比较两个数的最大值 二元运算
+    3.求100以内所有能被3和7整除的数的和
+   4. 需求 ：有一群人，如果3个人站一排多出一人，如果4个人站一排多出来2个人；如果5人一排多出3人。问：这群人的数量
+   5. 一个input一个ul，点增加按钮把输入的名字加到li中然后在加到ul中innerHTML
+   6.一个box宽度100px高度100px,点放大按钮,让box的宽高每次加10. 如果到300px 那么就停止style.width/height
+
+1.2.7数组
+    基本类型和引用类型
+       基本类型Number、String 、Boolean、Null和Undefined     引用类型有数组、对象
+       基本类型:是按值访问，值是不可变的，不能加属性和方法        比较是值的比较             变量是存放在栈区的
+      引用类型:按引用地址访  值可变，       可以加属性和方法         比较是引用地址的比较    保存在堆内存中的对象
+      let a=10;
+      let b=a;
+      b=20;
+      let ar=
+      ar[0]=123;
+      ar[1]=456;
+      let ar1=ar;
+      ar1[0]=234;
+      内存分析
+为什么使用数组：保存所有学生的成绩，你需要多个变量来保存
+    ES 数组可放任何类型的数据  大小动态调整的
+   定义数组的三种方法
+       声明var 数组名称 = new Array(size) 如var ar1=new Array(10)
+       声明并赋值var animal=  new Array（"cat", "dog", "hamster"）
+       通过字面量定义var ar= ["cat"; "dog"; "hamster"];
+   属性:length
+   数组元素访问[下标]  ar1[0]='zs'; alert(ar1[1])
+   求斐波那契数列的前20个数字：
+        已知斐波那契数列的第一个值是1，第二项是2，从第三项开始，每一项都等于前两项的和
+   遍历:一个一个访问 for   for in
+   解构 const[a,b]=ar;交换两个值[a,b]=[b,a]
+            var ar1=[];var ar2=ar[...ar1]
+       冒泡排序
+       插入排序
+       选择排序
+
+   Array类静态方法
+     Array.from()从多个对象或迭代对象中创建数组.
+        var divs = document.getElementsByTagName("div");var ar=Array.from(divs);
+     Array.isArray()判断是否数组
+     Array.of(1, 2, 3);用多个值创建数组
+   方法:
+      arr.at(index)返回索引处的元素index从0到arr.length-1
+          如console.log(` ${index}  ${arr.at(index)}`);
+      arr.join(",")用连接符拼接字成符串,某项值是 null 或者 undefined 结果空字符
+      arr.concat(value0, value1, ...) 连接数组和值返回新数组
+      arr.splice()向数组的中部插入项
+      arr.slice(start, end)切分为新数组 
+      arr.push(v0,v1,...)末尾添加 arr.pop()弹出
+      arr.shift()删除第一个元素  arr.unshift()数组的头部添加一个或多个元素  
+      arr. reverse()反转数组
+       arr.sort()按升序排列数组项
+      arr.indexOf和lastIndexOf从前往后查找
+      arr.every()每个元素通过测试函数some()至少一个通过测试函数true  如年龄是否都大于等于18岁
+      arr.filter创建新数组，元素符合条件
+      arr.map新数组每个元素都运算 foreach()循环遍历数组中的每一项  如求数组中最大值和最小值foreach
+    
+ 
+JavaScript 获取标签
+  1.根据标签名获取标签var divs = document.getElementsByTagName("div"); divs[0].innerText=
+  2.通过类名来获取标签var cls=document.getElementsByClassName("c1");for(i in cls){cls[i].style.background="red";}
+  3.通过name属性获取标签var names=getElementsByName("c1");
+  4.事件onfocus onblur要返回true才能离开 textarea.oninput最多100个字符
+  5.document.querySelector和document.querySelectorAll
+es6集合类型
+    Set无序不重复
+      构造方法Set：const set1 = new Set([1, 2, 3, 4, 5]);
+      属性.size
+      方法
+        .add(value) 如set1.add(5).add('some text');
+        .delete(value)删除has(value)包含有 clear()清空
+       迭代方法.forEach
+    WeakSet弱引用Set 只能包含对象引用不能有其他值，对象没有引用时启动GC回收垃圾
+    Map键值对  WeakMap
+
+1.写出引用类型和基本类型的区别
+2.写99乘法表
+3.atm机器: balance=1000 1.存钱 2.取现 如果balance-取现数<=0抛出异常余额不足 3.退出用while(true) switch
+4.求斐波那契数列的前30个数字
+5.对数组var ar=[1,8,3,9,12,6]实现三种排序  冒泡排序   插入排序  选择排序
+6. 用for in 求数组ar最大值和最小值
+6. 用foreach求数组ar最大值和最小值
+7.如何测试ar数组中有无大于20的数 用some，如何保证数组中所有的数都大于20 用every
+8.把ar数组全部都乘10  map
+9.实现选框移动效果用Array.from
+
+es6集合类型
+    Set不重复
+      构造方法Set：const set1 = new Set([1, 2, 3, 4, 5]);
+      属性.size
+      方法
+        .add(value) 如set1.add(5).add('some text');
+        .delete(value)删除has(value)包含有 clear()清空
+       迭代方法.forEach
+    WeakSet弱引用Set 只能包含对象引用不能有其他值，对象没有引用时启动GC回收垃圾
+    Map键值对  WeakMap
+     
+
+1.2.9自定义函数
+    声明 function 函数名(参数1,参数2[=默认值],参数3){//形参默认值为 undefined
+           [return返回值]  //没有 return 返回的是undefined
+        }
+     调用  函数名( 实参)//多个参数中间用逗号分隔 
+     形参的个数可以和实参个数不匹配，但是结果不可预计，尽量要匹配
+     arguments参数的数组for(in)
+     函数的参数和返回值:可以是js的任意类型
+
+特殊的函
+     构造函数var add = new Function("a,b","return a+b;");console.log(fn1);
+     匿名函数var add=function(a,b){} add(1,2); 
+     自动执行函数(function(a,b) {console.log(a+b);})(3,4)  !(function(a,b) {console.log(a+b);})(3,4)
+  箭头函数
+         var add=(a,b)=>{return a+b;}  
+         var fn=a=>console.log(a);没有参数()可以省略 只有1句{}可以省略
+         var fn=(a,b)=>{let c=a+b;return {a,b,z}};返回多个值
+         var fn=()=>{({a,b});}返回对象
+         var fn=()=>{let x=10;return ()=>x=x+10;};返回函数
+    函数作为参数和返回值
+        function f(callback) {const a=10;if(callback instanceof Function) callback(a);}
+        function f(){let a=10;return (x,y)=>{return a+x+y;}}
+        const f=()=>123;可以返回后面这些值'';true;['',''];{name:123};({name:123})
+
+作业:1.set最大的特点是什么  map的特点呢
+        2.输入4个学生姓名,判断有没有张三，有就删除没有就加
+        3.weakset干嘛用的
+       4.function add(a,b){ console.log(a+b);}  let z=add(1); console.log(z)问输出什么
+       5.写insertSort函数
+         function insertSort(ar){
+          if(null!==ar && ar instanceof Array){//保证ar不为空且为array的实例
+              for(let i=0; i<ar.length; i++){
+                 for(let j=0; j<i; j++)
+                    if(ar[j]>ar[i])
+                      [ar[j],ar[i]]=[ar[i],ar[j]];//交换ar[j]和ar[i]
+              }
+          }   
+       }
+      6.写add()可以加任意个数如add(1,2) add(1,2,3,4,5,6)arguments
+      7.用Function构造一个函数arrMax求数组最大值      用Math.max(...ar)方法
+/	(1)
+         let arrMax=new Function('return function arrMax(ar=[]){return Math.max(...ar);}');
+         let am=arrMax()(ar);
+        (2)
+        let arrMax=new Function('ar=[]','return Math.max(...ar)');
+        let am=arrMax(ar);
+        console.log(am);
+
+      8.下面的函数怎么调用，怎么把返回值取出来
+         (1) var fn=(a,b)=>{let c=a+b;return [a,b,c];} 
+          取：  let [a,b,c]=fn(9,19);
+           	console.log(a+","+b+","+c);//9,19,28
+
+      (2) var fn=()=>{let x=2;return ()=>x=x+10;} 
+          取： 	let fn2=fn()();
+            	console.log(fn2);//12
+
+      (3) const fn=()=>[1,2,3]; 
+          取：  let [a,b,c]=fn();
+            	console.log(a+","+b+","+c);//1,2,3
+
+      (4) const fn=()=>({a:1,b:2,c:3});
+          取：  let {a,b,c}=fn();
+           	console.log(a+","+b+","+c);
+      9.写myMap返回新数组，myFind查找第一个符合条件的元素
+       const ar=[12,23,4,56,77];
+      function myMap(ar=[],callback){
+           let newar=[];//返回新数组
+          ar.forEach((e)=>{//每个元素都执行callback
+              newar.push(callback(e)) ;
+          });
+          return newar;
+      }
+     var ar1= myMap(ar,(e)=>{return e+10});//所有元素都+10
+     es6集合类型
+     Set不重复
+       构造方法Set：const set1 = new Set([1, 2, 3, 4, 5]);
+       属性.size
+       方法
+         .add(value) 如set1.add(5).add('some text');
+         .delete(value)删除has(value)包含有 clear()清空
+        迭代方法.forEach
+     WeakSet弱引用Set 只能包含对象引用不能有其他值，对象没有引用时启动GC回收垃圾
+     Map键值对  WeakMap
+      
+ 
+ 1.2.9自定义函数
+     声明 function 函数名(参数1,参数2[=默认值],参数3){//形参默认值为 undefined
+            [return返回值]  //没有 return 返回的是undefined
+         }
+      调用  函数名( 实参)//多个参数中间用逗号分隔 
+      形参的个数可以和实参个数不匹配，但是结果不可预计，尽量要匹配
+      arguments参数的数组for(in)
+      函数的参数和返回值:可以是js的任意类型
+ 
+ 特殊的函
+      构造函数var add = new Function("a,b","return a+b;");console.log(fn1);
+      匿名函数var add=function(a,b){} add(1,2); 
+      自动执行函数(function(a,b) {console.log(a+b);})(3,4)  !(function(a,b) {console.log(a+b);})(3,4)
+   箭头函数
+          var add=(a,b)=>{return a+b;}  
+          var fn=a=>console.log(a);没有参数()可以省略 只有1句{}可以省略
+          var fn=(a,b)=>{let c=a+b;return {a,b,z}};返回多个值
+          var fn=()=>{({a,b});}返回对象
+          var fn=()=>{let x=10;return ()=>x=x+10;};返回函数
+     函数作为参数和返回值
+         function f(callback) {const a=10;if(callback instanceof Function) callback(a);}
+         function f(){let a=10;return (x,y)=>{return a+x+y;}}
+         const f=()=>123;可以返回后面这些值'';true;['',''];{name:123};({name:123})
+ 
+ 作业:1.set最大的特点是什么  map的特点呢
+         2.输入4个学生姓名,判断有没有张三，有就删除没有就加
+         3.weakset干嘛用的
+        4.function add(a,b){ console.log(a+b);}  let z=add(1); console.log(z)问输出什么
+        5.写insertSort函数
+          function insertSort(ar){
+           if(null!==ar && ar instanceof Array){//保证ar不为空且为array的实例
+               for(let i=0; i<ar.length; i++){
+                  for(let j=0; j<i; j++)
+                     if(ar[j]>ar[i])
+                       [ar[j],ar[i]]=[ar[i],ar[j]];//交换ar[j]和ar[i]
+               }
+           }   
+        }
+       6.写add()可以加任意个数如add(1,2) add(1,2,3,4,5,6)arguments
+       7.用Function构造一个函数arrMax求数组最大值      用Math.max(...ar)方法
+ /	(1)
+          let arrMax=new Function('return function arrMax(ar=[]){return Math.max(...ar);}');
+          let am=arrMax()(ar);
+         (2)
+         let arrMax=new Function('ar=[]','return Math.max(...ar)');
+         let am=arrMax(ar);
+         console.log(am);
+ 
+       8.下面的函数怎么调用，怎么把返回值取出来
+          (1) var fn=(a,b)=>{let c=a+b;return [a,b,c];} 
+           取：  let [a,b,c]=fn(9,19);
+               console.log(a+","+b+","+c);//9,19,28
+ 
+       (2) var fn=()=>{let x=2;return ()=>x=x+10;} 
+           取： 	let fn2=fn()();
+                console.log(fn2);//12
+ 
+       (3) const fn=()=>[1,2,3]; 
+           取：  let [a,b,c]=fn();
+                console.log(a+","+b+","+c);//1,2,3
+ 
+       (4) const fn=()=>({a:1,b:2,c:3});
+           取：  let {a,b,c}=fn();
+               console.log(a+","+b+","+c);
+       9.写myMap返回新数组，myFind查找第一个符合条件的元素
+        const ar=[12,23,4,56,77];
+       function myMap(ar=[],callback){
+            let newar=[];//返回新数组
+           ar.forEach((e)=>{//每个元素都执行callback
+               newar.push(callback(e)) ;
+           });
+           return newar;
+       }
+      var ar1= myMap(ar,(e)=>{return e+10});//所有元素都+10
+   
+      第二章 面向对象
+      三个特征：封装 继承 多态
+    2.1 自定义对象
+     创建对象的三种方法
+      1.var person = new Object( ); person.name="cjy"; person.say()=function(){}
+      2.用字面量var Person={name:"cjy",say:function(){}} 
+      3.用构造函数function Person(name){this.name=name;this.age=age;this.say(){}} 
+         var p=new Person("cjy",33); p.say();
+    内存分析
+    new在执行时会做四件事情：
+         在内存中创建一个新的空对象。
+         让 this 指向这个新的对象。
+         执行构造函数里面的代码，给这个新对象添加属性和方法。
+         返回这个新对象（所以构造函数里面不需要 return ）
+         每次new都占一块空间，很浪费内存，方法能不能共享呢 用原型 prototype 
+        console.dir(p1)  console.dir(Person)
+    对象的访问   
+       对象就是键值对 对象['属性名'] 对象.属性名 
+               if(对象['name']) 
+               for(in或of)遍历对象
+       属性访问:对象.属性名   对象['属性名']     delete 对象.属性名
+    
+    构造函数和原型对象
+        function Person(name,age){this.name=name;this.age=age;}
+        Person.prototype.say=function(){console.log("say...");}
+        var p=new Person("cjy",33,'shenzhen'); p.say();
+       属性constructor和prototype
+        Person.prototype = {constructor:Person,
+                eat: function () {console.log(this.name + "吃东西"); }}
+         Person.prototype.name="旺旺";
+         Person.prototype.run=()=>console.log("run...");
+         prototype原型属性是个指针，指向该类的所有实例共享的属性和方法
+        var p=new Person();原型链:p对象、p对象原型、原型的原型（Object）、Object的原型null没父亲
+    练习：1.画图分析内存    重点new一个对象到底干了什么
+             function Person(name){this.name=name;this.age=age;this.say(){}} 
+             var p1=new Person("cjy",33); p.say();var p2=new Person("cjy1",43);p2.say();
+             2.prototype干什么用的
+             3.写MyArray类 
+         /*        构造函数function MyArray(...ele)
+                    {  this.datas=[...ele];this.size=this.datas.length;}
+                 MyArray.prototype.at(index)=size>0?datas[index]:-1;
+                 MyArray.prototype.every(callback);
+                 MyArray.prototype.map(callback);
+                 MyArray.prototype.filter(callback);*/
+
+        </p>
+        <p id="xy"><input type="checkbox" disabled="disabled">我已阅读协议，一定遵守
+         <input type="submit" value="注册" disabled=""disabled></p>
+    </div>
+     
+    <script>
+   //   {
+   //    function MyArray(...arr){
+   //       this.datas=[];
+   //       this.size=this.datas.length;
+   //   }
+   //   MyArray.prototype.at=function(index){
+   //      return this.size>0?this.datas[index]:-1;
+   //   }
+   //   MyArray.prototype.push=function(ele){
+   //      this.datas[size+1]=ele;
+   //   }
+   //   MyArray.prototype.pop=function(){
+   //      return  this.datas[size--];
+   //   }
+   //   MyArray.prototype.every=function(callback){
+   //       let flag=true;
+   //      for(let i=0; i<this.size; i++)
+   //        if(callback(this.datas[i]))
+   //          flag=false;
+   //      return flag;
+   //   }
+   //   MyArray.prototype.map=function(callback){
+   //      let newArr=[];
+   //      for(let i in this.datas)
+   //         newArr.push(callback(this.datas[i]));
+   //      return newArr;
+   //   }
+   //   var jQ=(
+   //      function(){
+   //      function jQ(){
+   //        this.doms=[];
+   //      }
+   //      jQ.prototype.each=(e)=>{
+   //        console.log("...each..")
+   //      }
+   //      return new jQ();
+   //    }
+   //   )()
+   //  jQ.each();
+   //   }
+    </script>
+  </body>
+</html>

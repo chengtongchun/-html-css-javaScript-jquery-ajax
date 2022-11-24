@@ -1,0 +1,85 @@
+﻿CSS3 盒子帮助的使用
+  盒子:{外边距margin+边框border+内边距padding+内容text{color,font-,text-,list-} 背景background-}box-  阴影box-shadow
+  属性的方向：上右下左 顺时针 
+  border-radius:25px; x方向上右下左 / y方向上右下左;
+  box-shadow:10px 10px 5px #888888;
+  border-image:url(border.png) 30 30 round;
+ -webkit-border-image:url(border.png) 30 30 round;
+要记单词:border边框 margin外边距 padding内边距 background背景 shadow阴影 radius圆角 gradient渐变 overflow溢出
+postion位置 image图片 repeat重复 size尺寸 radial雷达 line线
+
+
+css3背景图片
+    background-image: url(img_flwr.gif), url(paper.gif);
+    background-position: right bottom, left top;
+    background-repeat: no-repeat, repeat;
+   背景图片大小background-size:80px 60px;
+
+CSS3渐变：
+线性渐变background-image: linear-gradient(to right, red , yellow);background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+径向渐变background-image: radial-gradient(red, yellow, green);background-image: radial-gradient(red 5%, yellow 15%, green 60%);
+
+CSS3 文本效果
+  text-shadow: 5px 5px 5px #FF0000;水平 垂直 距离 颜色
+  box-shadow: 10px 10px 5px #888888;
+  text-overflow: clip; 溢出内容 white-space: nowrap; 
+  word-wrap:break-word;长文本换行  word-break: break-all;单词拆分换行
+
+CSS3 2D 转换
+  transform: translate(50px,100px);-ms-transform: translate(50px,100px); -webkit-transform: translate(50px,100px);
+  rotate旋转transform: rotate(30deg);
+  scale缩放transform: scale(2,3);
+  skew倾斜transform: skew(30deg,20deg);
+
+CSS3 3D 转换
+  transform: rotateX(120deg);绕x轴旋转 transform: rotateY(130deg);
+CSS3 过渡从一种样式逐渐改变为另一种的效果
+  transition:width 2s;  div:hove触发{width:200px;} 宽高同时transition: width 2s, height 2s, transform 2s;
+
+CSS3 动画
+@keyframes an1{from {background: red;} to {background: yellow;}}  animation: an1 5s;
+多帧动画0% {background: red; left:0px; top:0px;} 25% {background: yellow; left:200px; top:0px;}50%75%100%
+分别设置动画属性
+     animation-name:动画名;animation-duration: 5s持续时间;animation-timing-function: linear速度函数; animation-delay: 2s延迟;
+     animation-iteration-count重复次数: infinite; animation-direction动画方向: alternate;animation-play-state运行状态: running;
+容易搞混的
+ animation动画有6个属性； transition过渡样式过度property如width/margin-left duration timing-function delay; 
+ transform变形旋转、缩放、移动或倾斜  translate只是移动translate(x,y) 2D平移
+
+CSS3 多列将文本内容多列布局
+   column-count:3;column-gap列间隙: 40px;column-rule-style边框样式: solid;column-rule-color:#ff0000;
+  简写column-rule: 1px solid lightblue;
+
+CSS3框尺寸
+   resize属性由用户去调整大小 resize:both;overflow:auto;
+   box-sizing:content-box默认wh只元素的内容border-box wh=内容+内边距+边框
+   outline-offset对轮廓偏移 border:2px solid black; outline:2px solid red; outline-offset:15px;
+
+CSS3 多媒体查询
+viewport(视窗) 的宽度与高度   设备的宽度与高度vh vw    朝向 (智能手机横屏，竖屏)  分辨率
+ all有多媒体  print打印机  screen电脑屏幕/平板/智能手机等  speech屏幕阅读器
+@media screen and (max-width: 480px) { body { background-color: lightgreen; }}
+@media screen and (max-width: 699px) and (min-width: 520px){
+     ul li a {
+        padding-left: 30px;
+        background: url(email-icon.png) left center no-repeat;
+    }}
+
+css flex布局弹性布局
+   display: flex;  inline-flex;  flex:1比重
+   flex-direction:项目的起点方向  row从左到右;  row-reverse从右到左;column从上到下;column-reverse;
+   flex-wrap轴线上排不下时换行方式 nowrap默认不换行  wrap换行第一行在上方  wrap-reverse第一行在下方 
+   简写flex-flow:<flex-direction> <flex-wrap>;
+    justify-content元素间对齐方式: flex-start左对齐 flex-end右对齐 space-between两端对齐 space-around两侧的间隔相等
+   align-items在交叉轴上如何对齐flex-start   flex-end终点对齐  center居中  base第一行文字
+   align-content多根轴线的对齐方式flex-start flex-end  center space-between  space-around stretch默认值，轴线占满整个交叉轴
+   order;flex-grow:放大比例默认为0如1,2,3  flex-shrink缩小比例
+
+CSS 网格布局
+  display为 grid 或 inline-grid定义网格  用grid-template-columns 和 grid-template-rows行和列
+  display: grid; grid-template-columns: auto auto auto auto;4列   用1fr表示1份
+  间隙grid-column-gap,grid-row-gap,grid-gap:10px;
+  跨列 .item1 {grid-column-start:1;grid-column-end: 3;}  简写grid-column:1 / 3;
+  跨行grid-row-start: 1; grid-row-end: 3;  简写grid-row: 1 / 3;
+        grid-area: 1开始行 / 2开始列 / 5 结束行/ 6结束列;
+  justify-content: center;水平调整，网格宽度小于容器宽度才起作用  align-content: center;垂直对齐

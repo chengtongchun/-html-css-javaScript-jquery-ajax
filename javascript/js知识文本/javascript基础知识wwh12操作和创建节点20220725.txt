@@ -1,0 +1,31 @@
+﻿操作节点Node
+      节点和节点关系 看dom结构document.body.childNodes
+          父(parent)、子(child) 和同胞(sibling)
+    parentNode父节点childNodes 子节点集合（包括text空格）  children所有子元素集合（不包括text空格）
+firstChild 首个子节点lastChild最后一个子节点nextSibling 下一个节点（包括text空格）  previousSibling 上一个节点
+   为了消除因空行、换行等无法准确访问到节点的情况 有出了一套
+     firstElementChild第一个子节点  lastElementChild最后一个子节点
+  nextElementSibling 下一个节点（不包括text空格）  previousElementSibling上一个节点（不包含text空格 注释）
+      ("li").nextSibling.nextSibling===("li").nextElementSibling
+节点信息
+    nodeName节点名称  
+       nodeValue节点值
+       nodeType节点类型：文档9   元素节点1   文本3    注释8  属性2   文档片段11DocumentFragment
+创建和插入节点
+     document.createElement(tagName)建新元
+      createTextNode建文本元素
+      ul.appendChild(li);把li加至ul末尾  ul.insertBefore(li,ul.children[0]);
+  父.removeChild(node) 删除节点
+         ul.removeChild(ul.children[0]);
+     父.replaceChild(newNode,oldNode) 替换节点
+        cloneNode(true);克隆节点 deep=true深拷贝 复制标签及内容 否则只复制标签
+     document.createDocumentFragment();
+      三种创建元素方式document.write(html) innerHTML要拼接html字符串  createElement
+      拼接性能不好用`${变量}`好点     最好用数组
+      动态生成表单
+作业
+  1.childNodes和children的区别
+  2.nextSibling和nextElementSibling的区别
+  3.创建元素的三种方式
+  4.留言板
+  5.完成动态生成表单

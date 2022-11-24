@@ -1,0 +1,39 @@
+操作DOM对象
+   DOM是文档对象模型，DOM规范允许访问和操作HTML页面中的每个单独元素
+   用JavaScript操作DOM时分为三个方面: DOM Core (核心). HTML-DOM 和CSS-OM
+  输入地址后:www.baidui.com-->用http从服务端下载index.html文件  
+                  构建dom树->构建cssom树->合并dom和cssom(发生DOMContentLoaded事件)
+                   ->加载图片图片视频资源-->渲染并显示(发生onload事件）
+     http协议：超文本传输协议
+   Core：getElementById、getElementsByTagName getElementsByClassName
+   HTML:document.body只含body、document.documentElement所有的网页、document.forms
+   CSS:   querySelector、querySelectorAll
+获取元素   
+   getElementById根据id获取元素 
+   getElementsByTagName根据标签获取元素
+   getElementsByClassName根据类获取元素 
+      var ul = document.getElementById('ul');console.log(ul.getElementsByTagName('li'));
+      var box1=document.getElementsByClassName('box1');
+     根据css的元素选择器获取元素 .class #id 
+      var box1 = document.querySelector('.box1'); 
+      boxs=document.querySelectorAll('.box');
+给元素加事件
+    事件三要素:事件源  事件类型  事件处理程序
+    执行事件步骤1. 获取事件源querySelector 2.绑定注册事件onClick  3.添加事件处理函数
+修改节点内容
+          innerText innerHTML textContent改变节点内容    
+修改元素属性
+      img.src  img的title alt的区别 
+      input的type和value    button的disabled="disabled"
+     例子: 隐藏显示密码  
+   必须阅读5秒后下一步setTimerout setTimerInterval
+   button显示还剩3秒
+练习
+ 1.访问www.qq.com时发生了什么
+ 2.document.body和document.documentElement的区别
+ 3.querySelector和querySelectorAll的区别
+ 4.img的title和alt的区别 
+ 5.<ul><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ul>把第三个li的底色变为pink
+ 6. 阅读协议，10秒后才能进入下一步
+ 7. 找4张图片，点每张切换到下一张
+ 8.打地鼠游戏--不计分

@@ -1,0 +1,268 @@
+1.课程简介
+C/S和B/S
+根据W3C标准，一个网页主要由三部分组成：结构hmtl、表现css还有行为js
+网页简史
+HTML简介
+超文本标记语言 (Hyper Text Markup Language)不是编程语言是用一套标记标签来描述网页
+HTML	 1991        HTML+	1993      HTML 2.0	1995   HTML 3.2	1997
+HTML 4.01 1999   XHTML 1.0	2000       HTML5	2012    XHTML5	2013
+2.编写你的第一个网页 
+记事本写诗<html head-title body
+安装notepad++
+3.自结束标签和注释
+<img><img/>注释不能嵌套<!-- -->
+大小写不敏感,标签不能嵌套 必须配对 
+4.文档声明
+进制字符编码解码字符集,文档的使用<!doctype html>
+<meta charset="utf-8">元数据帮助浏览器或搜索引擎解析网页的
+<meta name="keywords" content=""><meta name="description" content>
+<meta http-equiv="refresh" content="3;url=http:www.baidu.com" />
+VSCode的安装，file首选项设置字体，安装中文插件，建立 网页
+配置liveServer，设置file自动保存,右键open with
+5.字符实体:特殊的字符html没法显示如空格大于小于号
+今天       老师很帅<b>
+空格&nbsp; 小于号&lt;大于号&gt;和号&amp;引号&quot;版权@copy;注册商标&reg;
+6.基本标签
+<html lang="zh-cn"><head><body>
+p段落 不要忘了关闭 <br>换行符<br/>所有的元素都必须关闭  <hr>水平线
+标题标签是 h1 到 h6 重要程度一般用h1-h3 属性align=left/center/right   hgroup给h分组
+文字: b,em语调加重,strong强调, 习大大说<blockquote>长引用撸起袖子加油干<q>短引用子曰
+7.标签中的属性
+属性:附加信息,以名称/值对的形式,对大小写敏感,为属性值加引号
+<body bgcolor='red'> <table border="1">
+8.文本格式化
+<b>粗体<big>大号字<em> 着重<i> 斜体字<small> 小号字<strong> 加重语气<sub>下标<sup> 上标<ins> 插入<del> 删除
+删除插入效果:<p>一打有 <del>二十</del> <ins>十二</ins> 件</p>
+<pre> 保留格式文本 h5 <code>
+<abbr>缩写<acronym>首字母缩写<address>地址<blockquote>长引用<q>短引用语
+9.超链接
+ <a>锚的意思，定义超链接，用于从一个页面连接到另一个页面
+target属性在何处显示target="_self/_blank"  必须有href   本地文件路径:相对路径 ./  ../
+命名锚<a name="buttom"><a id="buttom" href="#">到顶部<a href="#buttom">到底部
+href="javascript:;"什么都不做, href="mailto:cjyddn@qq.com"
+a可以嵌套a外所有
+10.列表支持有序ol、无序ul和定义列表， li为列表项 
+有序ol的属性  用css控制
+定义列表:用dl定义，dt内容，dd描述
+嵌套列表
+
+11.图片标签在文档中显示图像
+<img src来源="本地/网路" alt图像加载不了显示替换文本  width height>
+图片的格式:
+gif颜色少 透明 动图 
+jpeg(jpg)颜色多 不透明 不动
+png透明 颜色多 不动 
+webp谷歌所有优点还小,但兼容性差
+
+12.table标签创建表格<table border="0" cellpadding="0"><tr>行<th>表头<td>列
+跨行rowspan，跨列colspan
+
+13.内联框架iframe 用于在网页内显示网页
+<iframe src="1.html" frameborder="0"></iframe>
+
+14.<div><span>
+大多数 HTML 元素被定义为块级元素或内联元素
+块级元素在浏览器显示时会以新行来开始（和结束）如<h1>, <p>, <ul>, <table>
+内联元素在显示时通常不会以新行开始如<b>, <td>, <a>, <img>
+<div> 没特定含义，属于块级元素。
+如果与 CSS 一同使用，<div> 元素可用于对大的内容块设置样式属性
+
+15.新语义元素：清楚地向浏览器和开发者描述其意义。w3c 
+<header><nav><section><article><aside><footer>
+<section>定义文档中的节，将网站首页划分为简介、内容、联系信息等节
+<section>
+   <h1>WWF</h1>
+   <p>The World Wide Fund for Nature (WWF) is....</p>
+</section>
+<article> 规定独立的自包含内容如论坛、博客、新闻<h1><p>
+<header> 为文档或节规定页眉,可以有多个 <header> 元素
+<article>
+   <header>
+     <h1>What Does WWF Do?</h1>
+     <p>WWF's mission:</p>
+   </header>
+   <p>WWF's mission is to stop the degradation of our planet's natural environment,
+  and build a future in which humans live in harmony with nature.</p>
+</article> 
+<footer> 元素为文档或节规定页脚,通常包含文档的作者、版权信息、使用条款链接、联系信息等。
+可以使用多个 <footer> 元素
+<nav> 元素定义导航链接集合<nav>ul>li>a;nav>a
+<aside> 元素定义主内容之外的某些内容比如侧栏、作者介绍、相关文章h4>p
+<figure> 和 <figcaption>与图片搭配的标题很常见
+
+16.多媒体：音视频播放
+<audio> 标签定义声音<video>定义视频
+属性autoplay,controls,loop  
+<audio controls="controls">
+  <source src="/i/song.ogg" type="audio/ogg">
+  <source src="/i/song.mp3" type="audio/mpeg">
+你的浏览器不支持音频
+</audio>
+<embed src= type="audio/mp3" width height>
+
+17.HTML 表单
+用于搜集不同类型的用户输入
+<form action="" target="_blank/_self默认" method="get/post" autocomplete="on"> get数据在URL可见,长度限制2048个字符
+  <label for="fname">姓名:</label><br>可以不写
+  <input type="text" id="fname" name="fname" value="cjy"><br>
+  <input type="submit" value="Submit">
+</form>
+输入类型
+password密码,submit提交reset重置radio单选按钮checkbox多选button按钮onClick
+属性name,value初始值readonly只读disabled不可见size大小checked选中
+file类型表单要加enctype="multipart/form-data"
+select选项框option选项multiple多选  textarea多行文本要定义cols rows
+
+html5新增的类型
+<input type="color" placeholder="请选择颜色" name="color"/>
+color选颜色,date日期,datetime日期时间,datetime-local本地日期时间
+email输入email 
+month输入月份；number输入数字；range输入范围条；
+search搜索条；tel电话；url网址；week星期
+属性name存数据min最小max最大placeholder占位提示
+
+CSS简介 w3c
+级联样式表，用 CSS 同时控制多重网页的样式和布局
+CSS编写的位置:行内style="color,font-size" 
+文件内<style>p{}  
+独立文件1.css<link rel="stylesheet" href="./1.css">head中<import>
+
+1.CSS的基本语法
+selector {property: value;} 如p{color:red;}
+CSS 对大小写不敏感    
+注释/*  */ 
+2.CSS选择器用于查找要设置样式的 HTML 元素。
+CSS 选择器分为五类：
+简单选择器：根据名称、id、类来选取元素
+组合器选择器：根据它们之间的特定关系来选取元素
+伪类选择器：根据特定状态选取元素
+伪元素选择器：选取元素的一部分并设置其样式
+属性选择器：根据属性或属性值来选取元素
+简单选择器
+     名称：h1 p{text-align: center;color:green;}
+     id选择器<p id="red"> #red{} id不能数字开头
+    类选择器<div class="red"> .red{ font-size:14px; } 元素可引用多个类class="red center"类名不能以数字开头
+    通用选择器*{} *可省略
+    分组选择器div,p{}
+组合器选择器
+   后代选择器 div p {}所有后代
+   子选择器 (>)div p{}只有子元素
+   相邻兄弟选择器 (+)div + p {}
+   通用兄弟选择器 (~)div ~ p {
+伪类选择器:不存在的类 将ul中li改变颜色
+    ul>li:first-child{}last,nth-child(n或even或odd) :first-of-type选同类型重新排,ul>li:not(:nth-of-type(3)){}
+    同层的所有span元素span:nth-of-type(even){ color: red; }
+   a:link没访问  :visited 访问过的 :hover鼠标悬停 active点击 注意顺序
+   div上悬停显示p div:hover p {display: block;}
+伪元素选择符
+   p::first-letter第一个字母{f-size}first-line,selection选中
+   div::before,after{content:'before';color:red}h1::before {content: url(1.gif);}
+属性选择符
+p[title]{},p[t="abc"]等于,^=abc开头有,$=ef结尾,*=d包含有;<p title="abcdefg"多个
+选择器的权重
+样式冲突用不同的选择选中系统的元素时，冲突时间按选择器的权重排
+内联1000> id 0100 >类和伪类0010 >元素0001> 通配0000 color:green!important;提高权重
+
+3.颜色用在背景色文本颜色边框颜色
+RGB值: red预定义的颜色名称lightblue;
+rgb(255,0,0); rgba(1不透明.5半) rgb(100%,0%,0%);#ff0000->#f00;
+HSL值 色相0-360 饱和度0-100%亮度0-100% hsl，hsla
+
+长度单位
+像素px
+百分比:相对父元素,随父变
+em相对字体大小来计算 1em=1font-size 浏览器默认字体为 16px=1em计算方法px/16=em 
+rem相对根元素字体大小计算html{f-s:30px}
+
+4.美化页面元素
+4.1.字体
+  font-family:Verdana,"楷体"；推荐"Microsoft YaHei";
+  font-style:italic斜体 font-weight:bold粗体  变体font-variant: small-caps小型大写字母   都可以设normal为正常
+  font-size大小 W3C建议用 em  
+  缩写font:italic bold 12px "楷体";
+  图标字体简介font-awesome<link rel="stylesheet" href="css/font-awesome.min.css">阿里巴巴iconfonts
+
+4.2.文本颜色和背景色color和background-color属性
+4.3.文本对齐text-align:left,right,center,justify两端对齐；  垂直对齐vertical-align：top middle bottom;
+   text-decoration设置或删除文本装饰 a{text-decoration:none}没有下划线；其他值:overline上;line-through传过;underline下面;
+   text-indent:50px首行缩进    line-height:1.8行间距   word-spacing:10px单词间距  letter-spacing:-3px字符间距
+   文本阴影text-shadow：颜色  x轴位移 y轴位移 模糊半径如red 2px 2px 5px;
+4.4.列表样式list-style-type、list-style-image、list-style-position和list-style四个属性来设置列表样式
+4.5.背景  为任何 HTML 元素设置
+ background-color:div { background-color: lightblue; opacity: 0.3;}
+ 背景图片background-image:url("bg.png") 图片重复方向background-repeat:repeat-x/repeat-y/no-repeat
+ background-position:right top重复顺序
+ background-attachment滚动还是固定的fixed/scroll;
+ 简写属性background: #ffffff url("bg.png") no-repeat right top;
+
+5.文档流
+    网页是个多层结构，一层叠一层 通过css分别为每层设置样式，用户只能看到最顶上一层，最底下一层为文档流默认创建的元素都是在文档流中进行排版
+元素在文档流中有2类：块元素 独占1行从上到下垂直排,默认宽父元素来撑,高被子撑开 div；
+行内元素只占自身大小从左到右水平排列 span
+
+6.盒子模型
+box model盒模型 盒子模型框模型 css将页面所有元素构成一个矩形盒子
+div { width: 300px; border: 15px solid green;  padding: 50px;  margin: 20px;}
+计算元素大小=内边距+边框+外边距+宽高。300+2*15+2*50+2*20
+
+7.边框
+border-width:四三{上 左右 下}二一值,border-xxx-width:top right bottom left
+border-color同width一样 
+border-style:solid/dotted/dashed虚线/double双线/groove槽线/ ridge脊线/inset凹边/outset凸边/none默认没有边框
+简写border: 15px solid green;
+
+8.内边距和外边距
+简写padding，margin
+分别 padding:10px 20px 30px 40px;-top right bottom left
+margin:0 auto居中,margin-top;可以写负数
+子内容超出 overflow: visible/hidden/scroll/auto;
+
+9.外边距的折叠：垂直方向相邻的外边距会发生重叠现象，大多发生在兄弟元素和父子元素之间
+兄弟元素margin-buttom=50,top=50  解决btm=-50px;
+子元素的外边距margin-top会传递给父元素   解决父 padding-top:1px或加border-top:1px red solid;子元素开启BFC:float:left;
+行内元素的盒模型 不允许设置w和h,padding/border/margin只对水平方向
+
+10.display是否/如何显示元素,多数元素默认display 值为 block 或 inline
+ inline  li { display: inline;}把块改为行内显示
+ block a改为块显示  inline-block行内块元素可设置wh但不占1行；none不显示 删除
+ visibility:visible显示:hidden不显示但还在
+浏览器的默认样式 
+   浏览器会默认启动一些样式 body,p,ul{mg:0}ul{pd:0;list-style:none} pc端要清理这些样式reset.css normalize.css对默认样式统一化
+
+
+11.盒子尺寸、轮廓、阴影和圆角
+  box-size设置盒子尺寸的计算方式:content-box默认wh只是内容;border-box用wh包括border和padding
+  outline轮廓线10px red solid; 
+  box-shadow阴影: 水平位置 垂直位置 模糊距离 尺寸 颜色；box-shadow:2px 2px 3px #aaaaaa;
+  border-radius圆角,border-bottom-xxx-radius用px或% 2em;
+
+12.浮动:使元素脱离原来的文档流，不再占据文档流中的位置，允许文本和内联元素环绕它。
+float三个值: left;right;none缺省; 
+css布局三种机制：标准流 浮动 定位
+标准流：块级元素会独占一行，从上向下排列；行内元素按照顺序从左到右顺序排列，碰到父元素边缘自动换行
+为什么需要浮动：标准流满足不了需要如行内块中间会有缝隙
+浮动特点：
+1.  脱离标准流，不占位置
+2.  浮动的元素一排显示，装不下了默认另起一行显示，浮动元素间默认无缝隙；
+3.  任何元素都可以浮动   浮动的元素压不住父亲的边框和padding
+4. 浮动元素不会超过上边的浮动的兄弟元素，最多就是和它一样高 
+5. 如果浮动元素的上边 是一个没有浮动的块元素，则浮动元素无法上移
+
+高度塌陷和BFC
+父高度默认被子元素撑开，当子浮动后会脱离文档流，父的高度丢失，后面元素会自动上移，导致页面的布局混乱 必须要处理
+BFC:Block Formatting Context块级格式化环境,变成一个独立区域
+元素开启BFC后的特点：● 不会被浮动元素覆盖● 父子元素外边距不会重叠● 可以包含浮动的元素
+3种方法:1.自己float 2.display: inline-block; 3.overflow:hidden设置值 开启BFC 除了visible;
+clear清除前面盒子浮动后给后面盒子的影响 left right both; 
+使用after伪类解决高度塌陷   父::after{content:'';clear:both;display:block;撑起高度}
+
+13.定位 position有五个不同的位置值static，relative，fixed，absolute，sticky
+元素用 top、bottom、left 和 right 属性定位的 正负数
+static始终根据页面的正常流进行定位
+position: relative相对定位，相对于其正常位置进行定位 
+position:fixed相对视口定位，即使滚动页面始终位于同一位置 
+position:absolute相对最近的定位祖先((用relative定位)进行定位 父relative子absolute
+position: sticky根据用户的滚动位置进行定位top:0
+在对元素进行定位时，有可能与其他元素重叠用z-index 属性指定元素的堆栈顺序
+可以设置正或负的堆叠顺序
+

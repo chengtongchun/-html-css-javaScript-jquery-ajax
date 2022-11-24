@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      body{
+         background-image: url(img/胡言乱语/胡言乱语1.jpg);
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-size: cover;
+         background-position: center center;
+         background-color: burlywood;
+         color:white;
+            font-size: 18px;
+            text-shadow: 0px 0px 10px green;
+
+      }
+      p{
+         white-space: pre-wrap;
+      }
+      #fiveButton{
+         width:70px;
+         height:40px;border-radius: 10px;
+      }
+      *{
+         margin:0;padding: 0;
+      }
+      /* 第六题 */
+      ul{
+         list-style: none;
+      }
+      #sixDiv{
+				border: 1px solid black;
+				width: 606px;
+				border-radius: 20px 20px 0 0 ;
+            background-color: white;
+      }
+      #titleUl>li{
+         width:200px;
+         height:50px;
+         cursor:pointer;/*鼠标变小手; */
+         background-color:#ccc ;
+         float:left;
+         border: 1px solid black;
+         text-align: center;
+         line-height:50px;
+         font-size: 28px;
+      }
+      #titleUl{
+         border-radius: 20px 20px 0 0 ;
+         overflow: hidden;
+      }
+      /* #titleUl>li:hover{
+         background-color: red;
+      } */
+      #titleUl> .show{
+         background-color: red;
+      }
+      
+      #contentUl>li{
+      
+         display: none;
+         height: 300px;
+         text-align: center;
+         line-height: 300px;
+         font-size: 50px;
+         border: #000000 1px solid;
+      }
+      
+      #contentUl>.show{
+         display: block;
+      } 
+		/* 轮播图 */
+      /* 总框 */
+      .outer{
+         margin:10px auto;
+         border:1px solid black;
+         width: 500px;
+         height:331px;
+         position: relative;
+         overflow: hidden;
+      }
+      /* 左右图标 */
+      #left_ico,#right_ico {
+         cursor: pointer;
+         width: 50px;height:50px;
+         background-color: rgba(0,0,0,0.2);
+				color: rgba(255,255,255,0.3);
+         font-size: 28px;
+         border-radius: 50%;
+         display: flex;justify-content: center;align-items: center;
+         z-index: 999;
+      }
+      /* 左图 */
+      #left_ico{
+         position:absolute;
+         left:0;top:45%;
+      }
+      /* 右图 */
+      #right_ico{
+         position:absolute;
+         right:0;top:45%;
+      }
+      /* 底部图标 */
+      #buttom_ico{
+         position:absolute;
+         bottom: 0;left:40%;
+         margin:20px;
+         z-index: 999;
+
+      }
+      #buttom_ico>li{
+         width:10px;height:10px;
+         border-radius: 50%;
+         cursor: pointer;
+         background-color: rgba(255,255,255,0.5);
+         margin: 5px;
+         float:left;
+      }
+      #buttom_ico> .show{
+         background-color:white;
+      }
+      /* 图片 */
+      #img{
+         width:2500px;display: flex;
+         transition: all 0.5s ease-in-out;
+      }
+      #img>li{
+         width:500px;float:left;
+         /* display: none; */
+         /* position: absolute; */
+      }
+      #img>li>img{width: 100%;}
+      /* #img> .show{
+         display: block;
+      } */
+      /* 轮播图上 */
+   </style>
+</head>
+<body>
+   <P>练习</P>
+   <P>1.查帮助 完成下列任务   
+      Person类有name属性say方法 Animal类有eat方法
+      <!-- function Person(name){} -->
+      <span id="one_one"></span>
+      用Object.assign合并Person和Animal类
+      <span id="one_two"></span>
+      用Object.create类实现Dog继承Animal类
+      <span id="one_there"></span>
+      用Object.defineProperty给Dog加属性color可写不能配置不能枚举
+      <span id="one_four"></span>
+      用Object.assign给Dog加方法run,fly
+         <!-- Object.assign(Dog.prototype,{
+            run(){},
+            fly(){}
+         }) -->
+      <span id="one_five"></span>
+   </P>
+   <P>2.判断对象的两种方法、如何判断obj是否数字， 如何保证str不是undefined和null
+   </P>
+   <p>   判断对象的两种方法：（1）=== （2）typeof
+      判断是否是数字：isNaN()
+      保证str不是undefined和null：!===
+   </p>
+   <P>3. 输出当前日期Date.now()是xx年xx月xx日  xx时xx分xx秒</P>
+   <p id="there"></p>
+   <P>4. 写dayDiff函数计算两个日期之间的天数差</P>
+   <p id="four"></p>
+   <P>5. 用eval实现计算器let exp=prompt("请输入计算公式:"); alert(eval(exp));</P>
+   <button id="fiveButton" onclick="five()">点击计算</button><span id="five"></span>
+   <P>6.选项卡  读代码并用[].forEach改造</P>
+   <div id="sixDiv">
+      <ul id="titleUl">
+         <li>标题1</li>
+         <li class="show">标题2</li>
+         <li>标题3</li>
+      </ul>
+      <ul id="contentUl">
+         <li>内容1</li>
+         <li class="show">内容2</li>
+         <li>内容3</li>
+      </ul>
+   </div>
+   <P>7.轮播图</P>
+   <div class="outer">
+      <div id="left_ico"><</div>
+      <div id="right_ico">></div>
+      <ul id="buttom_ico">
+         <li class="show"></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+      </ul>
+      <ul id="img">
+         <li class="show"><img src="images/01.jpg"</li>
+         <li><img src="images/02.jpg"</li>
+         <li><img src="images/03.jpg"</li>
+         <li><img src="images/04.jpg"</li>
+         <li><img src="images/05.jpg"</li>
+      </ul>
+   </div>
+   <script>
+      window.onload=function(){
+         let index=0;
+         let imgs=document.getElementById("img");//图片ul
+         let imgArray=imgs.getElementsByTagName("li");//获取图片li的次数
+         let indexCount=imgArray.length;//图片数量
+         // 底部图标
+         let buttom_ico=document.getElementById("buttom_ico");
+         let buttom_li=buttom_ico.getElementsByTagName("li");
+         for(var i=0;i<buttom_li.length;i++){
+            buttom_li[i].onclick=function(){
+               for(var j=0;j<buttom_li.length;j++){
+                  if(buttom_li[j] == this){
+                     this.className="show";
+                     index=j;
+                     moveImg();
+                  }else{
+                     buttom_li[j].className="";
+                  }
+               }
+            }
+         }
+         // 定义计时器的ID
+			var timer = null;
+         //当鼠标悬停在图片上
+         imgs.onmouseenter=function(){
+            clearInterval(timer);//清除定时器
+         }
+         //当鼠标移出图片的时候，开始轮播
+			imgs.onmouseleave = function() {
+            timer=setInterval(moveImg2,2000);
+			}
+         timer=setInterval(moveImg2,2000);
+         let v=0;
+         function moveImg2(){
+           index++;
+            moveImg();
+         }
+         // 轮播·图片的·方法
+         function moveImg(){
+            //当图片播放到最后一张的时候需要给图片播放的位置进行重置
+            if(index % indexCount ==0){
+               index=0;
+            }
+           
+            let imgWidth=500;
+            // 计算容器需要移动的量
+				var leftMove = index * imgWidth;
+				//给容器进行移动 left=left
+				imgs.style.transform = "translate("+(-leftMove)+"px,0)";
+            for(var i=0;i<imgArray.length;i++){
+               if(index == i){
+                  imgArray[i].className="show";
+                  //底层图片分页
+                  // for(let j=0;j<buttom_li.length;j++){//这个·也可以
+                  //    if(index ==j){
+                  //       buttom_li[j].className="show";
+                  //    }else{
+                  //       buttom_li[j].className="";
+                  //    }
+                  // }
+                  let aaa=Array.from(buttom_li);
+                  aaa.forEach(function(item,indexs){
+                     if(indexs == index) {
+                        aaa[indexs].classList.add("show")
+                     } else {
+                        aaa[indexs].classList.remove("show")
+                     }
+                  })
+               }else{
+                  imgArray[i].className="";
+               }
+            }
+
+         }
+         let img_ico=Array.from(imgArray);//图片的li集合，转成数租
+         // 左图标
+         let left_ico=document.getElementById("left_ico");//左图标
+         left_ico.onclick=function(){
+            clearInterval(timer);//清除定时器
+            if(index == 0){
+               index=0;
+            }else{
+               index--;
+            }
+            moveImg();
+         }
+         // //右图标
+         let right_ico=document.getElementById("right_ico");//右图标
+         right_ico.onclick=function(){
+            clearInterval(timer);//清除定时器
+            if(index == indexCount){
+               index=0;
+            }else{
+               index++;
+            }
+            moveImg();
+         }
+         
+      }
+   </script>
+   <script>
+      //第一题
+      {
+         //第一问
+         function Person(name){
+            this.name=name;
+            this.say=function(){
+               console.log(this.name);
+            }
+         }
+         function Animal(){
+            this.eat=function(){
+               console.log("吃了"+this.name);
+            }
+         }
+         //第二问
+        let per=new Person("小猪");
+        let an=new Animal();
+        let PA=Object.assign(per,an);//对象实例，对象实例
+         
+         //第三问 
+         function Dog(){
+            Animal.call(this);
+         }
+         Dog.prototype=Object.create(Animal.prototype);
+         Dog.prototype.constructor=Dog;
+         let dog=new Dog();
+         let newdog=Object.assign(dog);
+         // newdog.eat();  //吃了undefined 
+         // 第四问   Object.defineProperty
+         let dog1=new Dog();
+         Object.defineProperty(dog1,'color',{//Object.defineProperty(Dog.prototype,'color',{
+            value:"red",
+            writable:true,//可写
+            configrable:false,//不可配置
+            enumerable:false//不能枚举
+         });    
+          
+         
+      //   //第五问
+      //    Object.assign(Dog.prototype,{
+      //       run(){console.log("跑得没影了")},
+      //       fly(){console.log("飞得更高")}
+      //    })
+            Object.assign(dog1,{
+               run(){console.log("跑得没影了")},
+               fly(){console.log("飞得更高")}
+            })
+         //
+         let one_one=document.getElementById("one_one");
+         let one_two=document.getElementById("one_two");
+         let one_there=document.getElementById("one_there");
+         let one_four=document.getElementById("one_four");
+         let one_five=document.getElementById("one_five");
+         one_one.innerHTML=" function Person(name){   <br>\
+            this.name=name;<br>\
+            this.say=function(){<br>\
+               console.log(this.name);<br>\
+            }<br>\
+         }<br>\
+         function Animal(){<br>\
+            this.eat=function(){<br>\
+               console.log('吃了'+this.name);<br>\
+            }<br>\
+         }";
+         one_two.innerHTML="let per=new Person('小猪'); <br>\
+        let an=new Animal(); <br>\
+        let PA=Object.assign(per,an);//对象实例，对象实例 <br>\
+        console.log(PA); <br>\
+        PA.eat();//吃了小猪 <br>\
+        PA.say();//小猪";
+         one_there.innerHTML="function Dog(){ <br>\
+            Animal.call(this); <br>\
+         } <br>\
+         Dog.prototype=Object.create(Animal.prototype); <br>\
+         Dog.prototype.constructor=Dog; <br>\
+         let dog=new Dog(); <br>\
+         let newdog=Object.assign(dog); <br>\
+         newdog.eat();  //吃了undefined";
+         one_four.innerHTML=" let dog1=new Dog(); <br>\
+         Object.defineProperty(dog1,'color',{//Object.defineProperty(Dog.prototype,'color',{ <br>\
+            value:’red', <br>\
+            writable:true,//可写 <br>\
+            configrable:false,//不可配置 <br>\
+            enumerable:false//不能枚举 <br>\
+         });    ";
+         one_five.innerHTML="Object.assign(dog1,{ <br>\
+               run(){console.log('跑得没影了')}, <br>\
+               fly(){console.log('飞得更高')} <br>\
+            })";
+      }
+      //第三题
+      function dates(){
+         let there=document.getElementById("there");
+         let date=new Date();
+         let [hours,min,sec]=[date.getHours(),date.getMinutes(),date.getSeconds()];
+         if(Number(hours)<10){
+            hours=0+hours;
+         }
+         if(Number(min)<10){
+            min=0+min;
+         }
+         if(Number(sec)<10){
+            sec=0+sec;
+         }
+         let day=date.getDay();//星期几
+         switch(day){
+            case 1:
+               day="一";
+               break;
+            case 2:
+               day="二";
+               break;
+            case 3:
+               day="三";
+               break;
+            case 4:
+               day="四";
+               break;
+            case 5:
+               day="五";
+               break;
+            case 6:
+               day="六";
+               break;
+            default:
+               day="天"   
+               break;
+         }
+         there.innerHTML='现在时间是'+(date.getFullYear())+'年'+(date.getMonth()+1)+'月'+(date.getDate())+'日\t'+hours+'时'+min+'分'+sec+'秒'+"\t星期"+day;
+      }
+      setInterval(dates,1000);
+      //第四题
+      {
+         let dayDiff=(d1,d2)=>Math.floor((d1-d2)/(1000*3600*24));
+         // console.log(dayDiff(new Date(),new Date('2022/07/17')))
+         
+         let four=document.getElementById("four");
+         four.innerHTML="  let dayDiff=(d1,d2)=>Math.floor((d1-d2)/(1000*3600*24)); <br>\
+         console.log(dayDiff(new Date(),new Date('2022/07/17'))) <br>\
+         <br>  今天与2022年7月17日相差"+(dayDiff(new Date(),new Date('2022/07/17')))+"天";
+         
+      }
+      //第五题
+      function five(){
+        let five=document.getElementById("five");
+        let exp=prompt("请输入计算公式：");
+        alert(eval(exp));
+        five.innerHTML=exp+" = "+(eval(exp));
+      }
+      //第六题
+      let title=document.getElementById("titleUl");//标题ul
+      let titleLi=title.getElementsByTagName("li");//标题li1
+      let content=document.getElementById("contentUl");//内容ul
+      let contentLi=content.getElementsByTagName("li");//内容li
+      let tLiArray=Array.from(titleLi);//集合转为数租
+      [].forEach.call(tLiArray,(item)=>{
+         item.onclick=function(){
+            for(var i=0;i<tLiArray.length;i++){
+               if(this == tLiArray[i]){
+                  this.className="show";
+                  contentLi[i].className="show";
+               }else{
+                  tLiArray[i].className="";
+                  contentLi[i].className="";
+               }
+            }
+         }
+      })
+      //第七题
+   </script> 
+</body>
+</html>

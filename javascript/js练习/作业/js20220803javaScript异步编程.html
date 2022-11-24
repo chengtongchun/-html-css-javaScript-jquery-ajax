@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url(./img/奇奇怪怪/3.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            background-color:cadetblue;
+        }
+        /* 伴随着天空的雷鸣， */
+        .title{
+            white-space: pre-wrap;
+            /* color:white; */
+            /* text-shadow: 0 0 10px black; */
+        }
+    </style>
+</head>
+<body>
+    <p class="title">练习: </p> 
+    <p class="title"> 1.同步和异步的区别
+        同步：要等待 耗费资源 严格按顺序执行
+        异步：快不费资源 但没法控制执行顺序</p>
+    <p class="title">2下列输出什么
+        Promise.resolve(1).then(2).then(console.log);//输出1
+        Promise.reject(1).then(2, 2).then(console.log, console.log);//输出1
+        Promise.reject(1).then(2).then(console.log);//报错：Uncaught (in promise) 1
+</p>
+    <p class="title">3.Promise.all,Promise.any,Promise.race的区别
+        all全部成功resolve最终返回成功，有一个失败则返回失败，按任务顺序执行
+        any只要有一个成功返回成功，只要所以失败才会返回失败的状态
+        race，赛跑，最先执行的状态返回回来，无论失败还是成功</p>
+    <p class="title"> 4.小鸡炖蘑菇：准备材料200--炒鸡500--炖鸡500--上菜200
+        console.log("小鸡炖蘑菇：")
+        var p=Promise.resolve();
+        p.then(()=>console.log("准备材料200")).then(()=>console.log("炒鸡500")).then(()=>console.log("炖鸡500")).then(()=>console.log("上菜200"));</p>
+   </p>
+   <script>
+        console.log("小鸡炖蘑菇：")
+        var p=Promise.resolve();
+        p.then(()=>console.log("准备材料200")).then(()=>console.log("炒鸡500")).then(()=>console.log("炖鸡500")).then(()=>console.log("上菜200"));
+   
+   </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .msg {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+</head><p>这里不刷新这里不刷新这里不刷新这里不刷新这里不刷新</p>
+<button id="btn">发到服务器</button>
+<div class="msg"></div>
+<p>这里不刷新这里不刷新这里不刷新这里不刷新这里不刷新</p>
+
+<body>
+    <script>
+        const url="http://127.0.0.1:8000/get"
+        const log = (...arg) => console.log(...arg);
+        msg = document.querySelector('.msg');
+        btn = document.querySelector('#btn');
+        const xhr = new XMLHttpRequest();
+        btn.onclick = function () {
+          
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200)
+                    msg.innerText = xhr.responseText;
+            }
+            xhr.open('get',url)
+            xhr.send();
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+FormData类
+  主要用途有两个：
+     1.将form表单的name与value组合减少表单元素的拼接，提高工作效率。getElementByid
+     2.异步上传文件
+  使用
+      封装表单var form = document.querySelector("#form1"); 
+        const formdata = new FormData(form);
+        console.log(formdata.getAll());
+ 
+       formdata.append("name","cjy");//追加数据   
+       formdata.get("name"));//获取数据  设置  
+       formdata.set("name","laoliu");
+    
+xml可扩展的标记语言
+    <?xml version="1.0" encoding="UTF-8"?>
+      <persons>
+         <person>
+            <name>cjy</name>
+            <age>20</age>
+        </person>
+    </persons>
+JSON是JavaScript对象表示法 用来存储和交换文本的语法，比 XML 更小、更快，更易解析易于人阅读和编写
+     var user=[
+                 { "name":"cjy" , "age":20 }, 
+                 { "name":"张三" , "age":true }
+              ]
+  语法   名称:值 用,分隔  {}存对象  []存数组，数组可包含多个对象  \转义
+  值的类型:字符串、数值、true、null、对象或数组
+    user[0].name;
+
+Mockjs自动生成模拟数据
+   安装node 百度搜node官网 运行node -v看版本  窗口+r输入cmd
+   安装npm install mock.js  -D
+   下载太慢改国内镜像npm config set registry http://registry.npm.taobao.org
+   使用 const Mock = require('mockjs');
+          const data=Mock.mock({   });
+  语法  
+           标识id:"@increment"   姓名:"@cname()"   身份证:"@id()"   城市:"@city(true)"   日期:"@date(yyyy-MM-dd hh:mm:ss)"
+            "学历|1": ["大学","大专","高中"]随机选一个
+  用mockjs制作10个学生数据
+        const Mock = require('mockjs');
+       const data = Mock.mock({
+        'students|10':
+          [{
+            id: '@increment()',
+            name: '@name',
+            address: '@city(true)',
+            idcard: "@id()",
+            modi:"@date(yyyy-MM-dd hh:mm:ss)",
+            "grade|1":["大学","大专","高中"]
+           }]
+        });
+       console.log(data);
+练习
+  1.表单form1有用户名密码，用formdata封装form1，给form1加email字段
+  2.xml，json是用来干什么的 json比xml的好处
+  3.安装node   步骤是搜node 下载安装，用node -v看安装好了吗
+  4.到代码目录 如d:\work下  运行npm install mock.js  -D
+  5.写mockdata.js生成100个模拟数据
+  6.运行node mockdata.js看数据有没有生成

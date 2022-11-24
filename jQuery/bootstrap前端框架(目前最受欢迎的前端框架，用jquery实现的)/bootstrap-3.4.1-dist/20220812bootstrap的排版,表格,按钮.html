@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><!--, maximum-scale=1, user-scalable=no 禁用移动设备缩放 -->
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap</title>
+
+    <!-- Bootstrap -->      
+    <link rel="stylesheet" type="text/css" href="./清除html默认样式/Normalize.css">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.cn/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.cn/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .margin_buttom{
+            margin-bottom: 10px;
+        }
+        .container{
+            padding: 0;
+        }
+        /* 第一个 */
+        #kcjs{
+            height:612px;
+            background-image: url(./img/黑.jpg);
+            background-repeat: no-repeat;
+        }
+        #kcjs img{
+            width: 85%;
+        }
+        #xxjs{
+            margin-top: 20px;
+        }
+        .h3,.h3+p{
+            line-height: 3em;
+            color:white;
+        } 
+        .h3+p{            
+            font-size: 12px;
+        }
+        /* 底部一行 */
+        .one_buttom{
+            display: flex;
+            justify-content: center;
+            width:85%;
+            margin:20px auto;padding: 0;
+        }
+        /* 课程中心那些 */
+        .sk{
+            color:black;
+            height: 104px;
+            margin:6px 0px;padding: 0;
+        }
+        .sk>span{
+            height:100%;
+            display: flex;justify-content: center;align-items: center;
+            font-size: 3em;color:blue;
+            background-color: white;
+        }
+        .sk>div{background-color: white;
+            height:104px;padding: 0px;padding-right: 5px;
+        }
+        .sk>div>p{
+            font-size: 6px;display:flex;width: 100%;height:100%;
+            line-height: 2.4em;padding: 0px;
+        }
+        /* 第二个 */
+        #gxtable{
+            height:95vh;
+            background-image: url(./img/竹水.jpeg);
+            background-repeat: no-repeat;
+        }
+        #tablefather{
+            height:75vh;
+            margin-top: 20px;
+            overflow: auto;
+        }
+        #table{
+            background-color: rgb(212, 209, 209);
+        }
+        #table>tbody>tr{
+            border-bottom: 2px solid white;
+        }
+        #table>tbody>tr:nth-child(1){
+            border: 0px solid white;
+            background-color: rgb(0, 123, 255);
+        }
+        #table>tbody>tr>td:nth-child(6){
+            background-color: blue;color:white;
+        }
+       
+        /* 第三个 */
+        #huanjing{
+            background-image: url(./img/披头散发.jpg);
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height:90vh;
+        }
+        /* 环境标题 */
+        #hjtitle h3{
+            color:black;
+            line-height: 2em;
+            margin-bottom: 0px;
+        }
+        #hjtitle div{
+            margin:0px;color: black;
+            margin-bottom: 20px;
+            font-size: 8px;
+        }
+        #hjtitle a{
+            color: black;list-style: none;
+            padding: 0;
+        }
+        /* 环境内容图片 */
+        #hjcontent>div{
+            height:260px;
+            display: flex;flex-direction: column;justify-content: center;align-items: center;
+
+        }
+        #hjcontent>div:nth-child(1){
+            margin: 0;
+        }
+        #hjcontent>div>div{
+            width:96%;
+            height:20%;color:white;
+            background-color: black;
+            display: flex;justify-content: center;align-items: center;
+            font-size: 18px;
+        }
+        #hjcontent img{
+            text-align: center;
+            width:96%;height:80%;
+        }
+        /* 第四个 */
+        #lx{
+            background-color: turquoise;
+            /* background-image: url(./img/竹水.jpeg); */
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height:70vh;
+        }
+        .lxheight{
+            height:70vh;padding-top:6%;
+            /* display: flex;flex-direction: column;justify-content: center; */
+        }
+        #liinput{
+            list-style: none;
+        }
+        #liinput>li{
+            width:100%;
+            height:50px;
+            border: 1px solid black;
+            margin-bottom: 10px;font-size: 18px;
+            padding: 10px;
+            display: flex;justify-content: space-between;
+        }
+        #liinput>li:hover{
+            border:1px solid rgb(0, 174, 255);
+        }
+        .libut{
+            font-size: 12px;
+            border-radius: 20px;
+        }
+        #liinput+p{
+            font-size: 20px;
+        }
+        /* 右边 */
+        #righttop{
+            display: flex;flex-direction: column;justify-content: space-between;
+        }
+        #righttop>h1{
+            margin-top:0 ;margin-bottom: 25px;
+        }
+        #righttop>p{
+            font-size: 16px;
+            
+        }
+        /* input */
+        .form-group{
+            height:40px;font-size: 20px;
+        }
+        .form-group label{
+            line-height: 2em;
+        }
+        .form-group input{
+            text-indent: 10px;height:100%;border-radius: 5px;
+        }
+        .form-group span{
+            display: flex;justify-content: center;align-items: center;
+            background-color: white;height: 100%;border-radius: 5px;
+        }
+        .lxheight:nth-child(2) .btn{
+            height: 50px;
+        }
+        @media screen {
+            @media (max-width:1200px){ 
+                #kcjs{
+                    height:100%;
+                }
+            }
+
+            @media (max-width:992px){ 
+                #kcjs{
+                    height:100%;
+                    background-image: url(./img/原神八重神子樱花.jpg);
+                }
+                #huanjing{
+                    height:100%;
+                }
+                #lx{
+                    height:100%;
+                }
+            }
+            @media (max-width:768px){
+                #kcjs{
+                    height:100%;
+                }
+                #lx{background-image: none;
+                    background-color: black;
+                }
+                .lxheight:nth-child(2){
+                    background-color: black;
+                }
+                .lxheight:nth-child(2) h1,.lxheight:nth-child(2) p{
+                    color:black;
+                }
+                .lxheight:nth-child(2) label{
+                    color:white
+                }
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid margin_buttom" id="kcjs">
+        <div class="row" >
+            <div class="col-md-6 col-xs-12 text-right hidden-xs">
+                <img src="./image/首页/10_03.png" >
+            </div>
+            <div class="col-md-5 text-right col-xs-12" id="xxjs">
+                <h3 class="h3 text-left">深圳市智能时代学校</h3>
+                <p class="text-left">深圳市智能时代产业园是人工智能设备研发与高技能人才引进转换和输送的基地,是软件开发和智能机器人应用系统集成，是集产，学，研，孵化于一体的高科技园区，主要从事工业自动化升级、更新和智能化改造，计算机语言开发，工业机器人工程技术人员培养，社区系统化教育，通用性职业技能训练，劳务输出与派遣，文化宣传策划等。下属有深圳市智能时代产业园有限公司，智能时代培训学校，深圳市晶禾智能装备有限公司，深圳市理想文化传播有限公司，深圳市坪山区大万人力资源服务有限公司组成。</p>
+                <button  class="btn btn-default">查看更多</button>
+            </div>
+        </div>
+        <!-- <div class="row one_buttom col-xs-12"> -->
+        <div class="container">
+            <div class="col-md-6 col-lg-3 col-xs-12  col-sm-12 sk">
+                <span class="col-md-3 col-lg-3 col-sm-3 col-xs-3  glyphicon glyphicon-book" aria-hidden="true"></span>
+                <div class="col-md-8 col-lg-8 col-sm-9 col-xs-9">
+                    <h4>课程中心</h4>
+                    <p>Java基础课程、数据库、前端技术、框架技术、分布式与集群、项目实战</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 col-xs-12  col-sm-12 sk">
+                <span class="col-md-3 col-lg-3 col-sm-3 col-xs-3  glyphicon glyphicon-user" aria-hidden="true"></span>
+                <div class="col-md-8 col-lg-8 col-sm-9 col-xs-9">
+                    <h4>师资力量</h4>
+                    <p>以人为本、以质为魂、诚信至上、服务永恒</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 col-xs-12  col-sm-12 sk">
+                <span class="col-md-3 col-lg-3 col-sm-3 col-xs-3  glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                <div class="col-md-8 col-lg-8 col-sm-9 col-xs-9">
+                    <h4>就业情景</h4>
+                    <p>科学、工业、国防和教育事业需要一大批高素质的计算机专门人才</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 col-xs-12  col-sm-12 sk">
+                <span class="col-md-3 col-lg-3 col-sm-3 col-xs-3 glyphicon glyphicon-education" aria-hidden="true"></span>
+                <div class="col-md-8 col-lg-8 col-sm-9 col-xs-9">
+                    <h4>就业明星</h4>
+                    <p>培训一个、合格一个、就业一个,我们的目标让你成为软件工程师</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid margin-buttom" id="gxtable">
+        <div class="container">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <h2 class="text-center">学员就业薪资表 高薪榜单期待下一个有你</h2>
+            </div>
+        </div>
+        <div class="container" id="tablefather">
+            <table class="table col-md-10 col-ms-10 col-xs-10 text-center" id="table" >
+                <tbody>
+                    <tr>
+                        <td>姓名</td>	
+                        <td>学历</td>	
+                        <td>目前状态</td>	
+                        <td>专业</td>	
+                        <td>入职企业</td>	
+                        <td>月薪</td>	
+                        <td>地点</td>	
+                        <td>就业时间</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container-fluid" id="huanjing">
+        
+        <div class="container">
+            <div class="row row-no-gutters" id="hjtitle">
+                <h3 class="col-md-12 col-xs-12 text-center h3" >学院环境</h3>
+                <div class="col-lg-12 col-md-12 col-xs-12 text-center ">
+                    <p class="col-lg-10 col-md-10 col-sm-9 col-xs-9">现有两个园区，一个宝安园区，一个坪山园区，现有学员1000余人</p>            
+                    <a href="#" class="text-right col-lg-2 col-md-2 col-sm-3 col-xs-3">了解更多学院环境<i class="glyphicon glyphicon-play"></i> </a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row-no-gutters " id="hjcontent">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="./img/拿着手机.jpg">
+                    <div>智能时代学校</div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="./img/黑.jpg">
+                    <div>教学楼</div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="./img/竹水.jpeg">
+                    <div>u行楼</div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="./img/竹水.jpeg">
+                    <div>机器人实训</div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="./img/披头散发.jpg">
+                    <div>课堂现场</div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="./img/黑.jpg">
+                    <div>学校饭堂</div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="./img/竹水.jpeg">
+                    <div>宿舍环境</div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                    <img src="./img/抱着娃娃.jpg">
+                    <div>校园活动</div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row row-no-gutters col-lg-offset-1" id="hjcontent">
+            <div class="col-lg-2 col-md-2 col-sm-5 col-xs-12">
+                <img src="./img/拿着手机.jpg">
+                <div>智能时代学校</div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-5 col-xs-12">
+                <img src="./img/拿着手机.jpg">
+                <div>智能时代学校</div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-5 col-xs-12">
+                <img src="./img/拿着手机.jpg">
+                <div>智能时代学校</div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-5 col-xs-12">
+                <img src="./img/拿着手机.jpg">
+                <div>智能时代学校</div>
+            </div>
+            
+        </div> -->
+       
+    </div>
+    <div class="container-fluid" id="lx">
+        <div class="container">
+            <div class="row row-no-gutters">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 hidden-xs lxheight" >
+                    <ul class="col-lg-9 col-md-9 col-sm-9 col-xs-10 col-xs-offset-1" id="liinput">
+                        <li>学费是多少<button class="btn btn-info libut">点击咨询</button></li>
+                        <li>我能不能学<button class="btn btn-info libut">点击咨询</button></li>
+                        <li>两周免费试听<button class="btn btn-info libut">点击咨询</button></li>
+                        <li>获取学习资料<button class="btn btn-info libut">点击咨询</button></li>
+                        <li>实训班座位告急<button class="btn btn-info libut">点击咨询</button></li>
+                    </ul>
+                    <p class="col-lg-9 col-md-9 col-sm-9 col-xs-10 col-xs-offset-1">培训一个、合格一个、就业一个！</p>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 lxheight"><!--右边-->
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-push-3 col-md-push-3 col-sm-push-1 col-xs-push-1" id="righttop">
+                        <h1 >在线报名</h1>
+                        <p >新生来校免费试读一个月后,经考核合格，正式办理就读手续，不合格者退回原校</p>
+                    </div>
+                    <div class="form-group col-lg-9 col-md-9 col-lg-offset-3 col-md-offset-3 col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1">
+                        <label for="name" class=" text-center col-lg-4 col-md-4 col-sm-4 col-xs-4">姓名</label>
+                        <input type="text" id="name" class="col-lg-8 col-md-8 col-sm-8 col-xs-8" placeholder="姓名">
+                    </div>
+                    <div class="form-group col-lg-9 col-md-9 col-lg-offset-3 col-md-offset-3 col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1">
+                        <label for="phone" class="text-center col-lg-4 col-md-4 col-sm-4 col-xs-4">手机</label>
+                        <input type="number" id="phone"  class="col-lg-8 col-md-8 col-sm-8 col-xs-8" placeholder="手机">
+                     </div> 
+                    <div class="form-group col-lg-9 col-md-9 col-lg-offset-3 col-md-offset-3 col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1">
+                        <label for="QQ" class="text-center col-lg-4 col-md-4 col-sm-4 col-xs-4">QQ</label>
+                        <input type="number" id="QQ"  class="col-lg-8 col-md-8 col-sm-8 col-xs-8" placeholder="QQ">
+                    </div>
+                    <div class="form-group col-lg-9 col-md-9 col-lg-offset-3 col-md-offset-3 col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1">
+                        <label for="code" class="text-center col-lg-4 col-md-4 col-sm-4 col-xs-4">验证码</label>
+                        <input type="text" id="code" class="col-lg-5 col-md-5 col-sm-5 col-xs-5" placeholder="输入右边验证码">
+                        <span class="text-center col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" id="codespan">1231</span>
+                    </div>
+                    <button class="btn btn-primary col-lg-9 col-sm-9 col-lg-offset-3 col-md-offset-3 col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1">提交·</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/4.(自动生成模拟数据的nodejs)mock-min.js"></script>
+    <script>
+        $(function(){
+            const data=Mock.mock({
+                'qian|25':[{
+                    name:'@cname',
+                    'grade|1':["本科","大专","高中"],
+                    'state|1':["应届","非应届","在读"],
+                    'professional|1':["java","前端","plc"],
+                    'enterprise|1':['123xxx公司','456xx公司','789xxx公司'],
+                    "salary|.2":Math.random()*20000,
+                    address:'@city(true)',
+                    date:2000+Math.ceil((Math.random()*22))+"年"
+                }]
+            })
+            console.log(data);
+            for(var i=0;i<data.qian.length;i++){
+                var div=`<tr><td>${data.qian[i].name}</td><td>${data.qian[i].grade}</td>
+                    <td>${data.qian[i].state}</td><td>${data.qian[i].professional}</td>
+                    <td>${data.qian[i].enterprise}</td><td>${data.qian[i].salary}</td>
+                    <td>${data.qian[i].address}</td>
+                    <td>${data.qian[i].date}</td>
+                    </tr>`
+                console.log(div);
+                $("table>tbody").append(div);
+
+            }
+            // 验证码
+            function codes(){
+                var c=Math.random().toString(36).slice(2).substr(0,4);
+                $("#codespan").text(c);
+            }
+            $('#codespan').click(function(){
+                codes();
+            })
+        })
+    </script>
+  </body>  
+</html>

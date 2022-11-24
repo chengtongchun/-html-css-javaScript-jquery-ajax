@@ -1,0 +1,60 @@
+JavaScript内置对象
+Object类 
+  几乎所有的对象都是 Object 类型的实例，它们都会从 Object.prototype 继承属性和方法
+  静态方法Object.assign指派  Object.create创建 Object.keys(objs)对象的key Object.values()对象的值
+  用Object.create继承
+     function Person(name){this.name=name;}
+     function Man(name,age) {Person.call(this,name); this.age=age;}
+     Man.prototype = Object.create(Person.prototype);
+重要的方法 
+   Object.defineProperty定义属性(obj类, prop属性名, desc属性描述符) 
+   如let Person = {}
+   Object.defineProperty(Person, 'name', {
+     value: 'cjy',
+     writable: true, // 默认true可改变    false不能改
+     configrable:true, //默认true 是否配置(定义同名属性)及删除 delete Person.name
+     enumerable:true //默认true 属性是否出现在for in或Object.keys遍历中
+  })
+
+   结合writable:false和configurable:false可创建一个常量属性
+   想禁止对象添加新属性用Object.preventExtensions(Person)
+   Object.getPrototypeOf(obj) 返回对象的原型Object.setPrototypeOf设置原型
+属性obj.constructor=== Object/Array/Function判断类型 
+      跟typeof的区别=== 'object'/'function'/'string'/'undefined'/'number'
+
+Function类
+    构造函数用eval构造    let exp=prompt("请输入计算公式:"); alert(eval(exp));
+    call apply bind
+       [].forEach.call(lis,(ele)=>ele.style.color="red");
+   调用者caller
+   function fn() {
+            if (fn.caller == null) {
+                console.log('不能直接用');
+            } else {
+                console.log('调用者  '+fn.caller);
+            }
+        }
+
+Date操作日期和时间。
+     Date对象方法：var d=Date()当前日期时间  getDate() 月天 getDay() 周天 
+       getHours()小时 getMinutes() 分钟  getSeconds() 秒数  getMonth() 月份 
+       getFullYear() 年份  getTime() 
+      const daysDiff= (d1, d2) => (d1 - d2) / (1000 * 3600 * 24);//new Date('2022-7-12')
+练习
+ 1.查帮助 完成下列任务
+    Person类有name属性say方法 Animal类有eat方法
+   function Person(name){}
+   用Object.assign合并Person和Animal类
+   用Object.create类实现Dog继承Animal类
+   用Object.defineProperty给Dog加属性color可写不能配置不能枚举
+   用Object.assign给Dog加方法run,fly
+      Object.assign(Dog.prototype,{
+         run(){},
+         fly(){}
+      })
+ 2.判断对象的两种方法
+     如何判断obj是否数字， 如何保证str不是undefined和null
+3. 输出当前日期Date.now()是xx年xx月xx日  xx时xx分xx秒
+4. 写dayDiff函数计算两个日期之间的天数差
+5. 用eval实现计算器let exp=prompt("请输入计算公式:"); alert(eval(exp));
+6.选项卡  读代码并用[].forEach改造  

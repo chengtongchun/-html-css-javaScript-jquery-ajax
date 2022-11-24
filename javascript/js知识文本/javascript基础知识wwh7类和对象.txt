@@ -1,0 +1,28 @@
+ES6 中的类和对象
+   class Person {
+          constructor(name,age) {this.name = name;this.age = age;}//构造函数new Person时调用
+          static sa = 2;//静态属性和方法 通过Person.sa  Person.add(1,2)访问
+          static add(a, b) {console.log(a+b);}
+          say() { }//实例属性和方法 通过实例调用
+          eat(){}
+        }
+   类定义不会被提升，必须在访问前对类进行定义，类中方法不需要 function，方法间不能加分号
+   let A = class{}   class A{}不可重复声明
+   对象的属性prototype原型，name类名
+   给类加改方法Person.prototype={}
+    Object.assign(Person.prototype,{
+        sex:'男',
+         run(){},
+         fly(){}
+      })
+继承
+    class Man extends Person {//继承父类
+          constructor(name,age,sex) {
+                super(name,age);//super()只能在构造函数中用
+                this.sex = sex;
+            }
+         say(){console.log("Man"+ this.name + "你好!"+super.age); }//super.父类属性或方法
+     }
+    var zs1 = new Man("张三",100,"0");
+    zs1.say();console.log(zs1);
+要求看懂

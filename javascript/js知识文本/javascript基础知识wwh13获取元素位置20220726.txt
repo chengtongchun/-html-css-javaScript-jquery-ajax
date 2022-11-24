@@ -1,0 +1,18 @@
+获取元素位置 client=padding+内容 offset偏移=含边  scroll viewport
+父子元素: offsetLeft跟offsetParent左上角的偏移    offsetTop上边界           
+    元素的可见区 clientWidth宽度clientHeight高度 offsetHeight高度  offsetWidth宽度 scrollWidth  scrollHeight
+    三个的区别:getBoundingClientRect.width clientWidth不含border offsetWidth含边 scrollWidth不含border但含不可见内容
+       注意设置box-sizing: border-box和content-box不同
+
+    const { top, left, bottom, right }=el.getBoundingClientRect();  获取元素边界值
+滚动条的位置 scrollTop 垂直 scrollLeft水平  要设置overflow: auto;
+    鼠标事件的clientX offsetX
+    const { innerHeight, innerWidth } = window;
+    拖拽1 
+    拖拽2
+练习
+   1.clientWidth offsetWidth scrollWidth getBoundingClientRect().width都是获取元素宽度 它们的区别是
+   2.box-sizing: border-box和content-box的区别
+   3.鼠标的clientX offsetX pageX的区别
+   4.完成拖拽
+   5.完成放大镜

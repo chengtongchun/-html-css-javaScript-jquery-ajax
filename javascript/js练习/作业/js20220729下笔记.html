@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         /* 第八题 */
+        body{        /* 总大框 */
+            width:100%;
+            height:100vh;
+            display: flex;
+            flex-wrap: wrap;
+            /* background-color:#7bdaf3 ; */
+            /* position: relative; */
+            /* background-image: linear-gradient(to right, red 10%,green 30%,yellow 40%); */
+            background-image: radial-gradient(red ,green);
+            
+        }
+        .add{/*新增笔记按钮*/
+            width:88px;height:33px;padding:0px;
+            border-radius: 5px;
+            color:white;
+            background-color: yellowgreen;border: 0px;
+            /* position:absolute; */
+            /* right:20px;top:15px; */
+            position:fixed;
+            top:15px;right:20px;
+        }
+        .bj{/* 新增笔记的操作div */
+            width:400px;height:400px;/*432px;*/
+            display: flex;flex-direction: column;
+            margin:41px 20px;
+            /* background-image: url(./img/睡眠.jpg);background-position:center left; */
+        }
+        .tools{
+            margin:0px;
+            width:400px;height:30px;
+            background-color: #9ec862;
+            display: flex;justify-content: flex-end;align-items: center;
+        }
+        .edit{/*修改*/
+            width:55px;height:30px;
+            color:white;
+            display: flex;justify-content:center;align-items: center;
+            cursor: pointer;
+        }
+        .remove{/*删除*/
+            width:55px;height:30px;
+            color:white;
+            display: flex;justify-content:center;align-items: center;
+            cursor: pointer;
+        }
+        .main{/*装文本域的框*/
+            height:402px;
+            width:400px;
+            background-color:white;
+            word-wrap: break-word;
+            overflow: hidden;
+        }
+        .main textarea{
+            width:100%;height:100%;
+            border: none;
+            outline: none;
+            padding:20px;
+            font-size: 1.3rem;
+        }
+        .hidden{
+            display: none;
+        } 
+    </style>
+        <link rel="stylesheet" href="./res/css/font-awesome.min.css">
+</head>
+<body>
+    <button class="add"> <i class="fa fa-plus">新增笔记</i></button>
+    <!-- <div class="bj">
+        <div class="tools">
+            <botton class="edit">
+                <i class="fa fa-edit">修改</i>
+            </botton>
+            <botton class="remove">
+                <i class="fa fa-remove">删除</i>
+            </botton>
+        </div>
+        <div class='main ${text ? "" : "hidden"}'>
+            <textarea class='${text ?  "hidden":""}'></textarea>`
+        </div>
+    </div> -->
+    <script>
+         const $=(ele)=>document.getElementById(ele);
+        const log=(...ele)=>console.log(...ele);
+        var body=document.body;
+        var add=document.querySelector(".add");
+        const dms=JSON.parse(localStorage.getItem("dm"));
+        dms.forEach((dm)=>{
+            adds(dm.text,dm.text);
+        })
+        add.onclick=adds;
+        function adds(...msg){
+            let newbj=document.createElement("div");
+            newbj.classList.add("bj");
+            newbj.innerHTML='\
+            <div class="tools">\
+            <botton class="edit">\
+                <i class="fa fa-edit">修改</i>\
+            </botton>\
+            <botton class="remove">\
+                <i class="fa fa-remove">删除</i>\
+            </botton>\
+            </div>\
+            <div class="main">\
+                <textarea class=""></textarea>`\
+            </div>\
+                ';
+            const edit=newbj.querySelector(".edit");//修改
+            const remove=newbj.querySelector(".remove");//删除
+            const main=newbj.querySelector(".main");//装文本框的div
+            const text=main.querySelector(".main>textarea");//文本框
+            log(edit,remove,main,text)
+            edit.addEventListener('click',function(){
+                var text_value=text.value;
+                    if(text.classList.toggle('hidden')){
+                        main.innerText=text.value;
+                    }else{
+                        main.innerHTML='<textarea>'+text_value+'</textarea>';
+                    }
+                        set();
+
+            })
+            remove.addEventListener('click',function(){
+                newbj.remove();
+                set();
+            })
+            if((msg.length)&&(msg[0]!=""&&msg[1])){
+                main.innerText=msg[0];
+                if(main.firstElementChild)main.firstElementChild.value=msg[1];
+            }
+            body.appendChild(newbj);
+        }
+        var dates=[];
+        function set(){
+            localStorage.removeItem("dm");
+            dates.length=0;
+            var mains=document.querySelectorAll(".main");
+            mains.forEach((main,index)=>{
+                console.log(main);
+                var obj={main:"",text:""};
+                obj.main=main.innerText;
+                if(main.firstElementChild)
+                obj.text=main.firstElementChild.value;
+                else
+                obj.text=main.innerText;
+                dates.push(obj);
+            })
+            localStorage.setItem("dm",JSON.stringify(dates));
+        }
+        // function styles(){//有四以上个笔记就
+        //     var bjs=document.querySelectorAll(".bj");
+        //     console.log(bjs)
+        //     if(bjs.length>3){
+        //         body.style.height="100%";
+        //     }else{
+        //         bidy.style.height="100vh";
+        //     }
+        // }
+    </script>
+</body>
+</html>

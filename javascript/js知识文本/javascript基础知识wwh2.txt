@@ -1,0 +1,190 @@
+﻿1.2.JavaScript核心语法
+ 基本类型：undefined未定义类型  Number数值类型  String字符串类型  Boolean布尔值 Object对象类型 null空对象
+1.2.1字面量
+    3.14  1001 1.23e5 0b11 012 0xFF数字; Infinity无穷大 NaN非数字 注意他们数字、逻辑运算的结果
+   IsNaN判断是否数字  
+    "cjy" 'zs'字符串;    'a'=="a"一样
+    数组[40, 100];
+     对象{name:"cjy",eyeColor:"blue"}
+  
+   类型转换 类型()  如String(null)
+   类型判断typeof
+1.2.4 变量的作用域
+     全局作用域：就是全部地方都可以用
+     全局:1.var x=10; 2.var window.x=20
+     {}内的是块作用域，只在块内能用
+es6：
+        var let const区别
+        var 全局  存在声明提升  值可以改
+        let 块      不存在声明提升 值可以改
+        const 块  不存在声明提升 不能改
+    
+1.2.5运算符：各种类型都可以参与运算
+    Number数字 String字符串 Boolean布尔 null空对象undefined NaN []数组{}对象
+   算术： +加  -减 *乘  /整除 %求余数 ++自增 --  
+              问var a=1; b = a++ + a++ + 1 + ++a + a++ + ++a + a++ + a;    
+   隐转换    把任意类型-0运算转为Number 把任意类型+字符串转为String if(任意类型)转为Boolean
+   赋值 =  （-  *  / %）= 
+   比较 == ===等值等型  !=  !==不等值或不等型  > >= < <= 重点==和===
+   逻辑 &&与 同为真结果为真   ||或 同为假结果为假   ！非
+   短路运算:  与运算&& 如果表达式1为真返回表达式2否则返回表达式1   如123&&456 0&&456
+                   或运算||      如果表达式1为真返回的是表达式1
+   回答:0 && 1 + 2 && 456 * 56789=?     ''&& 1 + 2 && 456 * 56789=?
+   ,运算符  var a,b=10,c=add(3,4);  let c=(1,alert(''),4+5);
+   非数字转换成数字parseInt和parseFloat:
+         parseInt('123.4e5') parseInt(11参数,16进值) parseFloat("0xff");parseFloat("1.2.3");
+
+1.2.6控制语句
+     一元运算符:+- 正负号  如+"1"，+{}，+true，-["4"]，-{age:1}
+    1.条件结构 if else if    
+         如果年龄大于18就可以上网否则滚回家学习if(age>18)
+         判断闰年:能被4整除但不能被100整除的或者能被 400 整除的就是闰年
+                 if((year%4==0 && year%100!=0)||year%400==0)
+         判断成绩的优良中差
+        
+    三元表达式 var result= num>60? 'ok' : 'bad'; 如果输入数字小于10则在这个数字前面补0
+    简化a>=60 && alert("no");
+    2.循环结构  for（初始值; 终止值; 步长值){} 
+                               如1-100的和  1-100偶数和、奇数和 能被3整除的数的和 
+                     for循环嵌套： 如打印n行n列* 记得\n'换行    九九乘法表i=1-9,j=1-i
+                     while和do while跟java一样
+          break中断循环break fori;  continue继续下一轮    如跳过3的倍数
+    3.多选
+      switch(){case:default:}    注意break
+    4.异常
+       try{
+         var result =  decodeURI("%"); //发生报错，后面都不会执行
+           console.log(result);
+      }catch(e){ //捕获异常
+         console.log(e.message);
+        } finally{ //不管有没有发生异常，都会执行
+         console.log("finally");
+       }
+      主动抛出异常 throw new SyntaxError("发生异常了");
+      异常种类:EvalError用eval不当导致   SyntaxError语法错误时  RangeError超出合法范围
+                    typeError值的类型发生错误  URIError:URI编码和解码的时候报错
+    回顾 ()的作用 1.提升优先级2.定义函数 调用函数
+           []1.定义数组2.获取下标
+           {}的作用 1.定义对象 2.代码块
+作业.
+     1. 判断问好时间早中晚休息0-12点是早上 01-14点是中午 14-24是晚上
+    2.比较两个数的最大值 二元运算
+    3.求100以内所有能被3和7整除的数的和
+   4. 需求 ：有一群人，如果3个人站一排多出一人，如果4个人站一排多出来2个人；如果5人一排多出3人。问：这群人的数量
+   5. 一个input一个ul，点增加按钮把输入的名字加到li中然后在加到ul中innerHTML
+   6.一个box宽度100px高度100px,点放大按钮,让box的宽高每次加10. 如果到300px 那么就停止style.width/height
+
+1.2.7数组
+    基本类型和引用类型
+       基本类型Number、String 、Boolean、Null和Undefined     引用类型有数组、对象
+       基本类型:是按值访问，值是不可变的，不能加属性和方法        比较是值的比较             变量是存放在栈区的
+      引用类型:按引用地址访  值可变，       可以加属性和方法         比较是引用地址的比较    保存在堆内存中的对象
+      let a=10;
+      let b=a;
+      b=20;
+      let ar=
+      ar[0]=123;
+      ar[1]=456;
+      let ar1=ar;
+      ar1[0]=234;
+      内存分析
+为什么使用数组：保存所有学生的成绩，你需要多个变量来保存
+    ES 数组可放任何类型的数据  大小动态调整的
+   定义数组的三种方法
+       声明var 数组名称 = new Array(size) 如var ar1=new Array(10)
+       声明并赋值var animal=  new Array（"cat", "dog", "hamster"）
+       通过字面量定义var ar= ["cat"; "dog"; "hamster"];
+   属性:length
+   数组元素访问[下标]  ar1[0]='zs'; alert(ar1[1])
+   求斐波那契数列的前20个数字：
+        已知斐波那契数列的第一个值是1，第二项是2，从第三项开始，每一项都等于前两项的和
+   遍历:一个一个访问 for   for in
+   解构 const[a,b]=ar;交换两个值[a,b]=[b,a]
+            var ar1=[];var ar2=ar[...ar1]
+       冒泡排序
+       插入排序
+       选择排序
+
+   Array类静态方法
+     Array.from()从多个对象或迭代对象中创建数组.
+        var divs = document.getElementsByTagName("div");var ar=Array.from(divs);
+     Array.isArray()判断是否数组
+     Array.of(1, 2, 3);用多个值创建数组
+   方法:
+      arr.at(index)返回索引处的元素index从0到arr.length-1
+          如console.log(` ${index}  ${arr.at(index)}`);
+      arr.join(",")用连接符拼接字成符串,某项值是 null 或者 undefined 结果空字符
+      arr.concat(value0, value1, ...) 连接数组和值返回新数组
+      arr.splice()向数组的中部插入项
+      arr.slice(start, end)切分为新数组 
+      arr.push(v0,v1,...)末尾添加 arr.pop()弹出
+      arr.shift()删除第一个元素  arr.unshift()数组的头部添加一个或多个元素  
+      arr. reverse()反转数组
+       arr.sort()按升序排列数组项
+      arr.indexOf和lastIndexOf从前往后查找
+      arr.every()每个元素通过测试函数some()至少一个通过测试函数true  如年龄是否都大于等于18岁
+      arr.filter创建新数组，元素符合条件
+      arr.map新数组每个元素都运算 foreach()循环遍历数组中的每一项  如求数组中最大值和最小值foreach
+    
+ 
+JavaScript 获取标签
+  1.根据标签名获取标签var divs = document.getElementsByTagName("div"); divs[0].innerText=
+  2.通过类名来获取标签var cls=document.getElementsByClassName("c1");for(i in cls){cls[i].style.background="red";}
+  3.通过name属性获取标签var names=getElementsByName("c1");
+  4.事件onfocus onblur要返回true才能离开 textarea.oninput最多100个字符
+  5.document.querySelector和document.querySelectorAll
+es6集合类型
+    Set无序不重复
+      构造方法Set：const set1 = new Set([1, 2, 3, 4, 5]);
+      属性.size
+      方法
+        .add(value) 如set1.add(5).add('some text');
+        .delete(value)删除has(value)包含有 clear()清空
+       迭代方法.forEach
+    WeakSet弱引用Set 只能包含对象引用不能有其他值，对象没有引用时启动GC回收垃圾
+    Map键值对  WeakMap
+
+1.写出引用类型和基本类型的区别
+2.写99乘法表
+3.atm机器: balance=1000 1.存钱 2.取现 如果balance-取现数<=0抛出异常余额不足 3.退出用while(true) switch
+4.求斐波那契数列的前30个数字
+5.对数组var ar=[1,8,3,9,12,6]实现三种排序  冒泡排序   插入排序  选择排序
+6. 用for in 求数组ar最大值和最小值
+6. 用foreach求数组ar最大值和最小值
+7.如何测试ar数组中有无大于20的数 用some，如何保证数组中所有的数都大于20 用every
+8.把ar数组全部都乘10  map
+9.实现选框移动效果用Array.from
+
+ <select id="lft" multiple style="width:100px;">
+     <option value="1">1</option>
+     <option value="2">2</option>
+     <option value="3">3</option>
+     <option value="4">4</option>
+   </select>
+   <select id="rgt" multiple style="width:100px;"></select>
+   <br>
+   <button id="btnl">></button>
+   <button id="btnll">>></button>
+   <button> < </button>
+   <button> << </button>
+ <script>
+   const lft=document.getElementById("lft");//左select
+   const lftops=lft.getElementsByTagName("option");//左select里的option
+   const rgt=document.getElementById("rgt");//右select
+   const rgtops=rgt.getElementsByTagName("option");//右select里的option
+   const btnl=document.getElementById("btnl");// >按钮
+   const btnll=document.getElementById("btnll");// >>按钮
+   //你要获取 < 和 << 按钮
+   btnl.onclick=()=>{
+        for(let index in lftops)
+           if(lftops[index].selected)//如果选中该项
+             rgt.appendChild(lftops[index]);//加到右边
+   }
+  btnll.onclick=()=>{
+    const opsarr=Array.from(lftops);//转为数组
+    opsarr.forEach((e)=>{
+      rgt.appendChild(e);//全部加到右边
+    })    
+  }
+ </script>
+

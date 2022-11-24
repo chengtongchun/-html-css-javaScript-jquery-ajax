@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            white-space: pre-wrap;
+            /* background-color: aquamarine; */
+        }
+        /* 第四题样式 */
+        #resultFour{
+            display: flex;width:100%;height:40px;
+            flex-direction: column;
+            justify-content: center;align-items: center;
+        }
+        #four{
+            display: flex;justify-content: center;align-items: center;
+            width:100%;height:20px;
+            text-decoration: none;color:black;
+            text-shadow: 0px 0px 10px blue;
+        }
+        #fourConsole{
+            display: flex;justify-content: center;align-items: center;
+            width:100%;height:20px;
+            text-shadow: 0px 0px 10px red;
+        }
+        /* 第五题 form表单样式 */
+        .form{
+            margin:0 auto;
+            width:400px;height:200px;
+            background-color: rgb(196, 195, 195);
+            border: 1px solid black;
+            border-radius: 5px;
+            display: flex;flex-direction: column;justify-content: center;align-items: center;
+        }
+        .lab{
+            display: flex;justify-content: space-around;align-items: center;
+            width:90%;height:30px;
+            margin-bottom: 2%;
+        }
+        .lab>span{width:20%; display: flex;justify-content: center;align-items: center;}
+        .lab>input{
+            width:60%;height:90%; display: flex;justify-content: center;align-items: center;
+            border-radius: 5px;
+        }
+        .form>button{
+            width:60%;height:30px;border-radius: 5px;border:0px solid black;
+            background-color: #efefef;
+        }
+        /* 第七题部分 */
+        #nameSpan,#ageSpan{
+            display: none;
+           height:100%;text-align: center;font-size:12px;color:red;
+           padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>练习：</h1>
+    <p class="title">1.async和defer区别 null与undefined的区别</p>
+    <p class="result">
+        (1)async和defer区别：
+            async异步脚本在它们载入后执行，但是不能保证按顺序执行；
+            defer延迟会按在文档里的出现顺序执行
+        (2)null与undefined的区别:
+            null是对象的值，表示没东西；undefined是变量未声明
+    </p>
+    <p class="title">2.js的组成  ECMAScript是什么    </p>
+    <p class="result">
+        ECMA组织给javascript定义的规范
+    </p>
+    <p class="title">3.交换两个变量的值 (2种方法) 片段里面写代    </p>
+    <p class="result">按F12,找到源代码一栏，下栏“替换”有个&gt;&gt;，点它接着看到代码段，点，接着点新建代码段
+    (1) var a=10;                            (2)var a=10;var b=3;
+        var b=3;                                   var c=a+b;
+        console.log(a+"\t"+b);            console.log(a+"\t"+b+"\t"+c);
+        var c=a;                                    a=a-a;
+        a=b;                                         b=a-a;
+        b=c;                                         console.log(a+"\t"+b+"\t"+c);
+        console.log(a+"\t"+b);              
+    </p>
+    <p class="title">4. 依次询问并获取用户的姓名、年龄、性别，并打印用户信息用prompt，console    </p>
+    <p class="result" id="resultFour"><a href="javascript:;"onclick="four()" id="four">坦白从宽，抗拒从严!你叫什么名字？年龄？性别？</a><span id="fourConsole"></span></p>
+    <p class="title">5.需求：在网页中输入用户名，密码 判断用户名和密码是否正确document.getElementByID    </p>
+        <div class="form">
+            <label class="lab">
+                <span>用户名：</span><input type="text" placeholder="请输入用户名" id="userId" name="userId">
+            </label>
+            <label class="lab">
+                <span>密码：</span><input type="password" placeholder="请输入用户密码" id="password" name="password">
+            </label>
+            <button onclick="five()" >提交</button>
+            <span class="lab" id="fourHint">用户123123 密码123123</span>
+        </div>
+    <p class="title">6.下面代码的执行顺序
+           console.log(e);
+           var e = 10;
+           console.log(f);
+           var f = 20;
+           var g = 30;
+          console.log(g);
+           var h = 40;
+    </p>
+    <p class="relute">先var e,f,g,h变量提升，接着从“console.log(e)”开始按循序运行（变量提升虽然不报错，却没有赋值）</p>
+    <p class="title"> 7.网页中输入姓名年龄并验证是否为空，错误信息显示在后面 --></p>
+    <div class="form">
+        <label class="lab">
+            <span>姓名：</span>
+            <input type="text" placeholder="请输入姓名" id="name" name="name">
+            <span id="nameSpan"></span>
+        </label>
+        <label class="lab">
+            <span>年龄:</span>
+            <input type="number" min="0" max="200" placeholder="请输入年龄" id="age" name="age">
+            <span id="ageSpan"></span>
+        </label>
+        <button onclick="seven()" >提交</button>
+        <span class="lab" id="fiveHint"></span>
+    </div>
+    <script>
+        // 第四题
+         function four(){ 
+            var name=window.prompt("你叫什么名字？");//输入框
+            var age=prompt("你的年龄?");
+            var gender=prompt("你的性别");
+            console.log("姓名："+name+"\t年龄："+age+"\t性别"+gender);
+            var con=document.getElementById("fourConsole");
+            con.innerHTML="姓名："+name+"\t年龄："+age+"\t性别"+gender;
+         }
+        //  第五题
+        function five(){
+            var userId=document.getElementById("userId");
+            var password=document.getElementById("password");
+            var id=userId.value;//用户名
+            var paw=password.value;//密码
+            console.log(id+"\t"+paw);
+            var span=document.getElementById("fourHint");//错误信息
+            if((id.length>0) & (paw.length>0)){
+                var zz=/\w{6,}$/;//正则表达式，不得少于6位，任意字母、数字、——
+                if(zz.test(id)){
+                    if(zz.test(paw)){
+                        var uid="123123";//自己定的用户也是密码
+                        if(uid == id){
+                            if(uid == paw){
+                                span.innerText="用户密码正确";
+                            }else{
+                                span.innerText="密码有误";
+                            }
+                        }else{
+                             span.innerText="没有该用户";
+                        }
+                    }else{
+                        span.innerText="密码不得少于6位";
+                    }
+                }else{
+                    span.innerText="用户名不得少于6位";
+                }
+            }else if((id.length == 0) & (paw.length==0)){
+                span.innerText="用户名和密码不得为空";
+            }else if(id.length == 0){
+                span.innerText="用户名不得为空";
+            }else{
+                span.innerText="密码不得为空";
+            }
+        }
+        // 第七题
+        function seven(){
+            var name=document.getElementById("name").value;
+            var age=document.getElementById("age").value;
+            var span=document.getElementById("fiveHint");//没错后的提示信息
+            var nameSpan=document.getElementById("nameSpan");//姓名错了后的提示
+            var ageSpan=document.getElementById("ageSpan");//年龄错了后的提示
+            if((name.length>0) & (age.length>0)){
+                if(name.length>=1){
+                    if(age.length>=1){
+                        // /^[u4e00-u9fa5·0-9A-z]+$/
+                        var namezz=/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}/;
+                        if(namezz.test(name)){
+                            if(age<200 && age>0){
+                                ageSpan.style.display="none";
+                                nameSpan.style.display="none";
+                                span.innerText="姓名："+name+"\t年龄："+age;
+                            }else{
+                                ageSpan.style.display="block";
+                                nameSpan.style.display="none";
+                                 ageSpan.innerText="年龄不合法不得小于0，大于200";
+                            }
+                        }else{
+                            nameSpan.style.display="block";
+                            ageSpan.style.display="none";
+                            nameSpan.innerText="姓名有误";
+                        }
+                    }else{
+                        ageSpan.style.display="block";
+                        nameSpan.style.display="none";
+                        ageSpan.innerText="年龄不得少于1位";
+                    }
+                }else{
+                    nameSpan.style.display="block";
+                    ageSpan.style.display="none";
+                    nameSpan.innerText="姓名不得少于1位";
+                }
+            }else if((name.length == 0) && (age.length == 0)){
+                nameSpan.style.display="block";
+                ageSpan.style.display="block";
+                nameSpan.innerText="姓名不得为空";
+                ageSpan.innerText="年龄不得为空";
+            }else if(name.length == 0){
+                nameSpan.style.display="block";
+                ageSpan.style.display="none";
+                nameSpan.innerText="姓名不得为空";
+            }else{
+                ageSpan.style.display="block";
+                nameSpan.style.display="none";
+                ageSpan.innerText="年龄不得为空";
+            }
+        }
+    </script>
+</body>
+</html>

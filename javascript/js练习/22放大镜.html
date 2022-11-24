@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#minBox,#maxBox{
+				float: left;
+				border: 1px solid black;
+			}
+        	#minBox{
+				height: 200px;
+				width: 200px;
+				position: relative;
+			}
+			
+			#minBox>img{
+				height: 200px;
+				width: 200px;
+			}	
+			#mask{
+				height: 80px;
+				width: 80px;
+				background-color: rgba(100,176,100,0.3);
+				position: absolute;
+				left: 0;
+				top: 0;
+				padding:10px;
+			}
+			
+			#maxBox{
+				height: 200px;
+				width: 200px;
+				overflow: hidden;
+				position: relative;
+			}
+			
+			#maxBox>img{
+				position: absolute;
+				height: 500px;
+				width: 500px;
+			}
+			
+			
+			
+			
+			
+		</style>
+	</head>
+	<body>
+		
+		
+		<div id="outer">
+			<div id="minBox">
+				<img src="./作业/img/步行.jpg" ><!-- <img src="images/02.jpg" > -->
+				<div id="mask">
+					
+				</div>
+			</div>
+			
+			<div id="maxBox">
+				<img id="maxImg" src="./作业/img/步行.jpg" >
+			</div>
+			
+		</div>
+		
+		
+		<script type="text/javascript">
+			var oMinBox = document.querySelector("#minBox");
+			var oMask = document.querySelector("#mask");
+			var oMaxImg = document.querySelector("#maxImg");
+            var oMaxBox = document.querySelector("#maxBox");			
+			//oMinBox.onmouseenter进入显示 onmouserleave隐藏
+			// 在小图范围内鼠标移动
+			oMinBox.onmousemove = function(ev) {
+				var ev = ev || window.event;
+				
+				// Mask的中心点=鼠标位置-图片的偏移距离-自身的一半 中心点
+				var minBoxLeft = ev.clientX - oMinBox.getBoundingClientRect().left - (oMask.offsetWidth/2);
+				var minBoxTop = ev.clientY - oMinBox.getBoundingClientRect().top - (oMask.offsetHeight/2);
+				// 限制边界值
+				if(minBoxLeft < 0) {
+					minBoxLeft = 0;
+				} else if(minBoxLeft > (oMinBox.clientWidth - oMask.offsetWidth) ) {
+					minBoxLeft = oMinBox.clientWidth - oMask.offsetWidth;
+					
+				}	
+				if(minBoxTop < 0) {
+					minBoxTop = 0;
+				} else if(minBoxTop > (oMinBox.clientHeight - oMask.offsetHeight) ) {
+					minBoxTop = oMinBox.clientHeight - oMask.offsetHeight;
+				}
+				//移动mask
+				oMask.style.left = minBoxLeft + "px";
+				oMask.style.top = minBoxTop + "px";
+				
+				//求其比值
+				var percentX = minBoxLeft/(oMinBox.offsetWidth - oMask.offsetWidth);
+				var percentY = minBoxTop /(oMinBox.offsetHeight - oMask.offsetHeight);
+
+                //方向相反，小图片鼠标移动方向与大图片相反，故而是负值
+				oMaxImg.style.left = -percentX * (oMaxImg.offsetWidth - oMaxBox.offsetWidth) + "px";
+				oMaxImg.style.top = -percentY * (oMaxImg.offsetHeight - oMaxBox.offsetHeight) + "px";
+				// 移动大图
+				//oMaxImg.style.left = -(minBoxLeft*2.5) +"px";
+				//oMaxImg.style.top = -(minBoxTop*2.5) +"px";
+				
+			}
+		</script>
+	</body>
+</html>

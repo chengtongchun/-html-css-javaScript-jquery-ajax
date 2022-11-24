@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url(./img/猫咪.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-size:22px;
+            
+            /* background-position: center center; */
+        }
+        p{
+            white-space:pre-wrap;   
+            color:white;
+            text-shadow: 0px 0px 10px greenyellow;
+        }
+        /* 第四题 */
+        #four{
+            background-color: #f5f5f5;
+            display:flex;
+            flex-direction: column;
+            justify-content:center;align-items: center;
+            width:100%;height: 100%;
+            padding-bottom: 50px;
+        }
+        h1 {
+        color: rgb(179, 131, 226);
+        font-size: 10rem;
+        text-align: center;
+        opacity: 0.4;
+        }
+
+        form {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 100%;
+        width: 400px;
+        }
+
+        .input {
+        border: none;
+        color: #444;
+        font-size: 2rem;
+        padding: 1rem 2rem;
+        display: block;
+        width: 100%;box-sizing: border-box;
+        }
+
+        .input::placeholder {
+        color: #d5d5d5;
+        }
+
+        .input:focus {
+        outline-color: rgb(179, 131, 226);
+        }
+
+        .todos {
+        background-color: #fff;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        }
+
+        .todos li {
+        border-top: 1px solid #e5e5e5;
+        cursor: pointer;
+        font-size: 1.5rem;
+        padding: 1rem 2rem;
+        }
+
+        .todos li.completed {
+        color: #b6b6b6;
+        text-decoration: line-through;
+        }
+
+        small {
+        color: #b5b5b5;
+        margin-top: 3rem;
+        text-align: center;
+        }
+        /* #form{
+            width: 400px;
+        }
+        #input{
+            width:100%;
+            height:70px;
+            box-sizing: border-box;
+            font-size:30px;
+            padding:5px 25px;
+            box-shadow: 0px 0px 10px gainsboro;
+            border:0px solid blueviolet;
+            display: block;border: none;
+        }
+        #input::placeholder{
+            color:#d5d5d5;
+        }
+        #input:focus{
+            border:0px solid blueviolet;
+
+        }
+        small{
+            text-align: center;
+        } */
+        /* 第五题 */
+        #add{
+            width:300px;
+            margin:0 auto;
+            border-collapse: collapse;
+            text-align: center;
+            
+        }
+        #add>tbody>tr>td{padding:0px;position: relative;}
+        #add>tbody>tr>td>input{
+            width:95%;
+            height:100%;
+            display: block;
+            font-size: 18px;
+        }
+        #add>tbody>tr>td span{
+            z-index: 5;position: absolute;top:-5px;font-size: 10px;color:red
+        }
+        #tables{
+            width:600px;
+            border:1px solid pink;
+            margin:0 auto;
+            text-align: center;
+            border-collapse: collapse;
+            box-shadow: 0px 0px 10px gray;
+        }
+        button{
+            width:150px;
+            height:40px; border-radius: 5px;text-align: center;
+            display:block;margin:10px auto;border:none;
+            background-color:gainsboro;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <p class="title">作业</p>
+    <p class="title"> 1.childNodes和children的区别
+        childNodes和children都是所有的子节点
+        childNodes所有的子节点中包含了text空格,children不包含text空格
+    </p>
+    <p class="title">2.nextSibling和nextElementSibling的区别
+        nextSibling和nextElementSibling都是下一个节点
+        nextSibling中下一个有可能是text空格，nextElementSibling下一个节点没有text空格
+    </p>
+    <p class="title">3.创建元素的三种方式
+        (1)createElement (2)innerHTML拼接字符串 (3)document.write(html)
+    </p>
+    <p class="title">4.留言板</p>
+    <div id="four">
+        <h1>todos</h1>
+        <form id="form">
+            <input type="text" class="input" id="input" placeholder="Enter your todo" autocomplete="off">
+
+            <ul class="todos" id="todos"></ul>
+        </form>
+        <small>Left click to toggle completed. <br> Right click to delete todo</small>
+
+    </div>
+    <p class="title">5.完成动态生成表单</p>
+    <table id="add" border="1">
+        <tbody>
+            <tr><td>姓名</td><td><input type="text" id="name" placeholder="姓名"><span></span></td></tr>
+            <tr><td>电话</td><td><input type="number" id="dh" placeholder="电话"><span></span></td></tr>
+            <tr><td>话费</td><td><input type="number" id="hf" placeholder="话费"><span></span></td></td></tr>
+            <tr><td colspan="2"><button id="five_button">添加</button></td></tr>
+        </tbody>
+    </table>    
+    <table id="tables" border="1">
+        <thead>
+            <tr>
+                <th><input type="checkbox" name="qaun" id="quan"></th>
+                <th>姓名</th>
+                <th>电话</th>
+                <th>话费</th>
+            </tr>
+        </thead>
+        <tbody> 
+            <!-- <tr>
+                <td><input type="checkbox"></td>
+                <td>程某</td>
+                <td>18476617483</td>
+                <td>38.5</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>程某某</td>
+                <td>17395160134</td>
+                <td>38.5</td>
+            </tr> -->
+        </tbody>
+    </table>
+    <script>
+        const log=(msg)=>console.log(msg);
+        //第四题
+        {
+            let input=document.getElementById("input");//表单里的input
+            let form=document.getElementById("form");//表单
+            let todos=document.getElementById("todos");//添加进去的ul
+            let plc=input.placeholder;
+            const todoJs=JSON.parse(localStorage.getItem("todoJs"));
+            if(todoJs!=null){//刷新之前ul里的东西
+                for(var i=0;i<todoJs.length;i++){
+                    var li=document.createElement("li");
+                    li.innerText=todoJs[i].text;
+                    if(todoJs[i].completed==true){
+                        li.classList.add("completed");
+                    }
+                    todos.appendChild(li);
+                }
+                var lis=todos.getElementsByTagName("li");
+                for(var i=0;i<lis.length;i++){
+                    lis[i].addEventListener('click',(ev)=>{
+                       if(ev.target.className=="completed"){
+                            ev.target.classList.remove("completed");
+                        }else{
+                            ev.target.classList.add("completed");
+                        }
+                        updateLs();
+                    })
+                    lis[i].addEventListener('contextmenu',(ev)=>{
+                        ev.preventDefault();
+                        todos.removeChild(ev.target);
+                        updateLs();
+
+                    })
+                }
+
+            }
+            var dates={value:null};
+            form.addEventListener('submit',e=>{//回车添加事件
+                e.preventDefault();
+                if(input.value.length>=1){
+                    dates.value=input.value;//保存文本框内容
+                    add(dates.value);
+                }
+                let trs=todos.getElementsByTagName("li");
+           
+            })
+            function add(val){//添加
+                var li=document.createElement("li");
+                li.innerHTML=val;
+                
+                li.addEventListener('click',(ev)=>{
+                    if(li.className=="completed"){
+                        li.classList.remove("completed");
+                    }else{
+                        li.classList.add("completed");
+                    }
+                })
+                li.addEventListener('contextmenu',(ev)=>{
+                    ev.preventDefault();
+                    todos.removeChild(li);
+                })
+                todos.appendChild(li);
+                input.value="";
+                input.placeholder=plc;
+                updateLs();
+            }
+            function updateLs(){//保存ul到本地
+                // todoJs
+                var todosEl=todos.getElementsByTagName("li");
+                const todoS=[];
+
+                for(var i=0;i<todosEl.length;i++){
+                    todoS.push({
+                        text:todosEl[i].innerText,
+                        completed:todosEl[i].classList.contains('completed')
+                    })
+                }
+                localStorage.setItem("todoJs",JSON.stringify(todoS));
+            }
+        }
+        // 第五题
+        {
+        var dates=[
+            {name:"程某",dh:18476617483,hf:123},
+            {name:"程某某",dh:17395160134,hf:123},
+            {name:"程某",dh:18476617483,hf:123}
+        ];
+        let tables=document.getElementById("tables");//话费表格
+        let tbody=document.querySelector("#tables>tbody");//话费表格下的tbody
+        dates.forEach((d,index)=>{
+            let tr=document.createElement("tr");
+            tr.innerHTML="<td><input type='checkbox' onclick='qx()'></td><td>"+d.name+"</td><td>"+d.dh+"</td><td>"+d.hf+"</td>"
+            tbody.appendChild(tr);   
+        })
+        let tr=tbody.getElementsByTagName("tr");//tbody下的所有tr
+        let fbu=document.getElementById("five_button");//添加按钮
+       
+        fbu.onclick=function(){
+            var name=document.getElementById("name");
+            var dh=document.getElementById("dh");
+            var hf=document.getElementById("hf");
+            
+           if(name.value.length>0 && dh.value.length==11 && hf.value.length>0){
+                let tr=document.createElement("tr");
+                tr.innerHTML="<td><input type='checkbox' onclick='qx()'></td><td>"+name.value+"</td><td>"+dh.value+"</td><td>"+hf.value+"</td>"
+                tbody.appendChild(tr);
+                name.nextElementSibling.innerText="";
+                dh.nextElementSibling.innerText="";
+                hf.nextElementSibling.innerText="";
+            }
+            if(name.value.length<1){console.log(name.nextElementSibling)
+                name.nextElementSibling.innerText="不得为空";
+            }
+            if(dh.value.length<1){
+                dh.nextElementSibling.innerText="不得为空";
+            }
+            if(dh.value.length<11){
+                dh.nextElementSibling.innerText="电话位数不够";
+            }
+            if(hf.value.length<1){
+                hf.nextElementSibling.innerText="不得为空";
+            }
+        }
+        let quan=document.getElementById("quan");
+        quan.onclick=function(){
+            if(this.checked){
+                for(var i=0;i<tr.length;i++){
+                    tr[i].firstElementChild.firstElementChild.checked=true;
+                }
+            }else{
+                for(var i=0;i<tr.length;i++){
+                    tr[i].firstElementChild.firstElementChild.checked=false;
+                }
+            }
+        }
+        for(var i=0;i<tr.length;i++){
+            tr[i].firstElementChild.firstElementChild.onclick=qx;
+        }
+        function qx(){
+            var flag=true;
+            for(var i=0;i<tr.length;i++){
+                if(tr[i].firstElementChild.firstElementChild.checked==false){
+                    flag=false;
+                }
+            }
+            if(flag){
+                quan.checked=true;
+            }else{
+                quan.checked=false;
+            }
+        }
+        function span(){
+            var name=document.getElementById("name");
+            var dh=document.getElementById("dh");
+            var hf=document.getElementById("hf");
+            if(name.nextElementSibling.innerText.length>0){
+                name.nextElementSibling.innerText="";
+            }
+            if(dh.nextElementSibling.innerText.length>0){
+                dh.nextElementSibling.innerText="";
+            }
+            if(hf.nextElementSibling.innerText.length>0){
+                hf.nextElementSibling.innerText="";
+            }
+        }
+        setTimeout(span,5000);
+    }
+    </script>
+</body>
+</html>

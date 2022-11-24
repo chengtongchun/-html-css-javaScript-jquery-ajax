@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./清除html默认样式/Normalize.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+</head>
+
+<body>
+<!-- 创建一个黑色背景白色文本的反向导航条navbar-inverse -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header"><!-- 这是响应式导航条，在页面宽度低于标准后，其他内容都隐藏，而仅留下的一个按钮，点击按钮就垂直打开导航栏。-->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar"><!-- 点击这个按钮，会触发这id#navbar的元素 -->
+                    <span class="sr-only">我是四条线</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">我的logo</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav" id="menu_show">
+                    <li><a href="">首页</a></li>
+                    <li><a href="#">关于我们</a></li>
+                    <li><a href="#">课程中心</a></li>
+                    <li><a href="#">师资力量</a></li>
+                    <li><a href="#">新闻中心</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">登录</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>我的介绍</h1>
+            <p>呵呵，我是老大。。。。。。。</p>
+            <p>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    Launch demo modal
+                  </button>
+            </p>
+        </div>
+    </div>
+<!-- 对话框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">我的原型</h4>
+        </div>
+        <div class="modal-body">
+          <form action="" class="form-horizontal">
+            <div class="form-group">
+                <label for="exampleInputEmail1">我的email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">我的电话</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputFile">我的照片</label>
+                <input type="file" id="exampleInputFile">
+                <p class="help-block">要看帅照.</p>
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary">保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--对话框结束-->
+  <!--滑动-->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">
+                <h2>java介绍</h2>
+                <p>Java语言是由Sun Microsystems公司于1995年5月推出的Java程序设计语言（以下简称Java语言）和Java平台的总称。</p>
+                <p><a class="btn btn-default" href="#" role="button">看细节 &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>java介绍</h2>
+                <p>Java语言是由Sun Microsystems公司于1995年5月推出的Java程序设计语言（以下简称Java语言）和Java平台的总称。</p>
+                <p><a class="btn btn-default" href="#" role="button">看细节 &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>java介绍</h2>
+                <p>Java语言是由Sun Microsystems公司于1995年5月推出的Java程序设计语言（以下简称Java语言）和Java平台的总称。</p>
+                <p><a class="btn btn-default" href="#" role="button">看细节 &raquo;</a></p>
+            </div>
+        </div>
+
+        <hr>
+
+        <footer>
+            <p>&copy; 我的公司.</p>
+        </footer>
+    </div>
+
+    <script src="./js/jquery-1.10.1.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

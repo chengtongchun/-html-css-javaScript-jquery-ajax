@@ -1,0 +1,45 @@
+﻿第一章 javascript基础知识wwh
+1.1Web前端有三层 结构 样式 行为
+HTML：描述页面结构CSS：描述样式（美化页面）   JavaScript：描述行为（提升用户体验）
+
+为什么学习JavaScript 前端开发验证表单、制作特效等 vue react等的基础
+特点
+在HTML页面中添加互交行为。
+一种脚本语言，语法与Java类似。
+一种解释性语言，边执行边解释。
+    简单易学，交互性强
+js的组成:ECMAScript 文档对象模型（DOM）浏览器对象模型（BOM）
+ECMAScript国际脚本语言标准，最新ECMAScript6  以后都用年份命名如ES2020
+ES6规定了js组成部分：1.语法2.变量和数据类型3.关键字和保留字4.操作符5.控制语句6.对象
+html中js的三种方式
+	1.行内onClick="javascript:alert('欢迎');"
+  
+	 2.<script>{ } </script>
+
+       3.独立的js文件<script src="js/1.js" [type="text/javascript"] [async异步加载][ defer延迟]></script>
+
+        区别:延迟会按在文档里的出现顺序执行   异步脚本在它们载入后执行，但是不能保证执行顺序。
+js输出
+   document.write('html') 
+   alert警告  console.log 控制台调试用的
+   操作dom对象var e=document.getElementByID，e.innerText=''
+   输入框var color = prompt("请输入你喜欢的颜色","红色"); 
+   确认框var flag=confirm("确认要删除此条信息吗?")
+1.2.2 注释 分行 空白 ,  {}
+     /*多行*/  //单行  ;可有可无但推荐必须有  空白随意  {}语句块  \分行
+
+1.2.3 变量的声明和赋值
+   var 变量名；
+  变量名由数字、字母、下划线和“$”组成首字母不能数字；区分大小写；
+  基本类型：undefined未定义类型  number数值类型  String字符串类型  boolean布尔值 object对象类型
+  用typeof判断值或变量的类型
+  变量的声明 
+   var str声明未初始值，值为undefined;   str="cjy"不声明 console.log(str)会出错
+   null对变量一个空值 注意与undefined的区别
+   好的编程习惯：在代码开始处，统一声明。
+   声明提升：
+      先预编译代码把所有声明的变量，提升到当前变量所在的作用域最前边开始解析
+     console.log(b);//报错  b变量找不到 未声明
+     console.log(c);//undefined  声明了但是找不到值
+     var c; c=10; //变量的赋值发生在JS的执行期 逐行执行
+开发者工具:f12打开控制台  源代码里片段里面写代码

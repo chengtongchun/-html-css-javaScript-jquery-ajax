@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            color:white;
+            background-color: #4f4f4f;
+        }
+        .title{
+            white-space:pre-wrap;
+        }
+        /* 第四题 */
+        #four {
+            width: 800px;
+            /* height: 500px; */
+            overflow: hidden;
+        }
+        #left {
+            width: calc(30% - 2px);
+            /* height: 100%; */
+            background: skyblue;
+            float: left;
+            background-image: url(./img/好色之徒/好色之徒8.jpg);
+            height:500px;
+        }
+        #resize {
+            width: 2px;
+            /* height: 100%; */
+            cursor: w-resize;
+            float: left;
+            height:500px;
+        }
+
+        #right {
+            float: right;
+            width: 70%;
+            /* height: 100%; */
+            background: tomato;
+            background-image: url(./img/好色之徒/好色之徒9.jpg);
+            height:500px;
+        }
+        /* 第五题 */
+        #five{
+            display: flex;
+        }
+        #imgLeft{
+            width:600px;
+            height:300px;
+            float:left;
+            background-color: yellowgreen;
+            margin:0 10px;
+            position: relative;
+        }
+        #imgLeft>img{
+            width:100%;height:100%;
+            position: absolute;
+        }
+        /* 放大镜 */
+        #big{
+            width:100px;height:100px;
+            position: absolute;z-index: 3;
+            background: #000;opacity: 0.3;
+            display: none;
+        }
+        #imgRight{
+            width:600px;
+            height:300px;
+            float:left;
+            display: none;
+            overflow: hidden;
+
+            position:relative;
+        }
+        #imgRight>img{
+            width:2980px;height:1500px;            position: absolute;
+
+        }
+    </style>
+</head>
+<body>
+    <p class="title">练习</p>
+    <p class="title">1.clientWidth offsetWidth scrollWidth getBoundingClientRect().width都是获取元素宽度 它们的区别是
+        clicentWidth是padding加内容，不包括隐藏部分和滚动条；
+        offsetWidth是整个盒子可见部分（不包括margin），包括滚动条；
+        scrollWidth在clicentWidth基础上加上不可见内容，滚动条
+        getBoundingClientRect().width和offsetWidth一样
+    </p>
+    <p class="title">2.box-sizing: border-box和content-box的区别
+        border-box是整个盒子加起来的宽度
+        content-box是内容的宽度
+    </p>
+    <p class="title">3.鼠标的clientX offsetX pageX的区别
+        clientX:设置或获取鼠标指针位置相对于当前窗口的 x 坐标，鼠标在页面上可视区域的位置,从浏览器可视区域左上角开始,即是以浏览器滑动条此刻的滑动到的位置为参考点,随滑动条移动 而变化.
+        offsetX 设置或获取鼠标指针位置相对于触发事件的对象的 x 坐标
+        PageX:pageX指的是鼠标指针位置相对于整个页面的x坐标。其中就包括滚动条移动的距离。鼠标在页面上的位置,从页面左上角开始,即是以页面为参考点,不随滑动条移动而变化
+    </p>
+    <p class="title">4.完成拖拽</p>
+    <div id="four">
+        <div id="left">左</div>
+        <div id="resize"></div>
+        <div id="right">右</div>
+    </div>
+    <p class="title">5.完成放大镜</p>
+    <div id="five">
+        <div id="imgLeft">
+            <img src="img/步行.jpg" id="img" alt="啊哦哦，图片不见了" title="放大镜" ><!-- 原图 -->
+            <div id="big"></div><!-- 放大镜 -->
+        </div>
+        <div id="imgRight">
+            <img src="" id="img2" alt="啊哦哦，图片不见了" title="放大镜" ><!-- 放大的图 -->
+        </div>
+    </div>
+    <script>
+        // 第四题
+        {
+            let box=document.getElementById("four");
+            let left=document.getElementById("left");
+            let right=document.getElementById("right");
+            let resize=document.getElementById("resize");
+            resize.onmousedown=function(ev){//鼠标按下事件
+                let ol=ev.clientX-resize.offsetLeft;
+                let ot=ev.clientY-resize.offsetTop;
+                document.onmousemove = function (ev) {
+                   let x=ev.clientX-ol;
+                   let y=ev.clientY-ot;
+                   //最大移动距离
+                   let maxX = box.clientWidth - resize.offsetWidth;//x
+                   let maxY = box.clientHeight - resize.offsetHeight;//y
+                    if (x < 150) x = 150;//x
+                    if (x > maxX - 150) x = maxX - 150;//x
+                    if(y<50)y=50;//y
+                    // if(y>maxY-50)y=maxY-50;//y
+                    resize.style.left=x+"px";//x
+                    resize.style.top=y+"px";//y
+                    resize.style.height=y+"px";
+                    left.style.width=x+"px";//x
+                    left.style.height=y+"px";//y
+                    right.style.width=box.clientWidth-x-5+"px";//x
+                    right.style.height=y+"px";//y
+                    box.style.height=y+"px";
+                    
+                    console.log(x+","+y)
+                }
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                }
+                 //解决鼠标丢失问题
+                resize.setCapture && resize.setCapture();//兼容浏览器写法
+                return false;//阻止mousedown的默认行为
+            }
+        }
+        //第五题
+        {
+            const log=(...msg)=>console.log(...msg);
+            let imgLeft=document.getElementById("imgLeft");//原图div
+            let img=document.getElementById("img");//原图
+            let big=document.getElementById("big");//放大镜
+            let imgRight=document.getElementById("imgRight");//放大图div;
+            // // 2.鼠标移动的时候
+            imgLeft.addEventListener('mousemove',function(e){
+                big.style.display="block";imgRight.style.display="block";
+                  //鼠标居中
+                var x = e.clientX-imgLeft.getBoundingClientRect().left -big.offsetWidth/2;//offsetWidth获取 
+                var y = e.clientY-imgLeft.getBoundingClientRect().top-big.offsetHeight/2;//offsetHeight/2和OffsetWidth/2鼠标居中
+                if(x<0){
+                    x=0;
+                }
+                if(x>(imgLeft.offsetWidth-big.offsetWidth)){
+                    x=imgLeft.offsetWidth-big.offsetWidth;
+                }
+                if(y<0)y=0;
+                if(y>(imgLeft.offsetHeight-big.offsetHeight))y=imgLeft.offsetHeight-big.offsetHeight;
+                big.style.left=x+"px";
+                big.style.top=y+"px";
+                // 获取原图
+                var src=img.src;
+                var img2=document.querySelector("#imgRight>img");
+                img2.src=src;
+               
+                //求其比值
+				var percentX = x/(imgLeft.offsetWidth - big.offsetWidth);
+				var percentY = y /(imgLeft.offsetHeight - big.offsetHeight);
+                 //方向相反，小图片鼠标移动方向与大图片相反，故而是负值
+                
+				img2.style.left = -percentX * (img2.offsetWidth - imgRight.offsetWidth) + "px";
+				img2.style.top = -percentY * (img2.offsetHeight - imgRight.offsetHeight) + "px";
+            })
+            imgLeft.addEventListener('mouseout',function(e){
+                big.style.display="none";imgRight.style.display="none";
+            })
+        }
+    </script>
+</body>
+</html>

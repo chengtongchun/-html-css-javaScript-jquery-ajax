@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./css/fullpage.min.css">
+    <style>
+        img{
+            display: block;
+            margin:0 auto;
+        }
+        .section>img,.slide>img{
+            height:100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="fullpage">
+        <div class="section " id="section0"><img src="./img/bac.e/5.jpg" alt="啊，哦，图片不见了"></div>
+        <div class="section active" id="section1">
+            <div class="slide"><img src="./img/bac.e/1.jpg"></div>
+            <div class="slide active"><img src="./img/bac.e/2.jpg"></div>
+            <div class="slide"><img src="./img/bac.e/3.jpg"></div>
+            <div class="slide"><img src="./img/bac.e/4.jpg"></div>
+        </div>
+        <div class="section " id="section2"><img src="./img/bac.e/6.jpg"></div>
+        <div class="section " id="section3"><img src="./img/bac.e/7.jpg"></div>
+        <div class="section " id="section4"><img src="./img/bac.e/8.jpg"></div>
+    </div>
+    <script src="./js/jquery-1.10.1.js"></script>
+    <script src="./js/fullpage.min.js"></script>
+    <script>
+       var myFullpage = new fullpage('#fullpage', {
+        sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff']
+        // licenseKey: 'treOUR_KEY_HERE'
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿Math数学
+     方法有abs求绝对值  exp求幂 
+     取整区别：floor向下取整 ceil向上取整  round四舍五入 trunc去掉小数位 1.1 1.9  -1.5
+     random伪随机数0-1  sqrt开平方 max求最大  min求最小
+     返回x-y之间的随机数Math.floor(Math.random() * (max - min + 1)) + min; 
+
+String字符串对象：
+     字符串的不可变性，不要大量的拼接字符串
+       var str='';
+        for (var i = 1; i <= 1000000000; i++) {
+            str += i;
+        }
+     属性length返回长度
+    方法
+     测试var str = "To be, or not to be, that is the question.";
+     字符位置indexOf首次  lastIndexOf 找不到返回-1    
+        找str中所有o出现的次数      
+     字符: charAt字符  charCodeAt字符的ASCII值:判断用户按下了那个键  fromCharCode从ascii建字符
+      //根据身份证号判断性别 第16位是性别 双数代表女，单数代表男
+       var str = "431103200506018771";var sex = str.charAt(16);if(sex%2==0) console.log('女');
+     包含不  includes  startsWith endsWith 
+      url="https://www.baidu.com";
+     去空白  trim()头尾  trimStart()头 trimEnd尾
+     填字符padStart padEnd     
+     转换 toLowerCase小写 toUpperCase大写   split切分 
+     截取 substr  substring   参数不同
+            splice要修改原字符串 slice新的字符串
+      negative负数
+     要正则匹配的search搜 replace替换replaceAll  match和matchAll
+作业:
+     1.取整函数有哪些，区别是
+     2.产生10个1-100间的随机数并放入数组，用数组的sort排序
+     3.var str = "431103200506018771" 取出出生年月和性别
+     4.如何判断url是否是https开头 .cn结尾
+     5.substr和substring  splice和slice 的区别
+
+substr和substring的区别：第二位参数不同，substr第二位是截取数量，substring第二位是截取结束位置（不包括本身）
+
+splice和slice的区别：splice会改变原数组，slice返回一个新数组
+
+     6.生成一个8位随机密码
+let span=document.getElementById("sixSpan");
+               let password=Math.random().toString(36).slice(2).substr(0,8);
+               span.innerText="\t"+password;
+               span.style.marginLeft="10px";span.style.borderRadius="5px"
+               span.style.backgroundColor="#"+(Math.random().toString(16).slice(2).substr(0,6));
+          
+     7.生成一个随机验证码，要求每个字的颜色不同
+let span=document.getElementById("sevenSpan");
+               span.innerText="";
+               let pwd=Math.random().toString(36).slice(2).substr(0,4);
+               let ar=pwd.split("");
+               for(var i=0;i<ar.length;i++){
+                    let span1=document.createElement("span");
+                    span1.style.color="#"+(Math.random().toString(16).slice(2).substr(0,6));
+                    span1.innerText=ar[i];
+                    span.appendChild(span1);
+               }

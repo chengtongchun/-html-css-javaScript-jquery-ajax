@@ -1,0 +1,26 @@
+﻿操作节点样式 3种方法
+     1.元素.style.backgroundColor驼峰命名法  width宽高 display显示   
+     2. className   div.className=; div.className+="" 
+        密码强度认证：不能为空 长度8-20  有字母数字下划线/^[a-zA-z0-9_]{8,20}$/
+        blur
+        用红底绿底蓝底表示 密码的弱中强
+     3. classList  
+      属性length
+      通过add("样式名") remove移除 toggle切换 contains replace修改样式
+          var oBox = document.querySelector('.box');
+          var list = oBox.classList;
+          document.onclick = function(){
+            list.add("red","width");//加了red width样式
+           list.toggle("height");//切换height样式
+           list.toggle("width",list.length<4?true:false);
+           oBox.innerHTML = list.item(2);
+           console.log(list.contains("width"))
+       }
+     评分
+        思路1.给每个星星加好评值和事件
+              2.遍历星星，如果当前索引小于点击的好评值就给星
+作业
+  1.密码强度认证 用红底绿底蓝底表示
+  2. 完成好评条
+  3.表格鼠标移到变色mousemove事件pink
+  4. 完成步骤条

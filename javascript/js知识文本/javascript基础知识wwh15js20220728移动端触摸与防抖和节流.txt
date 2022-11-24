@@ -1,0 +1,35 @@
+移动端手指触摸事件:
+     touchstart  touchmove  touchend手指从屏幕上离开
+     每个触摸事件都有三个列表：
+       touches所有触摸点   targetTouches绑定事件结点上的触摸点的集合列表
+       changedTouches: 触发事件时改变的触摸点的集合
+      触摸移动div：1.div.touchstart中记录x,y,offsetLeft,offsetTop 2.div的touchmove中计算
+        mx= e.targetTouches[0].pageX - sx;  this.style.left =left +mx;
+节流与防抖 
+  优化高频率执行js的手段，像oninput/onkeypress/onscroll/onresize 等触发非常频繁
+  防抖:规定时间内函数只能执行一次  公交司机要等最后一个人进入才能关门
+     document.onmousemove = debounce(log, 1000)
+       function debounce(fn, delay=1000) {
+              let time = null;
+            return  function(...args) {
+               if (time !== null) {clearTimeout(time);}
+               time = setTimeout(() => {fn(args);}, delay)
+             }
+       }
+  节流：一段时间内不管你触发几次事件，只会执行一次   进地铁站过闸机2秒进1个人     
+        function throttle(fn, delay = 1000) {
+            let last = 0;//保留上次时间
+            return function (...arg) {
+                var now = new Date().getTime();
+                if (now - last > delay) {
+                    fn(arg);
+                    last = new Date().getTime();//重新开始计时
+                }
+            }
+        }
+   防抖的应用：搜索框搜索输入；手机号、邮箱验证输入检测；窗口大小Resize。
+   节流的应用：滚动加载；高频点击提交；表单重复提交
+练习
+  1.写触摸移动
+  2.节流和防抖的区别 
+  3.实现节流防抖函数 

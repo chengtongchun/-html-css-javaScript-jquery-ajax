@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			
+			#outer{
+				border: 1px solid black;
+				width: 606px;
+				border-radius: 20px 20px 0 0 ;
+			}
+			#menu_box{
+				overflow: hidden;
+				border-radius: 20px 20px 0 0 ;
+			}
+			#menu_box>li{
+				cursor: pointer; /* 鼠标悬停时候出现一个小手 */
+				float: left;
+				width: 200px;
+				border: 1px solid black;
+				height: 50px;
+				text-align: center;
+				line-height: 50px;
+				font-size: 28px;
+				background-color: #ccc;
+				color: white;
+				font-weight: bold;
+			}
+			
+			#menu_box>.show{
+				background-color: red;
+			}
+			
+			#context_box>li{
+			
+				display: none;
+				height: 300px;
+				text-align: center;
+				line-height: 300px;
+				font-size: 50px;
+				border: #000000 1px solid;
+			}
+			
+			#context_box>.show{
+				display: block;
+			}
+			
+			
+			
+		</style>
+	</head>
+	<body>
+		
+		
+		<div id="outer">
+			<ul id="menu_box">
+				<li >标题1</li>
+				<li class="show">标题2</li>
+				<li>标题3</li>
+			</ul>
+			
+			
+			<ul id="context_box">
+				<li >内容1</li>
+				<li class="show">内容2</li>
+				<li>内容3</li>
+			</ul>
+		</div>
+		
+		
+		<script type="text/javascript">
+			//获取标题元素
+			var menuBox = document.getElementById("menu_box");
+			var menuBtns = menuBox.getElementsByTagName("li");
+			
+			//获取内容元素
+			var contextBox = document.getElementById("context_box");
+			var contextChilds = contextBox.getElementsByTagName("li");
+			
+			//将元素集合转换成数组
+			var menuBtnsArr = Array.from(menuBtns);
+			[].forEach.call(menuBtns,(item)=>{
+				item.onclick = function() {
+					//this 表示当前元素
+					
+					for (var i = 0; i < menuBtns.length; i++) {
+						if(this == menuBtns[i]){
+							//获取当前元素所在的位置 i
+							this.className = "show";
+							contextChilds[i].className = "show";
+						} else {
+							menuBtns[i].className = "";
+							contextChilds[i].className = "";
+						}
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         body{
+            background-image: url(./img/枫叶.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            background-color:cadetblue;
+        }
+        .title{
+            white-space: pre-wrap;
+        }
+        button{
+            width:150px;height:45px;
+        }
+    </style>
+</head>
+<body>
+    <p class="title">练习</p>
+    <p class="title">1.宏队列和微队列是什么？分别放哪些任务
+        宏队列：用来保存待执行的宏任务，比如定时器回调、DOM事件回调、ajax回调
+        微队列：用来保存待执行的微任务，比如promise的回调、Mutation回调。I/O操作、UI渲染
+    </p>
+    <p class="title">2.下面代码输出什么
+        const { log } = console;
+         Promise.reject('打游戏').catch(log);
+         Promise.resolve('写代码').then('看视频').then(log)
+         setTimeout(() => {
+             Promise.resolve("蹲坑").then(log);
+             Promise.reject('表白').then(log.log);
+             setTimeout(() => log('看手机'), 0);
+             log('吃辣条');
+         }, 0);
+         window.onload = log('背单词');
+         log('开电脑');
+         //输出：
+         背单词
+         开电脑
+         打游戏
+         写代码
+         吃辣条
+         蹲坑
+         表白
+         看手机
+    </p>
+    <p class="title">3.async只能放在什么前面，await只能放在async函数里面
+        async只能放在函数前面，await只能放在async函数里面
+    </p>
+    <p class="title">4.用async和await封装ajax
+        const { log } = console;
+        const url = "http://127.0.0.1:5500/1.txt";
+        async function ajax(method, url) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open(method, url);
+                xhr.onload = () => resolve(xhr.responseText)
+                xhr.onerror = () => reject(xhr.statusText)
+                xhr.send()
+            });
+        }
+        async function getData() {
+            let data = await ajax('get', url);
+            log(data);
+        }
+        getData();
+    }</p>
+    <p class="title">
+        
+        //generator生成器
+
+        1.下列代码输出什么
+        function* gen(x){
+            let y=2*(yield(x+1))
+            let z=yield(y/3)
+            return x+y+x
+        }
+        let it=gen(6)
+        console.log(it.next())//输出：7
+        console.log(it.next(2))//输出：1.3333333333333333
+        console.log(it.next())//输出：16
+
+    </p>
+    <p class="title">2.写抽奖代码 显示在div中</p>
+    <button id="chou">抽奖</button>
+    <div></div>
+    <script>
+        //第二题
+        {
+            const { log } = console;
+            Promise.reject('打游戏').catch(log);
+            Promise.resolve('写代码').then('看视频').then(log)
+            setTimeout(() => {
+                Promise.resolve("蹲坑").then(log);
+                Promise.reject('表白').then(log,log);
+                setTimeout(() => log('看手机'), 0);
+                log('吃辣条');
+            }, 0);
+            window.onload = log('背单词');
+            log('开电脑');
+        }
+        //第四题
+       {
+        const {log}=console;
+        const url="http://127.0.0.1:5500/get/";
+        async function ajax(method,url){
+            return new Promise((resolve,reject)=>{
+                const xhr=new XMLHttpRequest();
+                xhr.open(method,url);
+                xhr.onload=()=>resolve(xhr.responseText)
+                xhr.onerror=()=>reject(xhr.statusText)
+                xhr.send();
+            })
+        }
+        async function getData(){
+            let data=await ajax('get',url);
+            log(data);
+        }
+        getData();
+       }
+       //generator生成器
+      // 1.
+        {  
+            function* gen(x){
+                let y=2*(yield(x+1))
+                let z=yield(y/3)
+                return x+y+z
+            }
+            let it=gen(6)
+            console.log(it.next())//输出：7
+            console.log(it.next(2))//输出：1.3333333333333333
+            console.log(it.next())//输出：NAN
+        }
+        //2.
+        {
+            var chou=document.getElementById('chou');
+            const {log}=console;
+            var div=document.querySelector("#chou+div");
+            console.log(div)
+            function draw(count){
+                let rd=Math.ceil(Math.random()*100);
+                log('你抽中了'+rd+",还剩"+count+"次机会");
+                div.innerText="你抽中了"+rd+",还剩"+count+"次机会";
+                div.style.color="red";
+            }
+            function* remain(count){
+                while(count>0){
+                    count--;
+                    yield draw(count);
+                }
+            }
+            let rc=remain(10);
+            chou.onclick=function(){
+                rc.next();
+            }
+        }
+    </script>
+</body>
+</html>

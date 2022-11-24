@@ -1,0 +1,349 @@
+1.1什么是 jQuery ?  what why  how
+ jQuery JavaScript 和Query，辅助开发的 js 类库。简化JavaScript 编程，很容易学习
+常见js库：jQuery、Prototype、YUI、Dojo、Ext JS、移动端的zepto
+
+ jQuery 核心思想：写得更少,做得更多 
+        如选择 DOM 元素、操作文档对象、 制作动画效果、事件处理、使用 Ajax 以及其他功能
+
+引入jquery
+    <script src="jquery-1.10.2.min.js"></script>
+测试>$.fn.jquery
+标准写法 $(document).ready(function(){ jquery的代码  });  //相当于DOMContentLoaded
+            $(function(){ jquery的代码  }) 
+      
+核心函数
+    $是jQuery()的缩写 log($)  
+   核心函数的4个作用
+         传入参数为[函数]时：在文档加载完成后执行这个函数
+         传入参数为[HTML字符串]时：根据这个字符串创建元素节点对象
+         传入参数为[选择器字符串]时：根据这个字符串查找元素节点对象
+        
+     传入参数为[DOM对象]时：将DOM对象包装为jQuery对象返回
+       jQuery 对象[object Object] 和    dom对象 [object HTML 标签名 Element]   
+           jq对象就是dom元素的数组+一系列操作元素的方法
+           dom元素到jq转换$('div')    
+          jq转dom元素 $('div') [index] 或$('div') .get(index) 
+
+ 选择元素   :contains(内容选择器)
+   性能比较  $("#id")>标签选择$("p")>$(".class")类>$("[attribute=vale]")性能最低要避免
+   基本选择器 $("*")选取所有元素  $("标签")选择标签   #id选择器    .class选择器   $(this)当前元素 
+   复合选择器$("p,div,span")  层级$("div span")  父子$("div>span")  相邻$("span+p")   所有兄弟$("span ~ p")
+   过滤选择器:first第一个  :last最后一个  :not()不是 :even偶数 :odd奇数 :eq(index)等于  :gt(index)大于  :lt(index)小于  :header所有h标签  :animated 所有动画
+   属性选择器[title]有title属性 [title=cjy]有title并且值等于cjy   [title!=cjy]值不等于cjy  [title^=cjy]属性值是cjy开头  [title$=cjy]属性值是cjy结尾  [title*=cjy]属性值含有cjy	
+   例子   
+      $("ul li:first").css("color", "red");
+      $("ul li:eq(2)").css("color", "blue"); 
+   表单选择{:input,:text,:password,:radio,:checkbox,:submit,:reset,:button,:image,:file}选中所有对应表单输入项
+   表单对象的属性:enabled  :disabled  :checked  :selected
+        $('#btn01').click(function () {
+               slts= $("select option:selected")
+               for(let i=0;i<slts.size();i++){
+                  log($(slts[i]).val())
+               }
+            });
+操作dom
+    获取内容和属性
+          text([val|fn])文本内容  html([val|fn]) HTML内容  val([val|fn|arr])值 
+             回调函数.html(function(i,oldText){}）下标及旧值
+          属性attr( )  removeAttr(name)  prop( )  removeProp()
+          
+  操作元素
+       添加
+         内部插入append(content|fn) appendTo(content)
+                      prepend(content|fn)  prependTo(content)
+         外部插入 after(content|fn)  before(content|fn)
+                       insertAfter(content)   insertBefore(content)
+          包裹
+                   wrap(html|ele|fn)    unwrap()
+                   wrapAll(html|ele)    wrapInner(html|ele|fn)
+       删除
+        a.empty()   把a掏空，把a里面的所有元素都删除 a.html('')
+        a.remove(b)  所有的a，是b的话就会删除  a.remove()删除a	
+           $("p").remove(".italic");删除class="italic" 的所有 <p> 元素
+      替换
+         replaceWith(content|fn) a.replaceWith(b)  把a用b替换
+         replaceAll(selector)    a.replaceAll(b)	  用a替换所有的b
+操作CSS classList.add
+          addClass加一个或多个类removeClass删除一个或多个类    toggleClass切换操作 
+          css设置或返回样式属性
+             $("h1,h2,p").addClass("blue"); 
+             $("p").css({"background-color":"yellow","font-size":"200%"});
+遍历元素
+         元素筛选
+             eq()  first()  last() 
+        向上遍历 DOM 树
+            parent直接父元素   parents所有祖先元素    parentsUntil两个给定元素之间的所有祖先元素
+              $("span").parent().css({"color":"red","border":"2px solid red"});
+              $("span").parentsUntil("div").css({"color":"red","border":"2px solid red"});
+       向下遍历 DOM 树
+            children返回被选元素的
+	find所有直接子元素
+              $("div").find("span").css({"color":"red","border":"2px solid red"});
+       遍历同胞(siblings有相同的父元素)
+            siblings()方法返回被选元素的所有同级元素
+
+            next() 匹配该选择器的下一个同胞元素
+
+            nextAll() 匹配元素集合中每个元素的所有跟随的同胞元素 应用选择器，
+		nextAll(选择器)则将通过检测元素是否匹配来对它们进行筛选。
+
+            nextUntil; 允许我们搜索 DOM 树中的元素跟随的同胞元素，当遇到被该方法的参数所匹配的元素时会停止搜索。
+		返回的新 jQuery 对象包含所有跟随的同胞元素，但不包含被参数匹配的元素。
+
+            prev() 前一个同胞元素，通过选择器进行筛选是可选的
+            prevAll()  每个元素的前一个同胞元素，通过选择器进行筛选是可选的
+            prevUntil() 允许我们在 DOM 树中搜索这些元素前面的同胞元素，直到遇到被选择器（传递到方法中的参数）匹配的元素为止。
+
+事件
+     表单 input事件: blur=>当元素失去焦点时发生 blur 事件。
+	            change=>  input失去焦点的时候才会触发
+	            click  =>单击事件
+	            dblclick =>双击事件
+                            error()  =》元素遇到错误（没有正确载入）时，发生 error 事件
+                            focus() =>当元素获得焦点时，发生 focus 事件。如 $(selector).focus()
+                            focusin(function)  =》当元素（或在其内的任意元素）获得焦点时发生 focusin 事件。与 focus() 方法不同的是，focusin() 方法在任意子元素获得焦点时也会触发。
+                            focusout(function) =》当元素（或在其内的任意元素）失去焦点时发生 focusout 事件 与 blur() 方法不同的是，focusout() 方法在任意子元素失去焦点时也会触发。
+                            select() =>   当 textarea 或文本类型的 input 元素中的文本被选择时，会发生 select 事件。$(selector).select()
+                            submit  =>当提交表单时，会发生 submit 事件。 该事件只适用于表单元素。submit() 方法触发 submit 事件，或规定当发生 submit 事件时运行的函数。
+			$(selector).submit()  		$("form").submit(function(e){alert("Submitted");});
+                            
+	            reset   =>重置表单 $(#test)[0].reset();
+
+                            unload (function)	unload() 方法在 jQuery 版本 1.8 中被废弃，在 3.0 版本被移除。
+			当用户离开页面时，会发生 unload 事件。
+
+			具体来说，当发生以下情况时，会发出 unload 事件：
+
+			点击某个离开页面的链接
+			在地址栏中键入了新的 URL
+			使用前进或后退按钮
+			关闭浏览器
+			重新加载页面
+			unload() 方法将事件处理程序绑定到 unload 事件。
+
+			unload() 方法只应用于 window 对象。
+     键盘 keydown  keypress  keyup
+     鼠标 
+	mousedown鼠标左键点击   mouseup元素上放松鼠标按钮时
+	mouseenter鼠标指针穿过触发  mouseleave鼠标指针离开触发  
+	mousemove鼠标指针在指定的元素中移动时触发 
+	mouseout鼠标指针从元素上移开时  mouseover鼠标指针位于元素上方时  
+
+     窗口 
+	resize 当调整浏览器窗口的大小时，发生 resize 事件。$(selector).resize() $(window).resize(function});
+
+	  scroll   当用户滚动指定的元素时，会发生 scroll 事件。scroll 事件适用于所有可滚动的元素和 window 对象（浏览器窗口）。
+		scroll() 方法触发 scroll 事件，或规定当发生 scroll 事件时运行的函数。 $(selector).scroll()   $(selector).scroll(function)
+  事件绑定
+          $("#box").click(function(){ $(this).css("background-color","yellow"); });
+          $("#box").on("click",function(){$(this).css("opacity","0.1"); })
+          $("#box").hover(function(){log("你进入了"); },function(){log("你离开了!");}).onclick(function(){log("你进入了!"); };
+         绑定多个事件 
+         $("button").bind({
+              click:function(){$("p").slideToggle();},
+              mouseover:function(){$("body").css("background-color","red");},  
+              mouseout:function(){$("body").css("background-color","#FFFFFF");}  
+          });
+          只想绑定一次事件$("ul").one("click",function(){log("你点击了");}) 
+     取消事件
+         $("#box").off("click mouseenter");
+     多个事件的绑定和取消
+         $("#box").bind("click mouseover",function(){$("#box").toggleClass("active");});
+         $("p").on("click dblclick", {foo: "bar"},callback)
+             function callback(event) {alert(event.data.foo);}
+          $("p").off("click dblclick");
+           //可以给事件一个名称空间
+           $("form").on("click.validator", "button", validate);
+           $("form").on("keypress.validator", "input[type='text']", validate);
+           $("form").off(".validator");
+      编码触发事件$("#box").click();   $("#box").trigger("click");  $("#box").triggerHandler("focus");
+
+动作效果
+    隐藏和显示css
+        $("p").hide(); 隐藏  
+        $("p").show(); 显现
+        $("p").toggle();toggle() 方法切换元素的可见状态。如果被选元素可见，则隐藏这些元素，如果被选元素隐藏，则显示这些元素
+
+        $(selector).hide(speed(可选.可能的值：毫秒 （比如 1500）"slow""normal""fast"在设置速度) , callback（可选。hide 函数执行完之后，要执行的函数。除非设置了 speed 参数，否则不能设置该参数。）)
+
+        $("div").hide(1000,"linear",function(){
+	alert("Hide已完成!");}
+         );
+    淡入  fadeIn();使用淡入效果来显示被选元素，假如该元素是隐藏的。   
+
+	$(selector).fadeIn(speed(可选 值：毫秒 （比如 1500）/"slow"/"normal"/"fast"),callback(可选)(除非设置了 speed 参数，否则不能设置该参数。执行函数))
+
+	fadeIn("slow/fast");   fadeIn(3000);毫秒
+
+    淡出  fadeOut 使用淡出效果来隐藏被选元素，假如该元素是隐藏的。	fadeOut和fadeIn搭配
+	$(selector).fadeOut(speed(可选 值：毫秒 （比如 1500）/"slow"/"normal"/"fast"),callback(可选)(除非设置了 speed 参数，否则不能设置该参数。执行函数))
+
+   切换	fadeToggle(speed,callback);	fadeToggle() 方法在 fadeIn() 和 fadeOut() 方法之间切换。注释：隐藏的元素不会被完全显示（不再影响页面的布局
+
+     透明度     fadeTo(speed,opacity,callback);渐变为不透明度（值介于 0 与 1 之间）将被选元素的不透明度逐渐地改变为指定的值。
+		（可选，必选，可选）(speed和callback和上面的一样)(opacity(0.00-1.00))
+
+    上下滑动：
+	slideDown(speed,callback);  通过使用滑动效果，显示隐藏的被选元素。(语法同上)
+
+	slideUp(speed,callback);使用滑动效果，隐藏被选元素，如果元素已显示出来的话 (语法同上)
+
+	slideToggle(speed,callback);通过使用滑动效果（高度变化）来切换元素的可见状态。如果元素已经隐藏，则该效果不产生任何变化，除非规定了 callback 函数	(语法同上)
+    
+    动画：
+	对位置进行操作先把元素的position属性设置为relative、absolute
+
+       .animate(styles,speed,easing,callback)
+
+       如$("div").animate({
+	left:'250px',opacity:'0.5',height:'150px', width:'150px'
+          });
+       使用相对值   width:'+=150px',  height:'toggle'    用预定义的值"show/hide/toggle"
+
+       使用队列:多个animate逐一运行
+             div.animate({
+	left:'100px'
+             },"slow");
+            div.animate({
+	fontSize:'3em'
+             },"slow");});
+
+       stop用于停止动画或效果.stop(stopAll,goToEnd);
+
+       Callback函数在当前动画100%完成之后执行
+
+       链(Chaining)把动作/方法链接在一起，在一条语句中运行多个方法
+             $("#p1").css("color","red").slideUp(2000).slideDown(2000);
+
+操作尺寸
+         width() height()  innerWidth()  outerWidth()   innerHeight()  outerHeight() outerWidth(true)含margin
+         获取$("#box").width(); 设置$("#box").width(300);
+        位置 offset();position()；
+AJAX：
+     异步 JavaScript 和 XML  目的是在不重载全部页面的情况下，实现了对部分网页的更新
+             $("#div1").load("./test.txt");
+             $(selector).load(URL,data,callback);
+             $("#div1").load("test.txt",function(resp,status,xhr){if(status=="success")alert("外部内容加载成功!");
+                if(status=="error") alert("Error: "+xhr.status+": "+xhr.statusText); });
+          HTTP 请求的GET和POST
+             $.get(URL [,data] [,callback] [,dataType]) function(data,status)
+             $.post(URL [, data ] [, callback ] [, dataType ] )
+插件{流行的:jQueryUI,Form,提示信息,jcarousel,Lightbox/Jcrop幻灯片}
+Ajax{XMLHttpRequest对象,异步交互;Ajax.load(),$.get()/$.post(),$.getScript $.getJson $.ajax()
+时间轴,tab切换 ,滑动门,焦点图轮播,导航条菜单,瀑布流,弹出层,倒计时,抽奖
+jQuery Mobile:移动设备模拟器
+用UI 组件:表单,按钮和组按钮,按钮图标,弹窗,列表{视图,内容,过滤}面板和可折叠块,导航条
+
+ jQuery EasyUI
+Bootstrap 来自 Twitter，是目前最受欢迎的前端框架，用于开发响应式布局、移动设备优先的 WEB 项目。
+特点：预编译的 CSS 文件；一个框架、多种设备；功能完备
+使用
+     组成：核心 CSS 文件bootstrap.min.css 主题文件bootstrap-theme.min.css 核心 JavaScript bootstrap.min.js
+     1.下载    2.cdn  3.npm install bootstrap@3
+移动设备优先<meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                             maximum-scale=1.0, user-scalable="no"禁用缩放
+响应式图像<img src="..." class="img-responsive" alt="响应式图像">
+
+从容器开始<div class="container"></div>
+Bootstrap 网格系统：响应式、移动设备优先的流式网格系统，随着屏幕或视口尺寸的增加，系统会自动分为最多12列。
+移动设备优先策略
+   内容：什么是最重要的。布局：优先设计更小的宽度，媒体查询是针对于平板电脑、台式电脑。渐进增强：随着屏幕大小的增加而添加元素。
+一系列包含内容的行和列来创建页面布局。
+     行必须放置在 .container内获得适当的对齐alignment和内边距padding，用行来创建列的水平组。
+     内容放置在列内，列的内边距是内容之间的间隙。通过跨列布局内容大小 如三个相等的列 3个.col-xs-4=12列
+媒体查询
+      /* 超小设备（手机，小于 768px）默认情况下没有媒体查询 */
+     @media (min-width: @screen-sm-min) { ... }/* 小型设备（平板电脑，768px 起） */
+     @media (min-width: @screen-md-min) { ... }/* 中型设备（台式电脑，992px 起） */
+     .col-xs-超小设备  .col-sm-小型设备  .col-md-中型设备 .col-lg-超大设备
+<div class="container">
+   <div class="row">
+      <div class="col-*-*"></div>
+      <div class="col-*-*"></div>      
+   </div>
+   <div class="row">...</div>
+</div>
+标题和文本
+    标题h1 到 h6的样式，内联子标题：两旁添加 <small>或者添加 .small    为了给段落添加强调文本加 class="lead"
+    <small>父的 85%<strong>更粗<em>斜体 写好的类class="text-left"向左对齐text-center居中对齐text-right向右对齐
+     text-muted减弱的 text-primary  text-success  text-info  text-warning  text-danger
+    缩写 <address><strong>公司名</strong><abbr title="电话" class="initialism"加上得更小字体>0755</address>
+    引用<blockquote>用 .pull-right 向右对齐引用
+列表：有序列表ol、无序列表ul和定义列表dl。
+  ul用 .list-unstyled来移除样式用 class .list-inline 把所有的列表项放在同一行中。
+  dl<dt>术语<dd> 描述。.dl-horizontal 排在一行
+Bootstrap 表格
+  标签<table><thead><th><tbody><tr><td><caption>描述或总结
+  类 table横向分隔线 table-striped条纹表格 table-bordered加边框 table-hover鼠标悬停   table-condensed紧凑表格
+   <table class="table table-striped table-bordered table-hover table-condensed">
+   放在<tr>, <th> 和 <td> 类 active   success  info  warning  danger
+   响应式表格把任意table 包在 .table-responsive内
+
+Bootstrap 表单布局：垂直表单（默认），内联表单，水平表单
+垂直表单（默认）
+  <form role="form">
+    <div class="form-group">//获取最佳间距
+      <label for="name">名称</label>
+      <input type="text" class="form-control" id="name" placeholder="请输入名称">
+    </div>
+    <button type="submit" class="btn btn-default">提交</button>
+  </form>
+内联表单:所有元素内联向左对齐的，向 <form class="form-inline">
+水平表单
+  <form class="form-horizontal" role="form">
+    <div class="form-group">
+         <label for="firstname" class="col-sm-2 control-label">名字</label>
+     <div class="col-sm-10">
+      <input type="text" class="form-control" id="firstname" placeholder="请输入名字">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">登录</button>
+    </div>
+  </div>
+</form>
+表单控件: input、textarea、checkbox、radio 和 select  
+     h5:text/password/datetime/date/month/time/week/number/email/url/search/tel 和 color
+     checkbox-inline  radio-inline
+     静态控件在 <p> 上用form-control-static
+表单控件状态
+    禁用 input加 disabled 属性
+    禁用的字段集<fieldset disabled>要禁用的控件
+    验证状态:对父加适当的 class（.has-warning、 .has-error 或 .has-success）即可
+表单控件大小用.input-lg 和 .col-lg-* 来设置表单的高度和宽度 xs sm md lg
+
+Bootstrap 按钮：样式可用于<a>, <button>, 或 <input> 元素上
+按钮样式:
+     .btn基本样式.btn-default默认按钮 .btn-primary未被操作.btn-success成功
+     .btn-info信息.btn-warning谨慎操作.btn-danger危险动作.btn-lin链接
+按钮大小  .btn-lg大按钮.btn-sm小按钮.btn-xs超小按钮.btn-block块级按钮  
+按钮状态  .active被点击.disabled禁用
+<button type="button" class="btn btn-default btn-lg">默认大按钮</button>
+     btn btn-primary btn-lg btn-block块级的原始按钮
+按钮组<div class="btn-group"> 用 .btn-group-lg|sm|xs 来控制按钮组的大小  .btn-group-justified 自适应大小的按钮组
+按钮下拉菜单
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+       <span class="caret"></span></button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Tablet</a></li>
+        <li><a href="#">Smartphone</a></li>
+      </ul>
+    </div>
+Bootstrap 图片.img-rounded   .img-circle  .img-thumbnail
+案例
+ 导航条<nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">
+div.container>row{div.navbar-header>logo.navbar-brand;div.collapse navbar-collapse> ul.nav navbar-nav navbar-right>li关于我们}
+轮播图container-fluid>row>div.carousel slide>ol.carousel-indicators>li;div.carousel-inner
+container-fluid>container>row>col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center>h3,p;row>col-md-3 col-sm-3 col-xs-12要4列
+2列col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center hidden-xs,aos="zoom-in"左图右h3p;
+
+aos.js超赞页面滚动元素动画jQuery动画库
+<link rel="stylesheet" href="aos.css" />
+<script src="aos.js"></script>
+使用<div aos="动画名">动画有fade-up/down/left/right(-up-left) 
+                    flip翻转、slide滑动、 zoom-in、zoom-out的上下左右
+ 
+属性有aos-offset    aos-duration持续时间   aos-easing效果   aos-delay延迟   
+aos-anchor锚元素  aos-anchor-placement锚位置  aos-once只会触发一次

@@ -1,0 +1,56 @@
+﻿常见鼠标事件
+     document的事件:contextmenu右键菜单 selectstart文字选中  用e.preventDefault();禁止默认行为 return false;
+     鼠标事件:单击click 双击dblclick 鼠标移入mouseenter 鼠标离开mouseleave  mouseover  鼠标移出mouseout 
+        mouseleave  mouseout的区别 
+		两个都是鼠标离开，mouseleave（只有在鼠标指针离开被选元素时，才会触发）是不冒泡的，mouseout（不论鼠标指针离开被选元素还是任何子元素，都会触发）有冒泡 
+        mouseenter和mouseover的区别 都是鼠标移入
+	mouseover：鼠标经过自身盒子会触发，经过子盒子还会触发（因为存在冒泡）
+	mouseenter：只会经过自身盒子触发（不会冒泡）跟mouseenter对应的
+        
+	常用mousedown mousemove mouseup绘图、拖拽
+        区分e.target，srcElement，this，currentTarget 都是事件触发对象(this不能用在箭头函数，会不知道对象是谁)
+               clientX    pageX   screenX  的区别
+screenX:鼠标位置相对于用户屏幕水平偏移量，而screenY也就是垂直方向的，此时的参照点也就是原点是屏幕的左上角。
+
+clientX:跟screenX相比就是将参照点改成了浏览器内容区域的左上角，该参照点会随之滚动条的移动而移动。
+
+pageX：参照点也是浏览器内容区域的左上角，但它不会随着滚动条而变动。所以pageX》=clientX；
+
+
+        跟随鼠标的图片mousemove: img.left=clientX  top=client.Y
+        鼠标拖影：4个拖影4张图片用定时器分别延迟显示
+
+ 操作节点属性
+        创建节点document.createAttribute("age");  
+         removeAttribute('index');移除属性
+     getAttribute("属性名")获取属性值  setAttribute("属性名","属性值")  
+      h5自定义属性，它只能获取data-开头的    
+      <div hello="cjy" data-index="2" data-list-name="andy"></div>
+        div.dataset，div.dataset.listName，dataset['listName'])
+
+      图片懒加载
+       document.documentElement.clientHeight/scrollTop;
+         在 window.onscroll中判断如果图片.offsetTop<clientHeight+scrollTop则图片进入了可视区内，则加载data-lazy
+      优化1
+         const top= img.getBoundingClientRect().top;
+         const clientHeight = window.innerHeight; // 可视区高度
+         top <= clientHeight + 100; // 这里有个+100是为了提前加载。
+     优化2 用IntersectionObserver允许你追踪目标元素与其祖先元素或视窗的交叉状态
+        const obs = new IntersectionObserver(callback);
+        imgs.forEach(img =>{ obs.observe(img)});//观察每张图片
+         let callback = (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    let img = entry.target;
+                    img.src = img.dataset.lazy;
+                    obs.unobserve(img);
+                }
+            })
+        }
+练习
+  1.如何禁止浏览器弹出右键菜单和复制文本
+  2. mouseleave  mouseout的区别 
+      mouseenter和mouseover的区别
+      clientX  pageX  screenX  的区别
+  3.完成鼠标拖影
+  4.用三种方式懒加载6张图片

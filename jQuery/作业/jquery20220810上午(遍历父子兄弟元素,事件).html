@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/jquery-1.10.1.js"></script>
+    <style>
+        body{
+            background-color: burlywood;
+        }
+     .red{
+        color:red;
+     }
+     .ul{
+        width:300px;
+        margin: 0 auto;
+        height:100%;
+        display: flex;
+        border: 1px solid black;
+        list-style: none;
+        flex-direction: column;
+     }
+     #butdiv{
+        margin: 10px auto;
+        display:flex;
+        flex-wrap: wrap;
+        width:100%;
+        justify-content: center;
+     }
+     #butdiv>button{margin:5px}
+    </style>
+</head>
+
+<body>
+    <ul class="ul">
+        <li>ulli1</li>
+        <li>ulli2</li>
+        <li>ulli3
+            <ol>
+                <li>olli1</li>
+                <li id="olli2">olli2</li>
+                <li>olli3</li>
+                <li>olli4</li>
+            </ol>
+        </li>
+        <li>ulli4</li>
+        <li>ulli5</li>
+    </ul>
+    <div id="butdiv">
+        <button>0找元素olli2父亲直到ul,并设置颜色和边框</button>
+        <button>1找ul的第4个孩子，并绑定click和dbclick事件，弹出它的文本内容</button>
+        <button>2设置元素olli2其他兄弟opacity:'0.5'</button>
+        <button>3ul下找内容为ollo4的元素设背景颜色为pink，字体颜色为red</button>
+        <button>4给按钮绑定click mouseenter mouseout事件,点击olli2加类red，鼠标进出改变背景颜色</button>
+        <button>5给按钮绑定click dblclick，并传数据到事件</button>
+        <!-- $(":button:eq(5)").on("click dblclick", {foo: "bar"},callback)
+            function callback(event) {alert(event.data.foo);}
+        -->
+        <button>6触发按钮4,5的点击事件</button>
+    
+        <button>7取消按钮4,5的事件</button>
+        <!-- $("p").off("click dblclick");-->
+    </div>
+    <script>
+        const { log } = console;
+        $(function(){
+            // <button>0找元素olli2父亲直到ul,并设置颜色和边框</button>
+            $(":button:eq(0)").click(function(){
+                log($("#olli2").parentsUntil("ul"));
+                $("#olli2").parentsUntil("ul").css("background","yellowgreen").css("border","1px solid black")
+            })
+
+             // <button>1找ul的第4个孩子，并绑定click和dblclick事件，弹出它的文本内容</button>
+            $(":button:eq(1)").click(function(){
+                $("ul").children(":eq(3)").bind({
+                    click:function(){
+                        alert("你好"+$(this).text());
+                    },
+                    dblclick:function(){
+                        alert("给你一脚"+$(this).text());
+                    }
+                });
+            })
+
+            // <button>2设置元素olli2其他兄弟opacity:'0.5'</button>
+            $(":button:eq(2)").click(function(){
+                $("#olli2").siblings().css("opacity","0.5")
+            })
+
+            // <button>3ul下找内容为olli4的元素设背景颜色为pink，字体颜色为red</button>
+            $(":button:eq(3)").click(function(){
+                // log($("ul").children(":contains('olli4')").css("background","pink").css("color","red"));
+                // $("ul").find(":contains('olli4')").css("background","pink").css("color","red")
+                var ch=($("ul").find("li"));
+                for(var i=0;i<ch.length;i++){
+                    if($(ch[i]).text()=="olli4"){
+                        $(ch[i]).css("background","pink").css("color","red")
+                    }else{
+                        log($(ch[i]).text());
+                    }
+                }
+
+            })
+            // <button>4给按钮绑定click mouseenter mouseout事件,点击olli2加类red，鼠标进出改变背景颜色</button>
+            $(":button:eq(4)").bind({
+                click:function(){
+                    $(this).addClass("red");
+                }
+                ,
+                mouseenter:function(){
+                    $(this).css("background","black");
+                },
+                mouseout:function(){
+                    $(this).css("background","white");
+                }
+            })
+            // <button>5给按钮绑定click dblclick，并传数据到事件</button>
+            $(":button:eq(5)").on("click dblclick", {foo: "放开，我不想被绑定"},callback)
+                function callback(event) {alert(event.data.foo);}
+           
+            // <button>6触发按钮4,5的点击事件</button>
+            $(":button:eq(6)").click(function(){
+                $(":button:eq(4)").off("click")
+                $(":button:eq(5)").off("click")
+            })
+
+            // <button>7取消按钮4,5的事件</button>
+            // $(":button:eq(7)").click(function(){
+            //     $(":button:eq(4)").unbind();//取消所有事件
+            //     $(":button:eq(5)").unbind();
+            // })
+            $(":button:eq(7)").click(function(){
+                $(":button:eq(4)").off();//取消所有事件
+                $(":button:eq(5)").off();
+            })
+        })
+        
+    </script>
+</body>
+
+</html>

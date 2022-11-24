@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        操作DOM对象
+   DOM是文档对象模型，DOM规范允许访问和操作HTML页面中的每个单独元素
+   用JavaScript操作DOM时分为三个方面: DOM Core (核心). HTML-DOM 和CSS-OM
+  输入地址后:www.baidui.com--> 先去dns解析为ip-->用http从服务端下载index.html文件  
+                  构建dom树->构建cssom树->合并dom和cssom(发生DOMContentLoaded事件)
+                   ->加载图片图片视频资源-->渲染并显示(发生onload事件）
+   Core：getElementById、getElementsByTagName getElementsByClassName
+   HTML:document.body只含body、document.documentElement所有的网页、document.forms
+   CSS:   querySelector、querySelectorAll
+    </p>
+    <button id="btn">点我阅读</button>
+    <script>
+         const btn=document.getElementById('btn');
+         btn.onclick=function(){
+           let ts=null;
+           clearInterval(ts);
+           let count=5;
+          ts= setInterval(()=>{
+              if(count>=0){
+              
+                btn.innerText=`还剩${count}秒`;
+                btn.disabled="disabled";
+                count--;
+
+              }
+              else{
+                clearInterval(ts);
+                btn.innerText=`下一步`;
+                btn.disabled="";
+              }
+           },1000);
+         }
+
+    </script>
+</body>
+</html>

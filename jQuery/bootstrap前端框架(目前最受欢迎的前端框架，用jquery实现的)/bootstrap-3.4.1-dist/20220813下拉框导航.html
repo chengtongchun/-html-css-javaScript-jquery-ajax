@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./清除html默认样式/Normalize.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        html{
+            background-image: url(./img/蓝发2.jpg);
+            /* background-position: center center; */
+            background-repeat: no-repeat;
+            background-size:cover;
+            background-attachment: fixed;
+        }
+        @media screen {
+            @media (max-width:768px) {
+                /* #menu_show{ */
+                    /* 导航栏里的导航项目 */
+                    /* display: none; */
+                /* } */
+            }
+        }
+    </style>
+</head><!--navbar两条线 navbar-fixed-top navbar-inverse-->
+    <nav class="navbar navbar-inverse  navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header"><!-- 这是响应式导航条，在页面宽度低于标准后，其他内容都隐藏，而仅留下的一个按钮，点击按钮就垂直打开导航栏。-->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" 
+                aria-expanded="false" aria-controls="navbar">
+                    <!-- navbar-toggle样式是控制3根斑马线的。
+                    collapsed是为了响应折叠插件的。
+                    data-toggle=“collapse”表明这个button是一个折叠控件，其折叠的内容指向data-target="#navbar"，即是id为navbar的内容。
+                    aria-expanded=“false”表示初始控件是折叠的。
+                    这其中的nvabar-collapse是导航栏的折叠样式，collapse这是表示初始时是折叠的，若没有collapse样式，那么缩放后导航栏元素将是展开的。
+                    -->
+                    <span class="sr-only">我是四条线</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">我的logo</a>
+            </div>
+            <div id="navbar"><!--导航条-->
+                <!-- navbar-nav会让menu_show这个ul水平堆叠在导航栏，不会垂直下来 --><!--导航组件都依赖nav-->
+                <ul class="nav navbar-nav" id="menu_show">
+                    <li><a href="">首页</a></li>
+                    <li><a href="#">关于我们</a></li>
+                    <li><a href="#">课程中心</a></li>
+                    <li><a href="#">师资力量</a></li>
+                    <li><a href="#">新闻中心</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+                <!--navbar-form表单堆叠 navbar-right右边对齐 -->
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">登录</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- jumbotron的作用即实现巨型效应 -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>我的介绍</h1>
+            <p>程某某，99年，属兔😀</p>
+            <p>
+                <!-- modal模拟框,popover弹出框,tooltips工具提示 --><!--btn-primary原始按钮-->
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    Launch demo modal
+                  </button>
+            </p>
+        </div>
+    </div>
+    <!-- 对话框 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">我的原型</h4>
+                </div>
+                <div class="modal-body">
+                <form action="" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">我的email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">我的电话</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">我的照片</label>
+                        <input type="file" id="exampleInputFile">
+                        <p class="help-block">要看帅照.</p>
+                    </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!--对话框结束-->
+  <!--滑动-->
+  <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>java介绍</h2>
+                <p>Java语言是由Sun Microsystems公司于1995年5月推出的Java程序设计语言（以下简称Java语言）和Java平台的总称。</p>
+                <p><a class="btn btn-default" href="#" role="button">看细节 &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>java介绍</h2>
+                <p>Java语言是由Sun Microsystems公司于1995年5月推出的Java程序设计语言（以下简称Java语言）和Java平台的总称。</p>
+                <p><a class="btn btn-default" href="#" role="button">看细节 &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>java介绍</h2>
+                <p>Java语言是由Sun Microsystems公司于1995年5月推出的Java程序设计语言（以下简称Java语言）和Java平台的总称。</p>
+                <p><a class="btn btn-default" href="#" role="button">看细节 &raquo;</a></p>
+            </div>
+        </div>
+
+        <hr>
+
+        <footer>
+            <p>&copy; 我的公司.</p>
+        </footer>
+    </div>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script>
+        // $(function(){
+        // // 导航栏点击切换隐藏显示
+        //     $("button[data-target='#navbar']").click(function(){
+        //         if($("#menu_show").css("display")=="none"){
+        //             $("#menu_show").show();
+        //         }else{
+        //             $("#menu_show").hide();
+        //         }
+        //     })
+        //     console.log();
+        // })
+        // 
+        $(function(){
+            //body背景图片
+            var bodyindex=0;
+            var imgs=["./img/蓝发1.jpg","./img/蓝发2.jpg"];
+            function bodyimg(){
+                if(bodyindex>=imgs.length){
+                    bodyindex=0;
+                }
+                $("html").css("background-image",`url(${imgs[bodyindex]})`);
+                bodyindex++;
+            }
+            setInterval(bodyimg,2000);
+        })
+    </script>
+<body>
+</body>
+</html>

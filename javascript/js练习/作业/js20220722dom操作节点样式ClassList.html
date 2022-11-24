@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: burlywood;
+        }
+        .title{
+            white-space: pre-wrap;
+            color:white;
+            text-shadow: 0px 0px 10px red;
+        }
+        /* 第一题 */
+        .ruo{
+            background-color: red;
+            color:white;
+        }
+        .zhong{
+            background-color: green;
+            color:white;
+        }
+        .qiang{
+            background-color: blue;
+            color:white;
+        }
+        /* 第二题 */
+        #ul{
+            width:40%;height:100%;
+            display:flex;padding: 0px;justify-content: center;align-items: center;
+            list-style: none;background-color: white;
+        }
+        #ul>li{
+            font-size: 50px;
+            margin:10px;
+        }
+        .orange{
+            color:orange;
+        }
+        #six_p{
+            font-size: 40px;text-shadow: 0px 0px 10px orange;
+        }
+        /* 第三题 */
+        .tables{
+            background-color: white;
+            background-image: url(./img/好色之徒/好色之徒7.jpg);
+            background-repeat: no-repeat;background-position: top center;background-size: cover;
+            text-align: center;
+            border-collapse: collapse;
+            font-size: 30px;
+        }
+        .pink{
+            background-color: pink;
+        }
+        /* 第四题 */
+        .four{
+            margin:0 auto;
+            width:400px;height: 80px;
+            background-color: white;
+            display: flex;justify-content: center;align-items: center;
+        }
+        .four>div{
+            width:70px;height:70px;
+            border-radius: 50%;border: 1px solid blue;
+            margin:0 10px;
+        }
+        .four2{
+            margin-top: 5px;
+            text-align: center;
+        }
+        .four2>button{
+            width:100px;height:40px;
+            margin:0 2%;
+            border-radius: 10px;
+            border:0px solid black;
+            background-color:white;
+        }
+        .blue{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <p class="title">作业</p>
+    <p class="title">1.密码强度认证 用红底绿底蓝底表示</p>
+    <div id="one" style="text-align: center;">
+        登录密码：<input type="password">
+        <p style="display: none;"></p>
+    </div>
+    <p class="title">2. 完成好评条</p>
+    <ul id="ul">
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+        <li>★</li>
+    </ul>
+    <p id="six_p"></p>
+    <p class="title">3.表格鼠标移到变色mousemove事件pink</p>
+    <table border="1" class="tables">
+        <tr>
+            <td>书名</td><td>类型</td><td>作者</td>
+        </tr>
+        <tr>
+            <td>《斗破苍穹》</td><td>玄幻</td><td>天蚕土豆</td>
+        </tr>
+        <tr>
+            <td>《斗罗大陆》</td><td>玄幻</td><td>唐家三少</td>
+        </tr>
+        <tr>
+            <td>《网游之天谴修罗》</td><td>网游</td><td>火星引力</td>
+        </tr>
+    </table>
+    <p class="title">4. 完成步骤条</p>
+    <div class="four">
+        <div></div><div></div><div></div><div></div>
+    </div>
+    <div class="four2"><button>上一步</button><button>下一步</button></div>
+    <script>
+        const $=(ele)=>document.getElementById(ele);//封装一个获取id元素的方法
+        const log=(msg)=>console.log(msg);//封装一个打印
+        //第一题
+        {
+            let pwd=$("one").querySelector("input[type=password]");
+            let p=$("one").querySelector("p");//p
+            pwd.addEventListener("blur",function(ev){
+              let src=ev.target||ev.srcElement;//为了浏览器兼容//input
+              let value=src.value||"";
+              p.style.display="block"; //显示p段落
+              let span=document.createElement("span");//新建一个span
+              span.style.padding="10px";
+              if(value==""){
+                p.innerText="密码不得为空";
+                pwd.focus();//指针回到input
+              }else if(value.length<8){
+                span.classList.add("ruo");
+                span.innerText="弱";
+              }else{
+                if(/^\w{8,20}$/.test(value)){
+                    span.classList.add("qiang");
+                    span.innerText="强";
+                    log(value)
+                }else{
+                    span.classList.add("中");
+                    span.innerText="中";
+                }
+              }
+              if(value !="")
+              p.innerText="安全程度：";
+              p.appendChild(span);
+            })
+        }
+        //第二题
+        {
+            let lis=document.querySelectorAll("#ul>li");
+            let six_p=document.querySelector("#six_p");
+            lis.forEach(function(li,index){
+                li.starValue=index;
+                li.addEventListener('click',function(){
+                    for(var i=0;i<lis.length;i++){
+                        if(i<=li.starValue){
+                            lis[i].classList.add("orange");
+                            six_p.innerText="评分："+(li.starValue+1)+"  颗星";
+                        }else{
+                            lis[i].classList.remove("orange");
+                        }
+                    }
+                })
+            })
+        }
+        // 第三题
+        {
+            let trs=document.querySelectorAll(".tables tr");
+            trs.forEach(function(tr,index){
+                let tds=tr.getElementsByTagName("td");
+                for(var i=0;i<tds.length;i++){
+                    tds[i].addEventListener('mousemove',function(event){
+                        let hh=event.target;
+                        trs.forEach(function(tr2,index2){
+                            let tds2=tr2.getElementsByTagName("td");
+                            for(var j=0;j<tds2.length;j++){
+                                if(tds2[j]==hh){
+                                    hh.classList.add("pink");
+                                }else{
+                                    tds2[j].classList.remove("pink");
+                                }
+                            }
+                        })
+                    })    
+                }
+            })
+        }
+        //第四题
+        {
+            let fours=document.querySelectorAll(".four>div");
+            let buts=document.querySelectorAll(".four2>button");
+            var v=0;
+            buts[0].addEventListener('click',function(){
+                v--;;log(v);log(this);
+                for(var i=0;i<fours.length;i++){
+                    if(i<=v){
+                        fours[i].classList.add("blue");
+                    }else{
+                        fours[i].classList.remove("blue");
+                    }
+                }
+                if(v<0){
+                    v=0;
+                }
+            })
+            buts[1].addEventListener('click',function(){
+                v++;
+                for(var i=0;i<fours.length;i++){
+                    if(i<v){
+                        fours[i].classList.add("blue");
+                    }else{
+                        fours[i].classList.remove("blue");
+                    }
+                }
+                if(v>fours.length-1){
+                    v=fours.length-1;
+                }
+            })
+            
+        }
+    </script>
+</body>
+</html>
